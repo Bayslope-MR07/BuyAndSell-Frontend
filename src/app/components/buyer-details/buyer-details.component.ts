@@ -38,7 +38,10 @@ export class BuyerDetailsComponent implements OnInit {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
     this.http
-      .get(`http://3.144.99.241/api/accounts/buyer-data/${this.patentId}/`, { headers })
+      .get(
+        `https://buyandsell-backend.onrender.com/api/accounts/buyer-data/${this.patentId}/`,
+        { headers }
+      )
       .subscribe(
         (response: any) => {
           this.patentDetails = response;
