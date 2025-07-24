@@ -1,0 +1,244 @@
+<!-- signup.component.html -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-9 col-md-9 col-lg-9">
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-primary text-white text-center py-3">
+          <h4 class="mb-0">Create Your Account</h4>
+        </div>
+        <div class="card-body p-2 p-md-3">
+          <p class="text-start text-muted mb-2">*Fill in your details to get started</p>
+          
+          <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" class="needs-validation">
+            <!-- Name Fields -->
+            <div class="row mb-4">
+              <div class="col-12 col-md-6 mb-3 mb-md-0">
+                <div class="form-floating">
+                  <input 
+                    type="text" 
+                    id="first_name" 
+                    [(ngModel)]="formData.first_name" 
+                    name="first_name" 
+                    class="form-control" 
+                    placeholder="First Name" 
+                    required 
+                    #firstName="ngModel"
+                    [ngClass]="{'is-invalid': firstName.invalid && firstName.touched}">
+                  <label for="first_name">First Name</label>
+                  <div *ngIf="firstName.invalid && firstName.touched" class="invalid-feedback">
+                    First name is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-floating">
+                  <input 
+                    type="text" 
+                    id="last_name" 
+                    [(ngModel)]="formData.last_name" 
+                    name="last_name" 
+                    class="form-control" 
+                    placeholder="Last name" 
+                    required
+                    #lastName="ngModel"
+                    [ngClass]="{'is-invalid': lastName.invalid && lastName.touched}">
+                  <label for="last_name">Last Name</label>
+                  <div *ngIf="lastName.invalid && lastName.touched" class="invalid-feedback">
+                    Last name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Fields -->
+            <div class="row mb-4">
+              <div class="col-12 col-md-6 mb-3 mb-md-0">
+                <div class="form-floating">
+                  <input 
+                    type="tel" 
+                    id="phone_number" 
+                    [(ngModel)]="formData.phone_number" 
+                    name="phone_number" 
+                    class="form-control" 
+                    placeholder="Phone Number"
+                    required 
+                    #phoneNumber="ngModel"
+                    [ngClass]="{'is-invalid': phoneNumber.invalid && phoneNumber.touched}">
+                  <label for="phone_number">Phone Number</label>
+                  <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="invalid-feedback">
+                    Valid phone number is required 
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-floating">
+                  <input 
+                    type="email" 
+                    id="email" 
+                    [(ngModel)]="formData.email" 
+                    name="email" 
+                    class="form-control" 
+                    placeholder="Email" 
+                    required 
+                    email 
+                    #email="ngModel"
+                    [ngClass]="{'is-invalid': email.invalid && email.touched}">
+                  <label for="email">Email Address</label>
+                  <div *ngIf="email.invalid && email.touched" class="invalid-feedback">
+                    Valid email is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Fields -->
+            <div class="row mb-4">
+              <div class="col-12 col-md-6 mb-3 mb-md-0">
+                <div class="form-floating">
+                  <input 
+                    type="password" 
+                    id="password" 
+                    [(ngModel)]="formData.password" 
+                    name="password" 
+                    class="form-control" 
+                    placeholder="Password" 
+                    required 
+                    minlength="6"
+                    #password="ngModel"
+                    [ngClass]="{'is-invalid': password.invalid && password.touched}">
+                  <label for="password">Password</label>
+                  <div *ngIf="password.invalid && password.touched" class="invalid-feedback">
+                    Password must be at least 6 characters
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-floating">
+                  <input 
+                    type="password" 
+                    id="confirm_password" 
+                    [(ngModel)]="formData.confirm_password" 
+                    name="confirm_password" 
+                    class="form-control" 
+                    placeholder="Confirm Password" 
+                    required 
+                    #confirmPassword="ngModel"
+                    [ngClass]="{'is-invalid': confirmPassword.invalid && confirmPassword.touched}">
+                  <label for="confirm_password">Confirm Password</label>
+                  <div *ngIf="confirmPassword.invalid && confirmPassword.touched" class="invalid-feedback">
+                    Passwords must match
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+            <!-- User Type Field -->
+            <div class="form-floating mb-4">
+              <select 
+                id="user_type" 
+                [(ngModel)]="formData.user_type" 
+                name="user_type" 
+                class="form-select" 
+                required 
+                #userType="ngModel"
+                [ngClass]="{'is-invalid': userType.invalid && userType.touched}">
+                <option value="" disabled selected>Select User Type</option>
+                <option value="Buyer">Buyer</option>
+                <option value="Seller">Seller</option>
+                <option value="Both">Both</option>
+              </select>
+              <label for="user_type">Select User Type</label>
+              <div *ngIf="userType.invalid && userType.touched" class="invalid-feedback">
+                Please select a user type
+              </div>
+            </div>
+
+            <!-- Password strength indicator (optional) -->
+            <!-- <div class="mb-4" *ngIf="formData.password">
+              <label class="form-label small text-muted">Password Strength</label>
+              <div class="progress" style="height: 5px;">
+                <div class="progress-bar bg-danger" role="progressbar" [style.width]="getPasswordStrength()" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div> -->
+
+            <!-- Terms and conditions checkbox -->
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" value="" id="termsCheck" required>
+              <label class="form-check-label" for="termsCheck">
+                I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
+              </label>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="signupForm.invalid">
+                <i class="bi bi-person-plus me-2"></i>Create Account
+              </button>
+              <button type="button" class="btn btn-outline-secondary" (click)="loginPage()">
+                Already have an account? Log In
+              </button>
+            </div>
+          </form>
+
+          <!-- Social signup options -->
+          <div class="mt-4">
+            <p class="text-center text-muted mb-3">Or sign up with</p>
+            <div class="d-flex justify-content-center gap-3">
+              <button class="btn btn-outline-primary rounded-circle" (click)="googleSignup()"><i class="bi bi-google"></i></button>
+              <button class="btn btn-outline-primary rounded-circle"><i class="bi bi-facebook"></i></button>
+              <button class="btn btn-outline-primary rounded-circle"><i class="bi bi-apple"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Additional Fields (shown after Google Sign-In) -->
+
+<ng-template #mandatoryFieldsModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">Mandatory Fields</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="additional-fields" class="mt-4">
+          <div class="form-floating mb-4">
+            <input 
+              type="tel" 
+              id="phone_number" 
+              [(ngModel)]="formData.phone_number" 
+              name="phone_number" 
+              class="form-control" 
+              placeholder="Phone Number" 
+              required>
+            <label for="phone_number">Phone Number</label>
+          </div>
+
+          <div class="form-floating mb-4">
+            <select 
+              id="user_type" 
+              [(ngModel)]="formData.user_type" 
+              name="user_type" 
+              class="form-select" 
+              required>
+              <option value="" disabled selected>Select User Type</option>
+              <option value="Buyer">Buyer</option>
+              <option value="Seller">Seller</option>
+              <option value="Both">Both</option>
+            </select>
+            <label for="user_type">Select User Type</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <button type="button" [disabled]="!formData.phone_number || !formData.user_type" class="btn btn-success" (click)="google_complete_signup()">
+          Complete Sign-Up
+        </button>
+      </div>
+    
+
+</ng-template>
+<!-- Button to trigger the modal -->
+<!-- <button (click)="openModal()" class="btn btn-primary">Open Modal</button> -->

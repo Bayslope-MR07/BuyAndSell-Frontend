@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BSP - Buy & Sell Patents</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar fixed-top navbar-expand-lg">
+        <div class="logo">
+          <img src="Logo.png"  alt="Logo" class="logo-img" />
+        </div>
+        <nav>
+          <ul>
+            <li><a class="ac" (click)="aboutUs()">About Us</a></li>
+            <li><a (click)="contactUs()">Contact Us</a></li>
+            <!-- Login Button with Dropdown -->
+            <li class="login-container">
+              <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
+                <mat-icon class="login-icon">person</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" class="login-menu bg-primary" xPosition="before">
+                <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAdmin()">Login as Admin</button>
+                <button mat-menu-item class="menu-item user-login text-white" (click)="loginAdmin()">Login as User</button>
+              </mat-menu>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section class="hero" style="padding: 200px;">
+      <h1 style="font-size: 36px; font-weight: 700;">
+        "Unlock Innovation – Buy and <br />
+        Sell Patents with Ease."
+      </h1>
+      <p style="font-size: 24px; color: #1F1F20; font-weight: 600;">
+        "Access a marketplace of patents across industries. Discover, purchase,
+        or <br />monetize intellectual property securely and transparently."
+      </p>
+    </section>
+    <button class="btn-explore">Explore Patents</button>
+    <div class="container">
+      <h2 class="section-title" style="font-size: 36px;">How it Works</h2>
+      <div class="step-row">
+        <div class="step-number">
+          <h3>1. Browse Patents:</h3>
+        </div>
+        <div class="step-description">
+          <p>
+            Explore a diverse selection of patents from various industries, each
+            ready for licensing or purchase.
+          </p>
+        </div>
+        <div class="step-icon">
+          <img
+            src="https://img.icons8.com/ios/100/000000/certificate.png"
+            alt="Browse Patent Icon"
+            class="icon-hover"
+          />
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-number">
+          <h3>2. Secure Transactions:</h3>
+        </div>
+        <div class="step-description">
+          <p>
+            Our platform ensures every transaction is safe and transparent, with
+            secure IP transfers.
+          </p>
+        </div>
+        <div class="step-icon">
+          <img
+            src="https://img.icons8.com/ios/100/000000/security-checked.png"
+            alt="Secure Transactions Icon"
+            class="icon-hover"
+          />
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-number">
+          <h3>3. Monetize Your IP:</h3>
+        </div>
+        <div class="step-description">
+          <p>
+            List your patent on our marketplace to connect with verified buyers
+            ready to invest.
+          </p>
+        </div>
+        <div class="step-icon">
+          <img
+            src="https://img.icons8.com/ios/100/000000/handshake.png"
+            alt="Monetize Your IP Icon"
+            class="icon-hover"
+          />
+        </div>
+      </div>
+    </div>
+
+    <section class="join-community" id="join-community">
+      <h2 style="font-weight: 600;">Join our Community</h2>
+      <p style="color: black">
+        "Ready to
+        <button class="btn-buy p-4" (click)="naviagateToBuy()">Buy</button> or
+        <button
+          class="btn-sell p-4"
+          (click)="naviagateToShell()"
+          style="background-color: #0cd100; "
+        >
+          Sell
+        </button>
+        Patents?"
+      </p>
+      <p class="buttomin-readyto">
+        Create an account today and start connecting with innovators and
+        industry <br />leaders. It's fast, free, and secure.
+      </p>
+    </section>
+
+    <div class="container" style="font-weight: 600;">
+      <h2 class="section-title">Benefits of Using Our Platform</h2>
+      <h3 style="color: #007bff; margin: 50px 0px 50px 0px; text-align: left">
+        Why choose our platform
+      </h3>
+
+      <div class="step-row">
+        <div class="step-number">
+          <h3><mat-icon>arrow_forward</mat-icon> Wide Patent Range:</h3>
+        </div>
+        <div class="step-description">
+          <p>
+            Browse a large and varied selection of patents across multiple
+            industries.
+          </p>
+        </div>
+        <div class="step-icon">
+          <img
+            src="https://img.icons8.com/ios/100/000000/certificate.png"
+            alt="Wide Patent Range Icon"
+            class="icon-hover"
+          />
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-number">
+          <h3><mat-icon>arrow_forward</mat-icon> Secure Transactions:</h3>
+        </div>
+        <div class="step-description">
+          <p>
+            All transactions are secure, with guidance provided for seamless
+            intellectual property transfers.
+          </p>
+        </div>
+        <div class="step-icon">
+          <img
+            src="https://img.icons8.com/ios/100/000000/security-checked.png"
+            alt="Secure Transactions Icon"
+            class="icon-hover"
+          />
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-number">
+          <h3><mat-icon>arrow_forward</mat-icon> Expert Support:</h3>
+        </div>
+        <div class="step-description">
+          <p>
+            Our team offers expert advice and support to guide you through every
+            step.
+          </p>
+        </div>
+        <div class="step-icon">
+          <img
+            src="https://img.icons8.com/ios/100/000000/customer-support.png"
+            alt="Expert Support Icon"
+            class="icon-hover"
+          />
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-number">
+          <h3><mat-icon>arrow_forward</mat-icon> Direct Buyer Connections:</h3>
+        </div>
+        <div class="step-description">
+          <p>
+            Connect directly with verified buyers ready to invest in your
+            intellectual property.
+          </p>
+        </div>
+        <div class="step-icon">
+          <img
+            src="https://img.icons8.com/ios/100/000000/handshake.png"
+            alt="Direct Buyer Connections Icon"
+            class="icon-hover"
+          />
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="left-section">
+          <p class="copyright">
+            © 2024 Bayslope Business Solutions Private Limited
+          </p>
+          <div class="links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Report Error</a>
+          </div>
+        </div>
+        <div class="social-media">
+          <p>Follow Us:</p>
+          <div class="icons">
+            <div>
+              <a
+                href="https://x.com/Bayslopepatent/status/1423928590073098244"
+                target="_blank"
+                ><i class="bi bi-twitter"></i
+              ></a>
+              <a href="https://www.facebook.com/yourusername" target="_blank"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="https://www.instagram.com/bayslope" target="_blank"
+                ><i style="color: #fe1e67" class="bi bi-instagram"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/company/bayslopepatentsolutions"
+                target="_blank"
+                ><i class="bi bi-linkedin"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

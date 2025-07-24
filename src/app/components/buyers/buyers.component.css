@@ -1,0 +1,432 @@
+/* Ensure the entire page takes up the full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 400; /* Normal weight for body text */
+  font-size: 16px; /* Standard size for body text */
+  background-color: #f9f9f9;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(to right, #BACBF7, #CEDAF9);
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 700; /* Bold for navbar consistency */
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  background-color: #343a40 !important;
+}
+
+/* Navigation List Styling */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+}
+
+/* Link Styling */
+.navbar a {
+  text-decoration: none;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 400; /* Normal weight for links */
+  font-size: 16px; /* Matches navigation link size */
+  color: #007bff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 20px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* Active State Styling */
+.navbar a.active {
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 700; /* Bold for active state */
+  font-size: 16px; /* Matches link size */
+  color: white;
+  background-color: #007BFF;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transform: scale(1.05);
+  cursor: default;
+}
+
+/* Logo Styling */
+.logo-img {
+  max-width: 150px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Login Container Styling */
+.login-container {
+  position: relative;
+}
+
+/* Login Button Styling */
+.login-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.login-button:hover {
+  transform: scale(1.1);
+}
+
+/* Login Icon Styling */
+.login-icon {
+  font-size: 24px;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.login-button:hover .login-icon {
+  color: #0056b3;
+}
+
+/* Dropdown Menu Styling */
+.login-menu {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  min-width: 150px;
+}
+
+/* Flexbox layout for the page */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ensure the content takes up the remaining space */
+.content-wrapper {
+  flex: 1 0 auto;
+}
+
+/* Footer styling */
+footer, app-footer {
+  flex-shrink: 0;
+  background-color: #e9ecef;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 600; /* Semi-bold for footer */
+  font-size: 14px; /* Matches footer text size */
+  padding: 10px 0;
+  text-align: center;
+  border-top: 2px solid #ddd;
+}
+
+
+table{
+  overflow-x: scroll;
+  overflow: 90%;
+}
+
+/* Adjust table container to accommodate paginator */
+.table-container {
+  display: flex;
+  flex-direction: column;
+  height: 70vh; /* Adjust as needed */
+  width: 100%;
+  margin-top: 20px;
+  overflow-x: scroll;
+}
+
+/* Paginator Styling */
+.mat-mdc-paginator {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+  font-family: 'FortBook', Arial, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: rgb(36, 28, 28);
+  margin-top: 10px;
+}
+
+
+
+/* Existing styles (unchanged unless specified) */
+.table-color {
+  background-color: #EAF0FF;
+  color: #406FE8;
+}
+
+.a-class {
+  margin-top: 3%;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #000;
+  border-top: 2px solid #000;
+  padding: 20px;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 700; /* Bold for section titles */
+  font-size: 20px; /* Matches section title size */
+  text-decoration: none !important;
+}
+
+.class-m {
+  margin-top: 3%;
+}
+
+.table-primary {
+  background-color: #007bff !important;
+  color: white !important;
+}
+
+.link-primary {
+  text-decoration: none !important;
+  color: #007bff;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 500; /* Medium weight for links */
+  font-size: 16px; /* Matches link size */
+}
+
+.link-primary:hover {
+  text-decoration: underline !important;
+  color: #0056b3;
+}
+
+.btn-primary {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 600; /* Semi-bold for buttons */
+  font-size: 16px; /* Matches button text size */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+  transform: scale(1.05);
+}
+
+.btn-primary:disabled {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 600; /* Semi-bold for buttons */
+  font-size: 16px; /* Matches button text size */
+}
+
+.btn-danger:hover {
+  background-color: #c82333 !important;
+  border-color: #c82333 !important;
+  transform: scale(1.05);
+}
+
+/* Main Content (Table) Styling */
+main .table tbody tr {
+  background-color: #ffffff;
+}
+
+main .table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+main .table td, main .table th {
+  border-color: #ddd;
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 400; /* Normal weight for table body */
+  font-size: 16px; /* Matches table body text size */
+}
+
+main .table .form-check-label {
+  cursor: pointer;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 400; /* Normal weight */
+  font-size: 14px; /* Matches label size */
+  color: #333;
+}
+
+main .alert-warning {
+  background-color: #ffe6e6;
+  border-color: #ffcccc;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+main .alert-warning p {
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 400; /* Normal weight */
+  font-size: 16px; /* Matches alert text size */
+}
+
+main .alert-warning button {
+  margin-left: 10px;
+}
+
+/* Sidebar (Filters) Styling */
+aside {
+  background-color: #f8f9fa;
+  border-right: 2px solid #dee2e6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 3%;
+}
+
+aside h2 {
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 600; /* Semi-bold for heading */
+  font-size: 24px; /* Matches filter heading size */
+  color: #007bff;
+}
+
+aside .form-label {
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 500; /* Medium weight for labels */
+  font-size: 16px; /* Matches label size */
+  color: #333;
+}
+
+aside .form-control, aside .form-select {
+  border-radius: 5px;
+  border-color: #ced4da;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 400; /* Normal weight */
+  font-size: 16px; /* Matches input text size */
+}
+
+aside .form-control::placeholder {
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font for placeholder */
+  font-weight: 400; /* Normal weight */
+  font-size: 16px; /* Consistent size */
+  color: #6c757d; /* Placeholder color matching previous style */
+}
+
+aside .btn-primary {
+  margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .row.class-m {
+    margin-top: 1%;
+  }
+
+  .col-md-3, .col-lg-2 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .col-md-9, .col-lg-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .a-class {
+    margin-top: 2%;
+    padding: 10px;
+    font-size: 16px; /* Adjusted for mobile */
+  }
+
+  main .table td, main .table th {
+    padding: 8px;
+    font-size: 14px; /* Smaller font size for mobile */
+  }
+
+  aside h2 {
+    font-size: 20px; /* Adjusted for mobile */
+  }
+
+  aside .form-label {
+    font-size: 14px; /* Adjusted for mobile */
+  }
+
+  aside .form-control, aside .form-select {
+    font-size: 14px; /* Adjusted for mobile */
+  }
+
+  aside .btn-primary {
+    font-size: 14px; /* Adjusted for mobile */
+  }
+
+  .table-container {
+    max-height: 50vh;
+  }
+}
+
+/* Ensure the layout matches the image's header */
+header {
+  background: linear-gradient(to right, #e0e0e0, #f0f0f0);
+  padding: 10px 0;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+th, td {
+  padding: 12px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.alert {
+  padding: 8px;
+  margin: 8px 0;
+}
+
+.link-primary {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link-primary:hover {
+  text-decoration: underline;
+}
+
+.link-dark {
+  color: #212529;
+}

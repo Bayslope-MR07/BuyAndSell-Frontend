@@ -1,0 +1,78 @@
+body {
+  font-family: 'FortBook', Arial, sans-serif; /* Ensure FortBook is available or fallback to Arial */
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+header {
+  background: linear-gradient(to bottom, #a2cffe, #c4e0ff);
+  color: white;
+}
+
+.chart-item1 {
+  width: 100%;
+  padding: 20px;
+  margin: 10px;
+  height: 450px;
+  align-items: center;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+
+.logo {
+  border-radius: 5px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+.chart-canvas {
+  max-height: 300px; /* Adjust height as needed to match your image */
+  width: 100% !important; /* Ensure the canvas takes full width */
+}
+
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+footer {
+  background-color: #f8f9fa;
+}
+.a-class {
+  margin-top: 6%;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #000;
+  border-top: 2px solid #000;
+  padding: 20px;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 700; /* Bold for section titles */
+  font-size: 20px; /* Matches section title size */
+  text-decoration: none !important;
+}
+
+@media (max-width: 768px) {
+  .row-cols-md-2 {
+    row-gap: 1rem;
+  }
+
+  .chart-canvas {
+    max-height: 200px;
+  }
+}

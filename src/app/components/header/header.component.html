@@ -1,0 +1,25 @@
+<div class="navbar fixed-top navbar-expand-lg">
+  <div class="logo" (click)="homePage()">
+    <img src="Logo.png"  alt="Logo" class="logo-img" />
+  </div>
+  <nav>
+    <ul>
+      <li><a class="ac" (click)="aboutUs()">About Us</a></li>
+      <li><a (click)="contactUs()">Contact Us</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+      
+      <li class="login-container">
+        <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
+          <mat-icon class="login-icon">person</mat-icon>
+        </button> -->
+        <mat-menu #menu="matMenu" class="login-menu bg-primary" >
+          <button mat-menu-item class="menu-item admin-login text-primary" (click)="loginAsAdmin()">Login as Admin</button>
+          <button mat-menu-item class="menu-item user-login text-primary">Login as User</button>
+          <button mat-menu-item class="menu-item user-login text-primary">Update Profile</button>
+          <button mat-menu-item class="menu-item user-login text-primary" (click)="forgot()">Password Change</button>
+          <button mat-menu-item class="menu-item user-login text-primary">Log Out</button>
+        </mat-menu>
+      </li>
+    </ul>
+  </nav>
+</div> 

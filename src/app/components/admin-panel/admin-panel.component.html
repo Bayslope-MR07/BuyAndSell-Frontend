@@ -1,0 +1,291 @@
+<!-- admin-panel.component.html -->
+<body>
+  <div class="navbar fixed-top navbar-expand-lg">
+    <div class="logo" (click)="homePage()">
+      <img src="Logo.png" alt="Logo" class="logo-img" />
+    </div>
+    <nav>
+      <ul>
+        <li class="login-container">
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
+            <mat-icon class="login-icon">person</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="login-menu bg-primary">
+            <button mat-menu-item class="menu-item user-login text-white" (click)="updateUserProfile()">Update Profile</button>
+            <button mat-menu-item class="menu-item user-login text-white" (click)="confirmPassword()">Password Change</button>
+            <button mat-menu-item class="menu-item user-login text-white" (click)="logout()">Log Out</button>
+          </mat-menu>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="container position-absolute">
+    <h3 class="text-center mb-4 mt-4 text-primary" style="font-size: 32px; font-weight: 600; margin-top: 40%">
+      Admin Panel
+    </h3>
+
+    <mat-tab-group mat-stretch-tabs mat-align-tabs="end">
+      <mat-tab class="lableClass" label="Seller Actions">
+        <!-- Filters Section (Hidden initially) -->
+        <div class="filters card p-4 mb-4 shadow-sm w-100">
+          <h4 class="mb-3 text-primary" style="font-weight: 600;">Filters</h4>
+          <div class="row gx-3">
+            <div class="col-md-4 mb-3">
+              <label for="emailFilter" class="form-label">Email</label>
+              <input class="form-control" [(ngModel)]="filter.email" placeholder="Filter by email"
+                id="emailFilter" (keyup.enter)="applyFilters()" />
+            </div>
+            <div *ngIf="selectedTabIndex===0" class="col-md-4 mb-3">
+              <label for="verifiedFilter" class="form-label">Verified</label>
+              <select class="form-select" [(ngModel)]="filter.verified" id="verifiedFilter"
+                (change)="applyFilters()">
+                <option value="">All</option>
+                <option value="false">Verified</option>
+                <option value="true">Unverified</option>
+              </select>
+            </div>
+            <div *ngIf="selectedTabIndex===0" class="col-md-4 mb-3">
+              <label for="importantFilter" class="form-label">Important</label>
+              <select class="form-select" [(ngModel)]="filter.important" id="importantFilter"
+                (change)="applyFilters()">
+                <option value="">All</option>
+                <option value="true">Important</option>
+                <option value="false">Not Important</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary me-2" (click)="applyFilters()">Apply Filters</button>
+            <button class="btn btn-outline-secondary" (click)="resetFilters()">Reset Filters</button>
+          </div>
+        </div>
+
+        <!-- Table Section (Hidden initially) -->
+        <mat-tab-group class="mt-2" [selectedIndex]="selectedTabIndex" (selectedTabChange)="changeTab($event)" mat-stretch-tabs="false" mat-align-tabs="end">
+          <mat-tab label="All Patent">
+            <div class="d-flex justify-content-end mt-2 mb-1">
+              <button style="background-color: #3b9bf5;" mat-raised-button (click)="downloadCSV()"> download CSV <mat-icon *ngIf="loader2"><mat-spinner color="accent" diameter="18"></mat-spinner></mat-icon></button>
+            </div>
+            <div class="table-container">
+              <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm">
+                <thead class="table-color" style="background-color: #eaf0ff; color: #406fe8">
+                  <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Patent Number</th>
+                    <th>Primary Technology</th>
+                    <th>Price Expectation</th>
+                    <th>Important</th>
+                    <th>Verified</th>
+                    <th>Additional Notes</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let seller of paginatedData">
+                    <td>{{ seller.id }}</td>
+                    <td>{{ seller.first_name }}</td>
+                    <td>{{ seller.last_name }}</td>
+                    <td>{{ seller.email }}</td>
+                    <td>{{ seller.phone }}</td>
+                    <td>{{ seller.city }}</td>
+                    <td>{{ seller.country }}</td>
+                    <td>{{ seller.patent_number }}</td>
+                    <td>{{ seller.primary_technology }}</td>
+                    <td>{{ seller.price_expectation }}</td>
+                    <td>{{ seller.important ? "Yes" : "No" }}</td>
+                    <td>{{ seller.verified ? "Yes" : "No" }}</td>
+                    <td>{{ seller.additional_notes || "N/A" }}</td>
+                    <td>
+                      <div class="d-flex gap-1 justify-content-center">
+                        <button class="btn btn-info btn-sm" (click)="viewFeedbackDetails(seller)">View Feedback</button>
+                        <button class="btn btn-primary btn-sm" *ngIf="!seller.verified" (click)="openVerificationForm(seller)">Verify</button>
+                        <button class="btn btn-danger btn-sm" *ngIf="seller.verified" (click)="unverifySeller(seller)">Unverify</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Add Paginator Here -->
+              <mat-paginator [pageSizeOptions]="[10]" [pageSize]="10" [length]="filteredData.length" (page)="handlePageEvent($event)"></mat-paginator>
+            </div>
+          </mat-tab>
+          <mat-tab label="Unverified Patent">
+            <div class="d-flex justify-content-end mt-2 mb-1">
+              <button style="background-color: #3b9bf5;" mat-raised-button (click)="downloadCSV()"> download CSV <mat-icon *ngIf="loader2"><mat-spinner color="accent" diameter="18">
+              </mat-spinner></mat-icon></button>
+            </div>
+            <div class="table-container">
+              <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm" id="scrolling">
+                <thead class="table-color" style="background-color: #eaf0ff; color: #406fe8" id="">
+                  <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>First Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Patent Number</th>
+                    <th>Primary Technology</th>
+                    <th>Price Expectation</th>
+                    <!-- <th>Important</th>
+                    <th>Verified</th>
+                    <th>Additional Notes</th> -->
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let seller of filteredData">
+                    <td>{{ seller.id }}</td>
+                    <td>{{ seller.first_name }}</td>
+                    <td>{{ seller.first_name }}</td>
+                    <td>{{ seller.first_name }}</td>
+                    <td>{{ seller.last_name }}</td>
+                    <td>{{ seller.email }}</td>
+                    <td>{{ seller.phone }}</td>
+                    <td>{{ seller.city }}</td>
+                    <td>{{ seller.country }}</td>
+                    <td>{{ seller.patent_number }}</td>
+                    <td>{{ seller.primary_technology }}</td>
+                    <td>{{ seller.price_expectation }}</td>
+                    <!-- <td>{{ seller.important ? "Yes" : "No" }}</td>
+                    <td>{{ seller.verified ? "Yes" : "No" }}</td>
+                    <td>{{ seller.additional_notes || "N/A" }}</td> -->
+                    <td>
+                      <div class="d-flex gap-1 justify-content-center">
+                        <button class="btn btn-info btn-sm" (click)="viewFeedbackDetails(seller)">
+                          View Feedback
+                        </button>
+                        <!-- <a target="_blank" class="btn btn-outline-secondary btn-sm" (click)="handleBuyerData(seller.id)">Buyer
+                          Data</a> -->
+                          <br />
+                        <button class="btn btn-primary btn-sm" *ngIf="!seller.verified"
+                          (click)="openVerificationForm(seller)">
+                          Verify
+                        </button>
+                        <button class="btn btn-danger btn-sm" *ngIf="seller.verified" (click)="unverifySeller(seller)">
+                          Unverify
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+      </mat-tab>
+
+      <mat-tab class="lableClass" label="Buyer Actions">
+        <app-buyer-actions></app-buyer-actions>
+      </mat-tab>
+
+      <mat-tab class="lableClass" label="Upload Excel">
+        <div class="upload-container card p-4 mb-4 shadow-sm">
+          <h6 class="h4 mb-3 text-primary">Upload Excel File</h6>
+          <div class="d-flex flex-column align-items-center">
+            <input type="file" accept=".xlsx, .xls" (change)="onFileSelected($event)"
+              class="form-control mb-3" id="fileInput" />
+            <button (click)="uploadFile()" class="btn btn-primary mb-2">Upload</button>
+            <p *ngIf="uploadStatus" class="upload-status text-muted">{{ uploadStatus }}</p>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <!-- Feedback Modal -->
+    <div *ngIf="selectedFeedback" class="modal fade show d-block" tabindex="-1"
+      style="background: rgba(0, 0, 0, 0.5)">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Feedback for Patent ID: {{ selectedFeedback.id }}</h3>
+            <button type="button" class="btn-close" (click)="selectedFeedback = null"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Buyer Email</th>
+                  <th>Buyer Name</th>
+                  <th>Action</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let feedback of selectedFeedback.feedback_details">
+                  <td>{{ feedback.email }}</td>
+                  <td>{{ feedback.first_name }} {{ feedback.last_name }}</td>
+                  <td>{{ feedback.action }}</td>
+                  <td>{{ feedback.timestamp | date : "short" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="selectedFeedback = null">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verification Form -->
+    <div *ngIf="selectedSeller" class="modal fade show d-block" tabindex="-1"
+      style="background: rgba(0, 0, 0, 0.5)">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content shadow-sm">
+          <div class="modal-header">
+            <h3 class="modal-title">Verify Seller: {{ selectedSeller.first_name }}
+              {{ selectedSeller.last_name }}</h3>
+            <button type="button" class="btn-close" (click)="selectedSeller = null"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row gx-3">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Important</label>
+                  <input type="checkbox" class="form-check-input" [(ngModel)]="important" name="important" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="entityStatus" class="form-label">Entity Status</label>
+                  <select class="form-select" [(ngModel)]="entityStatus" id="entityStatus" name="entityStatus">
+                    <option value="micro">Micro</option>
+                    <option value="small">Small</option>
+                    <option value="large">Large</option>
+                  </select>
+                </div>
+                <div class="col-12 mb-3">
+                  <label for="additionalNotes" class="form-label">Additional Notes</label>
+                  <textarea class="form-control" [(ngModel)]="additionalNotes" id="additionalNotes"
+                    name="additionalNotes" rows="3"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success me-2" (click)="verifySeller()">Submit Verification</button>
+            <button class="btn btn-secondary" (click)="selectedSeller = null">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<ng-template #loading>
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; padding: 20px; height: 100vh;">
+    <div><mat-spinner></mat-spinner></div>
+    <div><p>Loading Data...</p></div>
+  </div>
+</ng-template>

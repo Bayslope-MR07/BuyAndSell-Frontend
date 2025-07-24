@@ -1,0 +1,76 @@
+<mat-sidenav-container class="drawer-container">
+  <mat-sidenav #drawer mode="side" opened [fixedInViewport]="true" [fixedTopGap]="210">
+    <h2 class="h5 mb-4">Filters</h2>
+    <div class="d-flex flex-column gap-1">
+      <label class="form-label">Email</label>
+      <input
+        type="text"
+        [(ngModel)]="emailFilter"
+        placeholder="Filter by Email"
+        class="form-control border-primary"
+        (keyup.enter)="applyFilters()"
+      />
+      <label class="form-label">Action</label>
+      <input
+        type="text"
+        [(ngModel)]="actionFilter"
+        (input)="applyFilters()"
+        placeholder="Filter by Action"
+        class="form-control border-primary"
+      />
+      <label class="form-label">Patent</label>
+      <input
+        type="text"
+        [(ngModel)]="patentFilter"
+        (input)="applyFilters()"
+        placeholder="Filter by Patent"
+        class="form-control border-primary"
+      />
+      <label class="form-label">Date</label>
+      <input
+        type="date"
+        placeholder="Filter by Date"
+        [(ngModel)]="dateFrom"
+        (change)="applyFilters()"
+        class="form-control border-primary"
+      />
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="table-container">
+      <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm">
+        <thead class="table-color">
+          <tr>
+            <th>Buyer Email</th>
+            <th>Patent Number</th>
+            <th>Action</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let feedback of paginatedActions">
+            <td>{{ feedback.buyer_email }}</td>
+            <td>{{ feedback.patent_number }}</td>
+            <td>{{ feedback.action }}</td>
+            <td>{{ feedback.timestamp | date: 'short' }}</td>
+          </tr>
+          <div *ngIf="paginatedActions.length === 0" class="no-results">No result to display</div>
+        </tbody>
+      </table>
+      <!-- Add Paginator -->
+      <mat-paginator 
+        [pageSizeOptions]="[10]" 
+        [pageSize]="10" 
+        [length]="filteredActions.length" 
+        (page)="handlePageEvent($event)"
+      ></mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Loading Data...</p>
+  </div> 
+</ng-template>

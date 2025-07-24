@@ -1,0 +1,55 @@
+<div class="container custom-border mt-5 signup-container forgot-form">
+  <div class="row justify-content-center">
+    <div class="col-md-8 gap-lg-5">
+      <h1 class="text-center">Forgot Password</h1>
+      <form id="enterOTP" (ngSubmit)="verifyOTP()">
+        <div class="col-md-12 mb-lg-4 text-center">
+          <label for="otp" class="text-center mt-lg-3 mb-lg-5">Enter OTP</label>
+          <div class="otp-input-group">
+            <input 
+              type="text" 
+              id="otp1" 
+              class="otp-input" 
+              maxlength="1" 
+              [(ngModel)]="otp[0]" 
+              name="otp1" 
+              (input)="moveToNext($event, 'otp1', 'otp2')" 
+              (keydown)="handleBackspace($event, 'otp1', null)"
+            />
+            <input 
+              type="text" 
+              id="otp2" 
+              class="otp-input" 
+              maxlength="1" 
+              [(ngModel)]="otp[1]" 
+              name="otp2" 
+              (input)="moveToNext($event, 'otp2', 'otp3')" 
+              (keydown)="handleBackspace($event, 'otp2', 'otp1')"
+            />
+            <input 
+              type="text" 
+              id="otp3" 
+              class="otp-input" 
+              maxlength="1" 
+              [(ngModel)]="otp[2]" 
+              name="otp3" 
+              (input)="moveToNext($event, 'otp3', 'otp4')" 
+              (keydown)="handleBackspace($event, 'otp3', 'otp2')"
+            />
+            <input 
+              type="text" 
+              id="otp4" 
+              class="otp-input" 
+              maxlength="1" 
+              [(ngModel)]="otp[3]" 
+              name="otp4" 
+              (input)="moveToNext($event, 'otp4', null)" 
+              (keydown)="handleBackspace($event, 'otp4', 'otp3')"
+            />
+          </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

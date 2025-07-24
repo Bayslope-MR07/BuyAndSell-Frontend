@@ -1,0 +1,133 @@
+<div class="profile-update-container">
+    <h2 class="text-center mb-4 text-primary">Update User Profile</h2>
+  
+    <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm" class="card p-4 shadow-sm">
+      <div class="row gx-3">
+        <!-- First Name -->
+        <div class="col-md-6 mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            [(ngModel)]="user.first_name"
+            name="firstName"
+            required
+            #firstName="ngModel"
+            [ngClass]="{'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched)}"
+          />
+          <div class="invalid-feedback" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+            First name is required.
+          </div>
+        </div>
+  
+        <!-- Last Name -->
+        <div class="col-md-6 mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            [(ngModel)]="user.last_name"
+            name="lastName"
+            required
+            #lastName="ngModel"
+            [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}"
+          />
+          <div class="invalid-feedback" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+            Last name is required.
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <div class="col-md-6 mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            [(ngModel)]="user.email"
+            name="email"
+            required
+            email
+            #email="ngModel"
+            [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched)}"
+          />
+          <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+            Please enter a valid email address.
+          </div>
+        </div>
+  
+        <!-- Phone Number -->
+        <div class="col-md-6 mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            [(ngModel)]="user.phone_no"
+            name="phone"
+            required
+            pattern="[0-9]{10}"
+            #phone="ngModel"
+            [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched)}"
+          />
+          <div class="invalid-feedback" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            Please enter a valid 10-digit phone number.
+          </div>
+        </div>
+  
+        <!-- User Type -->
+        <div class="col-md-6 mb-3">
+          <label for="userType" class="form-label">User Type</label>
+          <select
+            class="form-select"
+            id="userType"
+            [(ngModel)]="user.user_type"
+            name="userType"
+            required
+            #userType="ngModel"
+            [ngClass]="{'is-invalid': userType.invalid && (userType.dirty || userType.touched)}"
+          >
+            <option value="">Select User Type</option>
+            <option value="Buyer">Buyer</option>
+            <option value="Seller">Seller</option>
+            <option value="Both">Both Seller & Buyer</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="userType.invalid && (userType.dirty || userType.touched)">
+            Please select a user type.
+          </div>
+        </div>
+  
+        <!-- Address -->
+        <!-- <div class="col-12 mb-3">
+          <label for="address" class="form-label">Address</label>
+          <textarea
+            class="form-control"
+            id="address"
+            [(ngModel)]="user.address"
+            name="address"
+            rows="3"
+            required
+            #address="ngModel"
+            [ngClass]="{'is-invalid': address.invalid && (address.dirty || address.touched)}"
+          ></textarea>
+          <div class="invalid-feedback" *ngIf="address.invalid && (address.dirty || address.touched)">
+            Address is required.
+          </div>
+        </div> -->
+      </div>
+  
+      <!-- Buttons -->
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary me-2" [disabled]="!profileForm.valid" >Update Profile</button>
+        <button type="button" class="btn btn-outline-secondary me-2" (click)="resetForm()">Reset</button>
+        <button type="button" class="btn  bg-black text-white" (click)="backToHome()">Back</button>
+      </div>
+    </form>
+  
+    <!-- Success/Error Message -->
+    <!-- <div *ngIf="message" class="alert mt-3" [ngClass]="{'alert-success': !error, 'alert-danger': error}">
+      {{ message }}
+    </div> -->
+  </div>

@@ -1,0 +1,365 @@
+<!-- <div class="buyer-details">
+    <h2>Details:</h2>
+    <div *ngIf="!patentDetails">
+      <p>Loading details...</p>
+    </div>
+  
+    <div *ngIf="patentDetails">
+      <p><strong>Patent Number:</strong> {{ patentDetails.patent_number }}</p>
+      <p><strong>Tech Domain:</strong> {{ patentDetails.primary_technology }}</p>
+      <p><strong>Entity Status:</strong> {{ patentDetails.entity_status }}</p>
+      <p><strong>Expiry:</strong> {{ patentDetails.expiry }}</p>
+      <p><strong>Claim Charts:</strong> {{ patentDetails.file }}</p>
+      <p><strong>Acquisition Status:</strong> {{ patentDetails.acquisition_status }}</p>
+      <p><strong>Bay Rating:</strong> {{ patentDetails.bay_rating }}</p>
+   
+      
+      <p><strong>Market Relevance:</strong> {{ patentDetails.MarketRelevance }}</p>
+      <p><strong>Enforceability:</strong> {{ patentDetails.enforceability }}</p>
+      <p><strong>Targets:</strong> {{ patentDetails.target }}</p>
+      <p><strong>Company Name:</strong> {{ patentDetails.company_name }}</p>
+      <p><strong>Contact:</strong> {{ patentDetails.admin_contact }}</p>
+      <p><strong>Email:</strong> {{ patentDetails.admin_email }}</p>
+      <p><strong>Upcoming Fees:</strong> {{ patentDetails.upcoming_fees }}</p>
+ 
+      <p><strong>Title:</strong> {{ patentDetails.title }}</p>
+      
+      <p><strong>Abstract:</strong> 
+        <span *ngIf="!showFullAbstract">{{ patentDetails.abstract | slice:0:100 }}...</span>
+        <span *ngIf="showFullAbstract">{{ patentDetails.abstract }}</span>
+        <button (click)="showFullAbstract = !showFullAbstract" class="read-more">
+          {{ showFullAbstract ? 'Read Less' : 'Read More' }}
+        </button>
+      </p>
+  
+      <p><strong>First Claim:</strong> 
+        <span *ngIf="!showFullClaim">{{ patentDetails.first_claim | slice:0:100 }}...</span>
+        <span *ngIf="showFullClaim">{{ patentDetails.first_claim }}</span>
+        <button (click)="showFullClaim = !showFullClaim" class="read-more">
+          {{ showFullClaim ? 'Read Less' : 'Read More' }}
+        </button>
+      </p>
+  
+      <p><strong>Filing Date:</strong> {{ patentDetails.filing_date }}</p>
+      <p><strong>Grant Date:</strong> {{ patentDetails.grant_date }}</p>
+      <p><strong>Current Assignee:</strong> {{ patentDetails.current_assignee }}</p>
+      <p><strong>IP Type:</strong> {{ patentDetails.ip_type }}</p>
+      <p><strong>Family Members:</strong> {{ patentDetails.family_members }}</p>
+      
+      <p><strong>Concepts:</strong> 
+        <span *ngIf="!showFullConcepts">{{ patentDetails.concepts | slice:0:100 }}...</span>
+        <span *ngIf="showFullConcepts">{{ patentDetails.concepts }}</span>
+        <button (click)="showFullConcepts = !showFullConcepts" class="read-more">
+          {{ showFullConcepts ? 'Read Less' : 'Read More' }}
+        </button>
+      </p>
+  
+      <p><strong>Keywords:</strong> {{ patentDetails.keywords }}</p>
+      <p><strong>Technologies:</strong> {{ patentDetails.technologies }}</p>
+    </div>
+  </div>
+  
+   -->
+
+<!--   <div class="container">
+   latest
+    <div class="header">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <h1 class="title">BSP</h1>
+      <div class="nav">
+        <a href="#">About us</a>
+        <a href="#">Contact us</a>
+        <i class="icon-user"></i>
+      </div>
+    </div>
+  
+    <a href="#" class="back-link">← Back to List</a>
+
+    <div class="search-box">
+      <input type="text" placeholder="🔍 Search..." />
+    </div>
+  
+    <h2 class="section-title">Details:</h2>
+    <div *ngIf="!patentDetails">
+      <p>Loading details...</p>
+    </div>
+    <div *ngIf="patentDetails">
+    <table class="info-table">
+      <tr>
+        <td><strong>Patent No.</strong></td>
+        <td class="link">{{ patentDetails.patent_number }}</td>
+        <td><strong>Tech Domain</strong></td>
+        <td>{{ patentDetails.primary_technology }}</td>
+        <td><strong>Entity Status</strong></td>
+        <td>{{ patentDetails.entity_status }}</td>
+        <td><strong>Expiry</strong></td>
+        <td>{{ patentDetails.expiry }}</td>
+        <td><strong>Claim Charts</strong></td>
+        <td>
+          <img src="assets/pdf-icon.png" class="icon" />
+              {{ patentDetails.file }}
+          <img src="assets/excel-icon.png" class="icon" />
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Status of Acquisition</strong></td>
+        <td>{{ patentDetails.acquisition_status }}</td>
+        <td><strong>Buying Options</strong></td>
+        <td>Skip</td>
+        <td><strong>Bay Rating</strong></td>
+        <td>{{ patentDetails.bay_rating }}</td>
+      </tr>
+    </table>
+  
+    
+    <h2 class="section-title">Infringement Details</h2>
+    <table class="info-table">
+      <tr>
+        <td><strong>Market Relevance</strong></td>
+        <td>{{ patentDetails.MarketRelevance }}</td>
+        <td><strong>Enforceability</strong></td>
+        <td>{{ patentDetails.enforceability }}</td>
+        <td><strong>Targets</strong></td>
+        <td>{{ patentDetails.target }}</td>
+        <td><strong>Company Name</strong></td>
+        <td>{{ patentDetails.company_name }}</td>
+        <td><strong>Contact</strong></td>
+        <td>{{ patentDetails.admin_contact }}</td>
+      </tr>
+      <tr>
+        <td><strong>Email</strong></td>
+        <td>{{ patentDetails.admin_email }}</td>
+        <td><strong>Upcoming Fees</strong></td>
+        <td>{{ patentDetails.upcoming_fees }}</td>
+      </tr>
+    </table>
+  
+   
+    <h2 class="section-title">Patent Details</h2>
+    <table class="info-table">
+      <tr>
+        <td><strong>Title</strong></td>
+        <td>{{ patentDetails.title }}</td>
+        <td><strong>Abstract</strong></td>
+        <td>
+          <span *ngIf="!showFullAbstract">{{ patentDetails.abstract | slice:0:100 }}...</span>
+          <span *ngIf="showFullAbstract">{{ patentDetails.abstract }}</span>
+          <button (click)="showFullAbstract = !showFullAbstract" class="read-more">
+            {{ showFullAbstract ? 'Read Less' : 'Read More' }}
+          </button>
+        </td>
+        <td><strong>First Claim</strong></td>
+        <td><span *ngIf="!showFullClaim">{{ patentDetails.first_claim | slice:0:100 }}...</span>
+          <span *ngIf="showFullClaim">{{ patentDetails.first_claim }}</span>
+          <button (click)="showFullClaim = !showFullClaim" class="read-more">
+            {{ showFullClaim ? 'Read Less' : 'Read More' }}
+          </button></td>
+        <td><strong>Filing Date</strong></td>
+        <td> {{ patentDetails.filing_date }}</td>
+        <td><strong>Grant Date</strong></td>
+        <td>{{ patentDetails.grant_date }}</td>
+      </tr>
+      <tr>
+        <td><strong>Current Assignees</strong></td>
+        <td>{{ patentDetails.current_assignee }}</td>
+        <td><strong>IP Type</strong></td>
+        <td>patentDetails.ip_type </td>
+        <td><strong>Family Members</strong></td>
+        <td>
+          <input type="checkbox" checked disabled /> Single Patent
+          <input type="checkbox" checked disabled /> Family Patent
+          <p> {{ patentDetails.family_members }}</p>
+          <span class="link">US20200045025A1</span>
+        </td>
+        <td><strong>Concepts</strong></td>
+        <td><span *ngIf="!showFullConcepts">{{ patentDetails.concepts | slice:0:100 }}...</span>
+          <span *ngIf="showFullConcepts">{{ patentDetails.concepts }}</span>
+          <button (click)="showFullConcepts = !showFullConcepts" class="read-more">
+            {{ showFullConcepts ? 'Read Less' : 'Read More' }}
+          </button></td>
+        <td><strong>Keywords</strong></td>
+        <td>{{ patentDetails.keywords }}</td>
+      </tr>
+      <tr>
+        <td><strong>Technologies</strong></td>
+        <td>{{ patentDetails.technologies }}</td>
+      </tr>
+    </table>
+    </div>
+  
+    <footer class="footer">
+      <p>© 2024 Bayslope Business Solutions Private Limited</p>
+      <div class="footer-links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Report Error</a>
+      </div>
+      <div class="social-icons">
+        <i class="icon-twitter"></i>
+        <i class="icon-facebook"></i>
+        <i class="icon-instagram"></i>
+        <i class="icon-linkedin"></i>
+      </div>
+    </footer>
+  </div>
+   -->
+   
+   <app-profile-header></app-profile-header>
+   <div class="container">
+    <!-- Header Section -->
+    
+    <div style="margin-top: 6%; font-size: 32px; color: #406FE8; cursor: pointer;">
+
+      <a (click)="backToBuyer()" class="back-link mt-4 text-primary fs-3 bold"><i class="fa fa-arrow-left " aria-hidden="true"></i> Back to List</a>
+    </div>
+  
+  
+    <!-- Search Box -->
+    <!-- <div class="search-box">
+      <input type="text" placeholder="🔍 Search..." />
+    </div>
+   -->
+    <!-- Details Section -->
+    <h2 class="section-title">Details</h2>
+    <div class="grid-container" *ngIf="patentDetails; else loading">
+      <div class="grid-item">
+        <strong>Patent No.</strong> <br />
+        <span class="highlight">{{ patentDetails.patent_number }}</span>
+      </div>
+      <div class="grid-item">
+        <strong>Tech Domain</strong> <br />
+        {{ patentDetails.primary_technology }}
+      </div>
+      <div class="grid-item">
+        <strong>Entity Status</strong> <br />
+        {{ patentDetails.entity_status }}
+      </div>
+      <div class="grid-item">
+        <strong>Expiry</strong> <br />
+        {{ patentDetails.expiry }}
+      </div>
+      <div class="grid-item">
+        <strong>Claim Charts</strong> <br />
+        📄 
+        <!-- {{ patentDetails.file }} -->
+      </div>
+      <div class="grid-item">
+        <strong>Status of Acquisition</strong> <br />
+        {{ patentDetails.acquisition_status }}
+      </div>
+      <div class="grid-item" style="background-color: #0DCAF0;">
+        <strong>Feedback</strong> <br />
+        {{ userFeedback?.action }}
+      </div>
+      <div class="grid-item">
+        <strong>Bay Rating</strong> <br />
+        {{ patentDetails.bay_rating }}
+      </div>
+    </div>
+
+
+
+    <h2 class="section-title">Contact Team</h2>
+    <div class="grid-container">
+      <div class="grid-item">
+        <strong>Contact</strong> <br />
+        {{ patentDetails?.admin_contact }}
+      </div>
+      <div class="grid-item">
+        <strong>Email</strong> <br />
+        {{ patentDetails?.admin_email }}
+      </div>
+     
+    </div>
+  
+    <!-- Infringement Details Section -->
+    <h2 class="section-title">Infringement Details</h2>
+    <div class="grid-container">
+      <div class="grid-item">
+        <strong>Market Relevance</strong> <br />
+        {{ patentDetails?.MarketRelevance }}
+      </div>
+      <div class="grid-item">
+        <strong>Enforceability</strong> <br />
+        {{ patentDetails?.enforceability }}
+      </div>
+      <div class="grid-item">
+        <strong>Targets</strong> <br />
+        {{ patentDetails?.target }}
+      </div>
+      <div class="grid-item">
+        <strong>Company Name</strong> <br />
+        {{ patentDetails?.company_name }}
+      </div>
+      <div class="grid-item">
+        <strong>Contact</strong> <br />
+        {{ patentDetails?.admin_contact }}
+      </div>
+      <div class="grid-item">
+        <strong>Email</strong> <br />
+        {{ patentDetails?.admin_email }}
+      </div>
+      <div class="grid-item">
+        <strong>Upcoming Fees</strong> <br />
+        {{ patentDetails?.upcoming_fees }}
+      </div>
+    </div>
+  
+    <!-- Patent Details Section -->
+    <h2 class="section-title">Patent Details</h2>
+    <div class="grid-container">
+      <div class="grid-item">
+        <strong>Title</strong> <br />
+        {{ patentDetails?.title }}
+      </div>
+      <div class="grid-item">
+        <strong>Abstract</strong> <br />
+        {{ patentDetails?.abstract }} <!-- Full abstract displayed directly -->
+      </div>
+      <div class="grid-item">
+        <strong>First Claim</strong> <br />
+        {{ patentDetails?.first_claim }} <!-- Full first claim displayed directly -->
+      </div>
+      <div class="grid-item">
+        <strong>Filing Date</strong> <br />
+        {{ patentDetails?.filing_date }}
+      </div>
+      <div class="grid-item">
+        <strong>Grant Date</strong> <br />
+        {{ patentDetails?.grant_date }}
+      </div>
+      <div class="grid-item">
+        <strong>Current Assignees</strong> <br />
+        {{ patentDetails?.current_assignee }}
+      </div>
+      <div class="grid-item">
+        <strong>IP Type</strong> <br />
+        {{ patentDetails?.ip_type }}
+      </div>
+      <div class="grid-item">
+        <strong>Family Members</strong> <br />
+        {{ patentDetails?.family_members }}
+      </div>
+      <div class="grid-item">
+        <strong>Concepts</strong> <br />
+        {{ patentDetails?.concepts }} <!-- Full concepts displayed directly -->
+      </div>
+      <div class="grid-item">
+        <strong>Keywords</strong> <br />
+        {{ patentDetails?.keywords }}
+      </div>
+      <div class="grid-item">
+        <strong>Technologies</strong> <br />
+        {{ patentDetails?.technologies }}
+      </div>
+    </div>
+  
+    <!-- Footer Section -->
+   
+  </div>
+   <footer class="footer w-100">
+      <app-footer></app-footer>
+    </footer>
+  <ng-template #loading>
+    <p>Loading details...</p>
+  </ng-template>

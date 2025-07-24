@@ -1,0 +1,267 @@
+/* Base Styles */
+body {
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Drawer Layout */
+.drawer-container {
+  height: auto;
+  width: 100%;
+}
+
+mat-sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-right: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+mat-sidenav-content {
+  margin-left: 350px;
+  flex-grow: 1;
+  overflow-x: auto;
+  background-color: #fff;
+}
+
+/* Container */
+.container-fluid {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 0 0 35%;
+  max-width: 35%;
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-right: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+/* Main Content */
+.main-content {
+  flex: 0 0 65%;
+  max-width: 65%;
+  padding: 25px;
+}
+
+/* Headings */
+h2.h5 {
+  color: #406fe8;
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form Inputs */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #007bff;
+  padding: 12px;
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.form-control::placeholder {
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #6c757d;
+}
+
+.mat-mdc-paginator {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+  font-family: 'FortBook', Arial, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: rgb(38, 30, 30);
+  margin-top: 10px;
+}
+
+/* Adjust table container to accommodate paginator */
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  justify-content: flex-start;
+  overflow: auto;
+  width: 100%;
+  margin-left: 5px;
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  min-width: 800px;
+  table-layout: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-color {
+  background-color: #eaf0ff !important;
+  color: #406fe8 !important;
+}
+
+.table thead th {
+  border: none;
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.table tbody tr {
+  background-color: #ffffff;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef;
+  transition: background-color 0.3s ease;
+}
+
+.table td,
+.table th {
+  border-color: #ddd;
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* No Results Message */
+.table-group-divider + div {
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #6c757d;
+  height: 60vh;
+  width: 100%;
+  margin-left: 250px;
+  margin-bottom: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Loading Message */
+#loading p {
+  font-family: 'FortBook', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #6c757d;
+}
+/* Loading Container */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 20px;
+  height: 150vh;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    flex: 0 0 100%;
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px;
+  }
+
+  .main-content {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .container-fluid {
+    padding: 0;
+  }
+
+  mat-sidenav {
+    width: 100%;
+    padding: 20px;
+  }
+
+  mat-sidenav-content {
+    margin-left: 0;
+  }
+
+  .table-container {
+    max-height: 50vh;
+  }
+
+  .table {
+    min-width: 100%;
+  }
+
+  .table td,
+  .table th {
+    padding: 8px;
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  h2.h5 {
+    font-size: 20px;
+  }
+
+  .form-control {
+    font-size: 14px;
+  }
+
+  .form-control::placeholder {
+    font-size: 14px;
+  }
+
+  .table-group-divider + div {
+    font-size: 16px;
+    margin-left: 0;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  #loading p {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,400 @@
+/* Base styles */
+body {
+  background-color: #f4f6f9;
+  font-family: FortBook, Arial, sans-serif;
+  margin-top: 5%;
+}
+
+/* Container */
+.container {
+  max-width: 100%;
+}
+
+table{
+  overflow-x: scroll;
+  overflow: 90%;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  height: 70vh; /* Adjust as needed */
+  width: 100%;
+  margin-top: 20px;
+  overflow-x: scroll;
+}
+
+
+
+
+/* Card styling */
+.card {
+  border: none; /* Table Container */
+  .table-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    max-height: 70vh; /* Maximum height for scrollability */
+    width: 100%; /* Ensure it takes full container width */
+    margin-top: 20px;
+  }
+
+
+  /* Page Size Dropdown Background Color and Text Color */
+  ::ng-deep .mat-mdc-select {
+    background-color: #0e6efd; 
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: white; /* White text */
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
+  }
+
+  ::ng-deep .mat-mdc-select:hover {
+    border-color: #406fe8; /* Optional: Blue border on hover */
+  }
+
+  ::ng-deep .mat-mdc-select:focus {
+    border-color: #2048b6;
+    box-shadow: 0 0 4px rgba(64, 111, 232, 0.3);
+  }
+
+  .mat-mdc-paginator {
+    background-color: #1094b6;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+    font-family: "FortBook", Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    color: white; /* Ensure text is readable */
+  }
+
+    .table-container {
+      display: flex;
+      flex-direction: column;
+      height: 70vh; /* Adjust as needed */
+      width: 100%;
+      margin-top: 20px;
+      overflow-x: scroll;
+    }
+
+  /* Table Styles (unchanged, for context) */
+  .table {
+    border-radius: 10px;
+    width: 100%;
+    table-layout: auto;
+    white-space: nowrap;
+  }
+
+  .table-container table {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x:scroll;
+    white-space: nowrap;
+
+  }
+
+  .table-color {
+    background-color: #eaf0ff !important; /* Light blue header */
+    color: #406fe8 !important; /* Blue text */
+  }
+
+  .table thead th {
+    border: none;
+    padding: 18px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap; /* Prevent header text wrapping */
+  }
+
+  .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for even rows */
+  }
+
+  .table tbody tr:hover {
+    background-color: #e9ecef; /* Hover effect */
+  }
+
+  
+ 
+  .modal-content {
+    border-radius: 10px;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .modal-header {
+    background-color: #eaf0ff; /* Light blue header matching tables */
+    color: #406fe8; /* Blue text */
+    border-bottom: 1px solid #ddd;
+    padding: 15px 20px;
+  }
+
+  .modal-title {
+    font-family: FortBook, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    margin: 0;
+  }
+
+  .btn-close {
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-close:hover {
+    opacity: 1;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .modal-footer {
+    border-top: 1px solid #ddd;
+    padding: 15px 20px;
+    background-color: #f9f9f9; /* Light gray footer */
+  }
+
+  /* Form Controls */
+  .form-label {
+    font-family: FortBook, Arial, sans-serif;
+    font-weight: bold;
+    color: #406fe8; /* Blue text for labels */
+    margin-bottom: 5px;
+  }
+
+  .form-control,
+  .form-select {
+    border-radius: 6px;
+    border: 1px solid #007bff;
+    padding: 10px;
+    font-family: FortBook, Arial, sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+
+  .form-check-input {
+    margin-top: 0.3rem;
+  }
+
+  /* Button Styling */
+  .btn-success {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-success:hover {
+    background-color: #218838 !important;
+    border-color: #1e7e34 !important;
+    transform: scale(1.05);
+  }
+
+  .btn-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268 !important;
+    border-color: #545b62 !important;
+    transform: scale(1.05);
+  }
+  .h4 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .modal-dialog {
+      margin: 10px;
+      max-width: 100%;
+    }
+    .modal-body {
+      padding: 15px;
+    }
+    .modal-header,
+    .modal-footer {
+      padding: 10px 15px;
+    }
+    .modal-title {
+      font-size: 32px;
+    }
+    .btn-success,
+    .btn-secondary {
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+    .table-container {
+      max-height: 50vh; /* Adjust for smaller screens */
+    }
+
+    .table {
+      min-width: 100%; /* Allow table to shrink on small screens */
+    }
+
+    .table td,
+    .table th {
+      padding: 8px;
+      font-size: 16px;
+      white-space: normal; /* Allow wrapping on small screens */
+    }
+  }
+}
+.navbar {
+  background: linear-gradient(to right, #BACBF7, #CEDAF9);
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 700; /* Bold for navbar consistency */
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  background-color: #07427d !important;
+}
+
+/* Navigation List Styling */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+}
+
+/* Link Styling */
+.navbar a {
+  text-decoration: none;
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 400; /* Normal weight for links */
+  font-size: 16px; /* Matches navigation link size */
+  color: #007bff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 20px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* Active State Styling */
+.navbar a.active {
+  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-weight: 700; /* Bold for active state */
+  font-size: 16px; /* Matches link size */
+  color: white;
+  background-color: #007BFF;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transform: scale(1.05);
+  cursor: default;
+}
+  
+  /* Logo Styling */
+  .logo-img {
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .logo-img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  /* Login Container Styling */
+  .login-container {
+    position: relative; /* Allows precise positioning of the dropdown */
+  }
+  
+  /* Login Button Styling */
+  .login-button {
+    background: none;
+    border: none;
+    padding: 0; /* Minimal padding to match other nav items */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .login-button:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+  
+  /* Login Icon Styling */
+  .login-icon {
+    font-size: 24px; /* Slightly larger for visibility */
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+  
+  .login-button:hover .login-icon {
+    color: #0056b3; /* Darker shade on hover */
+  }
+  
+  /* Dropdown Menu Styling */
+.login-menu {
+  background-color: #221a1a !important; /* Default state when closed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  min-width: 150px;
+}
+
+/* Style when menu is opened */
+mat-menu.mat-menu-panel {
+  background-color: #C3D2F8 !important; /* Apply this when the menu is opened */
+}
+
+/* Optional: Menu item hover effect to match new background */
+mat-menu-item:hover {
+  background-color: #BACBF7; /* Slightly darker variant for hover */
+}
+
+/* Ensure text contrast with the new background */
+mat-menu-item {
+  color: #333; /* Darker color for better readability */
+}
+
+mat-menu-item:hover {
+  color: #007bff; /* Match link color on hover */
+}

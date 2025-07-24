@@ -1,0 +1,261 @@
+<!-- <div class="upload-container card p-4 mb-4 shadow-sm">
+  <h2 class="h4 mb-3">Upload Excel File</h2>
+  <div class="d-flex flex-column align-items-center">
+    <input
+      type="file"
+      accept=".xlsx, .xls"
+      (change)="onFileSelected($event)"
+      class="form-control mb-3"
+      id="fileInput"
+    />
+    <button (click)="uploadFile()" class="btn btn-primary mb-2">
+      Upload
+    </button>
+    <p *ngIf="uploadStatus" class="upload-status text-muted">
+      {{ uploadStatus }}
+    </p>
+  </div>
+</div> -->
+
+<!-- Filters Section (Hidden initially) -->
+<div style="margin-bottom: 5%;">
+  <app-profile-header></app-profile-header>
+</div>
+
+<div class="filters card p-4 mb-4 mt-5 shadow-sm">
+  <div class="w-100 d-flex justify-content-between">
+    <h4 class="mb-2 text-primary">Filters</h4>
+    <button type="button" class="btn btn-outline-success btn-md p-2" (click)="sellerForm()">Seller Form</button>
+  </div>
+  <div class="row gx-3">
+    <div class="col-md-4 mb-3">
+      <label for="emailFilter" class="form-label">Email</label>
+      <input
+        class="form-control"
+        [(ngModel)]="filter.email"
+        placeholder="Filter by email"
+        id="emailFilter"
+        (keyup.enter)="applyFilters()"
+      />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="verifiedFilter" class="form-label">Verified</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filter.verified"
+        id="verifiedFilter"
+      >
+        <option value="">All</option>
+        <option value="true">Verified</option>
+        <option value="false">Unverified</option>
+      </select>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary me-2" (click)="applyFilters()">
+      Apply Filters
+    </button>
+    <button class="btn btn-outline-secondary" (click)="resetFilters()">
+      Reset Filters
+    </button>
+  </div>
+</div>
+
+<!-- Table Section -->
+<div class="table-container">
+  <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm">
+    <thead class="table-color">
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Patent Number</th>
+        <th>Primary Technology</th>
+        <th>Price Expectation</th>
+        <th>Additional Notes</th>
+        <th>Verified</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let item of paginatedData; let i = index">
+        <td>{{ (pageIndex * pageSize) + i + 1 }}</td>
+        <td>{{ item.first_name }}</td>
+        <td>{{ item.last_name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.country }}</td>
+        <td>{{ item.city }}</td>
+        <td>{{ item.patent_number }}</td>
+        <td>{{ item.primary_technology }}</td>
+        <td>{{ item.price_expectation }}</td>
+        <td>{{ item.additional_notes || "N/A" }}</td>
+        <td>
+          <div>
+            <span *ngIf="item.verified" class="badge text-bg-success">Verified</span>
+            <span *ngIf="!item.verified" class="badge text-bg-warning">Pending</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="filteredData.length === 0 && !loader" style="
+    height: 60vh;
+    width: 100%;
+    margin-left: 95px;
+    margin-bottom: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  ">
+    No result to display
+  </div>
+  <mat-paginator 
+    [pageSizeOptions]="[10]" 
+    [pageSize]="10" 
+    [length]="filteredData.length" 
+    (page)="handlePageEvent($event)"
+  ></mat-paginator>
+  
+</div>
+
+<!-- Feedback Modal -->
+<div
+  *ngIf="selectedFeedback"
+  class="modal fade show d-block"
+  tabindex="-1"
+  style="background: rgba(0, 0, 0, 0.5)"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          Feedback for Patent ID: {{ selectedFeedback.id }}
+        </h3>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="selectedFeedback = null"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Buyer Email</th>
+              <th>Buyer Name</th>
+              <th>Action</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of selectedFeedback.feedback_details">
+              <td>{{ feedback.email }}</td>
+              <td>{{ feedback.first_name }} {{ feedback.last_name }}</td>
+              <td>{{ feedback.action }}</td>
+              <td>{{ feedback.timestamp | date : "short" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="selectedFeedback = null">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Verification Form -->
+<div
+  *ngIf="selectedSeller"
+  class="modal fade show d-block"
+  tabindex="-1"
+  style="background: rgba(0, 0, 0, 0.5)"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content shadow-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          Verify Seller: {{ selectedSeller.first_name }}
+          {{ selectedSeller.last_name }}
+        </h3>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="selectedSeller = null"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row gx-3">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Important</label>
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [(ngModel)]="important"
+                name="important"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="entityStatus" class="form-label">Entity Status</label>
+              <select
+                class="form-select"
+                [(ngModel)]="entityStatus"
+                id="entityStatus"
+                name="entityStatus"
+              >
+                <option value="micro">Micro</option>
+                <option value="small">Small</option>
+                <option value="large">Large</option>
+              </select>
+            </div>
+            <div class="col-12 mb-3">
+              <label for="additionalNotes" class="form-label">Additional Notes</label>
+              <textarea
+                class="form-control"
+                [(ngModel)]="additionalNotes"
+                id="additionalNotes"
+                name="additionalNotes"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success me-2" (click)="verifySeller()">
+          Submit Verification
+        </button>
+        <button class="btn btn-secondary" (click)="selectedSeller = null">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding: 20px;
+      height: 150vh;
+    "
+  >
+    <div><mat-spinner></mat-spinner></div>
+    <div><p>Loading Data...</p></div>
+  </div>
+</ng-template>
+<app-footer></app-footer>

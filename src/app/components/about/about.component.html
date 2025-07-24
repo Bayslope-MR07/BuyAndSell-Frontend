@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSP - Buy & Sell Patents</title>
+</head>
+<body>
+  <div class="navbar fixed-top navbar-expand-lg">
+    <div class="logo">
+      <img src="Logo.png" alt="Logo" class="logo-img" (click)="homePage()" />
+    </div>
+    <nav>
+      <ul>
+        <li><a class="ac" (click)="aboutUs()">About Us</a></li>
+        <li><a (click)="contactUs()">Contact Us</a></li>
+        <!-- Login Button with Dropdown -->
+        <li class="login-container">
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
+            <mat-icon class="login-icon">person</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="login-menu bg-primary" >
+            <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAdmin()">Login as Admin</button>
+            <button mat-menu-item class="menu-item user-login text-white" (click)="loginAdmin()">Login as User</button>
+          </mat-menu>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <section class="about-us">
+    <div>
+      <h2 class="back text-sm-start  "><a  (click)="homePage()" class="fw-bold text-decoration-none"><i class="fa fa-arrow-left"></i> About Us</a></h2>
+      <p class="text-muted lead" style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+        "At Bayslope, we empower innovation by providing a comprehensive 
+        database of patent litigation cases and a marketplace for buying and selling patents. 
+        Our platform is designed to give legal professionals, inventors, and businesses 
+        invaluable insights into patent disputes and strategic patent opportunities. 
+        With data-driven analytics and in-depth case histories, we simplify 
+        the complexities of litigation, helping you make informed decisions. 
+        Whether you’re looking to protect your intellectual property or expand 
+        your portfolio, Bayslope is your trusted partner for navigating 
+        the world of patents with confidence and clarity."
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p class="copyright">
+        © 2024 Boyslope Business Solutions Private Limited
+      </p>
+      <div class="links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Report Error</a>
+      </div>
+      <div class="social-media">
+        <p>Follow Us:</p>
+        <div class="icons">
+          <a href="https://x.com/Bayslopepatent/status/1423928590073098244" target="_blank"><i class="bi bi-twitter"></i></a>
+          <a href="https://www.facebook.com/yourusername" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/bayslope" target="_blank"><i style="color: #FE1E67;" class="bi bi-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/bayslopepatentsolutions" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body> 
+</html>

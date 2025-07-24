@@ -1,0 +1,36 @@
+<div class="login-form">
+  <h1 class="text-center">Welcome Back</h1>
+  <p>Glad to see you again, Login To your account below</p>
+  <button (click)="googleCallback()" id="button-google">
+    <i class="fab fa-google fa-2x me-3"></i> Continue with Google
+  </button>
+  <form (ngSubmit)="onSubmit()">
+    <label for="email">Email:</label>
+    <input type="email" [(ngModel)]="formData.email" name="email" required />
+
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      [(ngModel)]="formData.password"
+      name="password"
+      required
+    />
+    <span class="mb-3">
+      <a class="form-control-sm anchorStyle" (click)="goForgot()">Forgot Password</a>
+    </span>
+
+    <button type="submit">Login</button>
+    <p class="mt-lg-2">
+      Don't have an account?
+      <a (click)="goToSignUp()" class="anchorStyle signup">Sign Up</a>
+    </p>
+  </form>
+
+  <p>{{ message }}</p>
+
+  <!-- Display user data after successful login -->
+  <div *ngIf="userData">
+    <h3>Welcome, {{ userData.first_name }} {{ userData.last_name }}!</h3>
+    <p>Email: {{ userData.email }}</p>
+  </div>
+</div>

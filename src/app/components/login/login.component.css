@@ -1,0 +1,133 @@
+.login-form {
+  max-width: 40%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: FortBook, Arial, sans-serif; /* Base font family */
+  font-weight: bold; /* Base bold style */
+}
+
+.forgot-form h1 {
+  font-family: FortBook, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 32px;
+  text-align: center;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.anchorStyle {
+  cursor: pointer;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: bold; /* Matches base style */
+}
+
+.login-form label {
+  font-size: 16px;
+  color: #333;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: bold; /* Matches base style */
+}
+
+.login-form input {
+  padding: 0.8rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: normal; /* Inputs typically aren't bold */
+}
+
+.login-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.login-form button {
+  padding: 0.8rem;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: bold; /* Matches base style */
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+.login-form p {
+  margin-top: 1rem;
+  font-size: 16px;
+  color: #898989;
+  text-align: center;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: normal; /* Paragraphs typically aren't bold */
+}
+
+.signup {
+  cursor: pointer;
+  color: #007bff;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: bold; /* Matches anchor style */
+}
+
+.login-form div {
+  margin-top: 1.5rem;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.login-form div h3 {
+  margin: 0;
+  font-size: 32px;
+  color: #007bff;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: bold; /* Matches base style */
+}
+
+.login-form div p {
+  margin: 0.5rem 0 0;
+  font-size: 16px;
+  color: #555;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: normal; /* Matches other paragraphs */
+}
+
+#button-google {
+  width: 100%;
+  margin: 20px 0 20px 0;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  font-family: FortBook, Arial, sans-serif; /* Consistent font */
+  font-weight: bold; /* Matches base style */
+}
+
+#button-google:hover {
+  background-color: rgb(228, 234, 238);
+}
+
+.fa-google {
+  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
