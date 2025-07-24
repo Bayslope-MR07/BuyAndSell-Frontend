@@ -6,8 +6,8 @@ export const environment = {
 
   GOOGLE_CLIENT_ID:
     '310505524472-gv7473u6ngdsujr15nq5nk1ak78curot.apps.googleusercontent.com',
-  GOOGLE_CALLBACK_URI: 'http://localhost:4200/google-callback',
-  
+  GOOGLE_CALLBACK_URI: 'https://bas-3nw9.onrender.com/google-callback',
+
   // GOOGLE_CALLBACK_URI: "http://ec2-3-144-99-241.us-east-2.compute.amazonaws.com/google-callback"
 };
   
