@@ -9,14 +9,14 @@ body {
 }
 
 .navbar {
-  background-color: transparent !important;
+  background-color: #006241;
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(to right, #BACBF7, #CEDAF9);
+  background: #006241;
 }
 
 .navbar.scrolled {
@@ -37,7 +37,7 @@ body {
   text-decoration: none;
   font-size: 16px; /* Smaller size for navigation links */
   font-weight: 600; /* Bold weight for navigation links */
-  color: #007bff;
+  color: #d4e9e2;
   transition: color 0.3s ease;
 }
 
@@ -45,7 +45,7 @@ body {
   color: white;
   padding: 10px 20px;
   border: none;
-  background-color: #007bff;
+  background-color: #424245;
   cursor: pointer;
   font-size: 16px;
   border-radius: 20px;
@@ -98,12 +98,13 @@ body {
 /* Login Icon Styling */
 .login-icon {
   font-size: 24px;
-  color: #007bff;
+  color: #d4e9e2;
   transition: color 0.3s ease;
 }
 
 .login-button:hover .login-icon {
-  color: #0056b3;
+  /* color: #0056b3; */
+  
 }
 
 /* Dropdown Menu Styling */
@@ -192,7 +193,7 @@ body {
 }
 
 .hero h1 {
-  color: #007bff;
+  color: #006241;
   font-size: 36px; /* Matches the bold heading in the image */
   font-weight: 700; /* Bold weight for hero heading */
 }
@@ -209,14 +210,14 @@ body {
   border: none;
   border-radius: 20px;
   height: 70px;
-  background-color: #2563eb;
+  background-color: #006241;
   color: white;
   font-size: 18px; /* Readable size for button text */
   font-weight: 600; /* Bold weight for button text */
 }
 
 .btn-explore:hover {
-  background-color: #1e40af;
+  background-color: #1E3932;
   transform: scale(1.1);
 }
 
@@ -246,7 +247,7 @@ body {
 .section-title {
   font-size: 36px; /* Matches the section title size */
   font-weight: 700; /* Bold weight for section titles */
-  color: #007bff;
+  color: #2C5F2D;
   margin-bottom: 40px;
 }
 
@@ -295,7 +296,7 @@ body {
 }
 
 .join-community h2 {
-  color: #007bff;
+  color: #2C5F2D;
   font-size: 36px; /* Matches the section title size */
   font-weight: 600; /* Semi-bold weight for community title */
   margin-bottom: 80px;
@@ -422,4 +423,48 @@ footer {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+::ng-deep .mat-menu-panel.custom-menu .mat-menu-content {
+  background-color: #006241 !important;
+}
+
+::ng-deep .mat-menu-panel.custom-menu .mat-menu-item {
+  color: white !important;
+}
+
+::ng-deep .mat-menu-panel.custom-menu .mat-menu-item:hover {
+  background-color: #1e3932 !important;
+}
+
+
+
+
+::ng-deep .mat-menu-panel.login-menu.custom-menu {
+  background-color: #006241 !important; /* Dark Green */
+}
+
+::ng-deep .mat-menu-panel.login-menu.custom-menu .mat-menu-item {
+  color: white !important;
+  font-weight: 500;
+}
+
+::ng-deep .mat-menu-panel.login-menu.custom-menu .mat-menu-item:hover {
+  background-color: #1e3932 !important; /* Darker green on hover */
+}
+
+
+::ng-deep .mat-menu-panel.green-menu {
+  background-color: #006241 !important; /* Starbucks Green */
+}
+
+::ng-deep .mat-menu-panel.green-menu .mat-menu-item {
+  color: white !important;
+  font-weight: 500;
+}
+
+::ng-deep .mat-menu-panel.green-menu .mat-menu-item:hover {
+  background-color: #1e3932 !important; /* Darker green on hover */
 }

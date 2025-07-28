@@ -9,14 +9,14 @@ body {
 
 /* Navigation Bar Styles */
 .navbar {
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(to right, #BACBF7, #CEDAF9);
+  background: #006241;
 }
 
 .navbar.scrolled {
@@ -36,7 +36,7 @@ body {
 .navbar a  {
   text-decoration: none;
   font-size: 16px;
-  color: #007bff;
+  color: #D4E9E2;
   font-weight: bold;
   cursor: pointer;
 }
@@ -44,7 +44,7 @@ body {
   color: white;
   padding: 10px 20px;
   border: none;
-  background-color: #007bff;
+  background-color: #424245;
   cursor: pointer;
   font-size: 16px;
   border-radius: 20px;
@@ -97,12 +97,12 @@ body {
 /* Login Icon Styling */
 .login-icon {
   font-size: 24px;
-  color: #007bff;
+  color: #D4E9E2;
   transition: color 0.3s ease;
 }
 
 .login-button:hover .login-icon {
-  color: #0056b3;
+  color: #D4E9E2;
 }
 
 /* Login Menu Styling */
@@ -122,19 +122,21 @@ body {
   padding: 20px;
   background-color: #fff;
   text-align: center;
+  
 }
 
 .about-us h2 {
   cursor: pointer;
   font-family: Georgia, Times New Roman, serif; /* Changed font style */
   font-weight: 400; /* Normal weight instead of bold */
-  color: #007bff;
+  color: #2C5F2D;
   font-size: 2.5em;
   margin-bottom: 20px;
 }
 
 .about-us h2:hover {
   cursor: pointer; /* Keep cursor pointer for interactivity */
+  color: #2C5F2D;
 }
 
 .about-us p {
@@ -180,5 +182,5 @@ footer {
 }
 
 .icons i:hover {
-  color: #0056b3;
+  color: #2C5F2D;
 }

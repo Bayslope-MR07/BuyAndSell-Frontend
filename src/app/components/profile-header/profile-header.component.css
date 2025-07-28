@@ -1,5 +1,5 @@
 .navbar {
-  background: linear-gradient(to right, #BACBF7, #CEDAF9);
+  background: #006241;
   font-family: 'FortBook', Arial, sans-serif; /* Updated font */
   font-weight: 700; /* Bold for navbar consistency */
   transition: background-color 0.3s ease;
@@ -33,7 +33,7 @@
   font-family: 'FortBook', Arial, sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight for links */
   font-size: 16px; /* Matches navigation link size */
-  color: #007bff;
+  color: #D4E9E2;
   padding: 6px 12px;
   border-radius: 20px;
   transition: all 0.3s ease;
@@ -41,7 +41,7 @@
 
 .navbar a:hover {
   color: white;
-  background-color: #007bff;
+  background-color: #424245;
   padding: 10px 20px;
   transform: scale(1.1);
   cursor: pointer;
@@ -53,7 +53,7 @@
   font-weight: 700; /* Bold for active state */
   font-size: 16px; /* Matches link size */
   color: white;
-  background-color: #007BFF;
+  background-color: #424245;
   padding: 10px 20px;
   border-radius: 20px;
   transform: scale(1.05);
@@ -105,12 +105,12 @@
   /* Login Icon Styling */
   .login-icon {
     font-size: 24px; /* Slightly larger for visibility */
-    color: #007bff;
+    color: #D4E9E2;
     transition: color 0.3s ease;
   }
   
   .login-button:hover .login-icon {
-    color: #0056b3; /* Darker shade on hover */
+    color: #D4E9E2; /* Darker shade on hover */
   }
   
   /* Dropdown Menu Styling */

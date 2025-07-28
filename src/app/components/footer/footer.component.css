@@ -40,7 +40,7 @@ footer {
 }
 
 .links a {
-  color: #007bff;
+  color: #006241;
   text-decoration: none;
   font-size: 14px;
   margin: 0 10px;
@@ -70,13 +70,13 @@ footer {
 
 .icons i {
   font-size: 20px;
-  color: #007bff;
+  color: #006241;
   padding: 10px;
   transition: color 0.3s ease;
 }
 
 .icons i:hover {
-  color: #0056b3;
+  color: #006241;
 }
 
 /* Responsive Adjustments */

@@ -5,6 +5,12 @@ body {
   margin-top: 5%;
 }
 
+.text-green {
+  color: #006241;
+  font-weight: 600;
+}
+
+
 /* Container */
 .container {
   max-width: 100%;

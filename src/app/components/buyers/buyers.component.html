@@ -208,8 +208,8 @@
     <div class="container-fluid content-wrapper">
       <div class="row h-100 class-m">
         <!-- Sidebar (Filters) -->
-        <aside class="col-md-3 col-lg-2 bg-light p-3 border-end">
-          <div class="text-primary">
+        <aside class="col-md-3 col-lg-2  p-3 border-end">
+          <div class="text-primary1">
             <h2 class="mb-4">Filters</h2>
           </div>
           <div class="mb-3">
@@ -262,8 +262,8 @@
         <!-- Main Content (Table) -->
         <main class="col-md-9 col-lg-10 p-3">
           <div class="d-flex justify-content-center gap-5 align-items-center a-class mb-4">
-            <a class="nav-link text-primary" (click)="showDetails()">Details</a>
-            <a class="nav-link text-primary" style="cursor: pointer;" (click)="analytics()">Analytics</a>
+            <a class="nav-link text-green" style="cursor: pointer;color: #006241;" (click)="showDetails()">Details</a>
+            <a class="nav-link text-green" style="cursor: pointer;color: #006241;" (click)="analytics()">Analytics</a>
           </div>
           <mat-tab-group class="mt-2" [selectedIndex]="selectedTabIndex" (selectedTabChange)="changeTab($event)" mat-stretch-tabs="false" mat-align-tabs="center">
             <mat-tab label="All Patents">

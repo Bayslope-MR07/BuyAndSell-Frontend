@@ -2,8 +2,8 @@
 
 @import 'ngx-toastr/toastr';
 :root {
-    --primary-color: #1a73e8;
-    --secondary-color: #4285f4;
+    --primary-color: #006241;
+    --secondary-color: #1E3932;
     --text-color: #202124;
     --background-color: #ffffff;
     --border-color: #dadce0;
@@ -55,3 +55,9 @@
   }
   
   /* Add more global styles as needed */
+
+
+
+  ::ng-deep .mat-menu-panel.green-menu {
+  background-color: #006241 !important;
+}

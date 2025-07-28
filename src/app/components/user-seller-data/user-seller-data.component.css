@@ -178,8 +178,8 @@ table{
 
 /* Existing styles (unchanged unless specified) */
 .table-color {
-  background-color: #EAF0FF;
-  color: #406FE8;
+  background-color: #D4E9E2;
+  color: #006241;
 }
 
 .a-class {
@@ -213,14 +213,15 @@ table{
 }
 
 .btn-primary {
-  background-color: #007bff !important;
-  border-color: #007bff !important;
+  background-color: #006241 !important;
+  border-color: #006241 !important;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3 !important;
-  border-color: #0056b3 !important;
+  background-color: #DFF9BA !important;
+  border-color: #DFF9BA !important;
   transform: scale(1.05);
+  color: #006241;
 }
 
 .btn-primary:disabled {

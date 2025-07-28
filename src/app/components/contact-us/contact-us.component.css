@@ -4,14 +4,14 @@ body {
 }
 
 .navbar {
-  background-color: transparent !important;
+  background-color: #006241;
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(to right, #BACBF7, #CEDAF9);
+  background: #006241;
 }
 
 .navbar.scrolled {
@@ -29,16 +29,16 @@ body {
 .navbar a {
   text-decoration: none;
   font-size: 16px;
-  color: #007bff;
+  color: #D4E9E2;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .navbar a:hover {
-  color: white;
+  color: #D4E9E2;
   padding: 10px 20px;
   border: none;
-  background-color: #007bff;
+  background-color: #424245;
   cursor: pointer;
   font-size: 16px;
   border-radius: 20px;
@@ -87,12 +87,12 @@ body {
 
 .login-icon {
   font-size: 24px;
-  color: #007bff;
+  color: #D4E9E2;
   transition: color 0.3s ease;
 }
 
 .login-button:hover .login-icon {
-  color: #0056b3;
+  color: #D4E9E2;
 }
 
 .login-menu {
@@ -112,7 +112,7 @@ body {
 }
 
 .contact-us h2 {
-  color: #007bff;
+  color: #006241;
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 42px;
@@ -120,23 +120,23 @@ body {
 
 .contact-us h2:hover {
   cursor: pointer;
-  color: #2a6eb8;
+  color: #1E3932;
 }
 
 .contact-info {
   font-size: 18px;
-  color: #6c757d;
+  color: #006241;
   font-weight: 400;
 }
 
 .contact-info a {
   text-decoration: none;
-  color: #007bff;
+  color: #1E3932;
   font-weight: 600;
 }
 
-.contact-info .text-primary {
-  font-weight: 600;
+.contact-info .text-primary1 {
+  font-weight: bolder;
 }
 
 .contact-info .text-black {
@@ -146,7 +146,7 @@ body {
 .tx1,
 .tx2 {
   font-size: 18px;
-  color: #6c757d;
+  color: black;
   font-weight: 400;
 }
 
@@ -212,7 +212,7 @@ body {
 
 .contact-form button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #006241;
   color: white;
   border: none;
   border-radius: 5px;
@@ -223,7 +223,7 @@ body {
 }
 
 .contact-form button:hover {
-  background-color: #0056b3;
+  background-color: #006241;
 }
 
 footer {

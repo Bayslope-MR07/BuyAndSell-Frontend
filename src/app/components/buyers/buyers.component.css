@@ -188,8 +188,8 @@ table{
 
 /* Existing styles (unchanged unless specified) */
 .table-color {
-  background-color: #EAF0FF;
-  color: #406FE8;
+  background-color: #D4E9E2;
+  color: #006241;
 }
 
 .a-class {
@@ -227,17 +227,18 @@ table{
 }
 
 .btn-primary {
-  background-color: #007bff !important;
-  border-color: #007bff !important;
+  background-color: #006241 !important;
+  border-color: #006241 !important;
   font-family: 'FortBook', Arial, sans-serif; /* Updated font */
   font-weight: 600; /* Semi-bold for buttons */
   font-size: 16px; /* Matches button text size */
 }
 
 .btn-primary:hover {
-  background-color: #0056b3 !important;
-  border-color: #0056b3 !important;
+  background-color: #DFF9BA !important;
+  border-color: #DFF9BA !important;
   transform: scale(1.05);
+  color:#006241;
 }
 
 .btn-primary:disabled {
@@ -306,8 +307,8 @@ main .alert-warning button {
 
 /* Sidebar (Filters) Styling */
 aside {
-  background-color: #f8f9fa;
-  border-right: 2px solid #dee2e6;
+  background-color: #D4E9E2;
+  border-right: 2px solid #D4E9E2;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 3%;
 }
@@ -316,19 +317,20 @@ aside h2 {
   font-family: 'FortBook', Arial, sans-serif; /* Updated font */
   font-weight: 600; /* Semi-bold for heading */
   font-size: 24px; /* Matches filter heading size */
-  color: #007bff;
+  color: black;
+  /* font-size: 16px; */
 }
 
 aside .form-label {
   font-family: 'FortBook', Arial, sans-serif; /* Updated font */
-  font-weight: 500; /* Medium weight for labels */
-  font-size: 16px; /* Matches label size */
-  color: #333;
+  font-weight: bolder; /* Medium weight for labels */
+  font-size: 15px; /* Matches label size */
+  color: #006241;
 }
 
 aside .form-control, aside .form-select {
   border-radius: 5px;
-  border-color: #ced4da;
+  border-color: green;
   font-family: 'FortBook', Arial, sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Matches input text size */
@@ -338,7 +340,7 @@ aside .form-control::placeholder {
   font-family: 'FortBook', Arial, sans-serif; /* Updated font for placeholder */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Consistent size */
-  color: #6c757d; /* Placeholder color matching previous style */
+  color: #006241; /* Placeholder color matching previous style */
 }
 
 aside .btn-primary {
@@ -429,4 +431,17 @@ th, td {
 
 .link-dark {
   color: #212529;
+}
+
+
+input.form-control:focus {
+  border-color: #006241;      /* halka grey border */
+  box-shadow: none;        /* shadow hata diya */
+  outline: none;           /* outline hata diya */
+}
+
+.form-select:focus{
+  border-color: #006241;      /* halka grey border */
+  box-shadow: none;        /* shadow hata diya */
+  outline: none;  
 }
