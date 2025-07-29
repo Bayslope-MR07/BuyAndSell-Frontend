@@ -89,21 +89,27 @@
   import { ProfileHeaderComponent } from '../profile-header/profile-header.component';
   import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+  import { MatFormFieldModule } from '@angular/material/form-field';
+  import { MatSelectModule } from '@angular/material/select';
+  import { MatOptionModule } from '@angular/material/core';
   
   @Component({
     selector: 'app-buyers',
     standalone: true,
     imports: [
+      MatOptionModule,
+      MatSelectModule,
+      MatFormFieldModule,
       FormsModule,
       CommonModule,
       FooterComponent,
       MatTabsModule,
       ProfileHeaderComponent,
       MatProgressSpinnerModule,
-      MatPaginatorModule
+      MatPaginatorModule,
     ],
     templateUrl: './buyers.component.html',
-    styleUrls: ['./buyers.component.css']
+    styleUrls: ['./buyers.component.css'],
   })
   export class BuyersComponent implements OnInit {
     baseUrl: any = environment.apiUrl;
@@ -129,47 +135,51 @@
     selectedTabIndex: any = 0;
     pageSize = 10;
     pageIndex = 0;
-  
-    constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
-  
+
+    constructor(
+      private http: HttpClient,
+      private router: Router,
+      private authService: AuthService
+    ) {}
+
     ngOnInit() {
       this.fetchBuyerData();
     }
-  
+
     updatePaginatedData() {
       const startIndex = this.pageIndex * this.pageSize;
       const endIndex = startIndex + this.pageSize;
       this.paginatedData = this.filteredData.slice(startIndex, endIndex);
     }
-  
+
     handlePageEvent(event: PageEvent) {
       this.pageIndex = event.pageIndex;
       this.pageSize = event.pageSize;
       this.updatePaginatedData();
     }
-  
+
     logout() {
       this.router.navigateByUrl('login');
     }
-  
+
     analytics() {
       this.router.navigateByUrl('analytics');
     }
 
-    showDetails(){
+    showDetails() {
       this.router.navigateByUrl('buyer');
     }
-    
-    seller(){
+
+    seller() {
       this.router.navigateByUrl('user-seller-data');
     }
-  
+
     fetchBuyerData() {
       this.loader = true;
       this.filteredData = [];
       const token = localStorage.getItem('access_token');
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       });
       this.http.get(`${this.baseUrl}/buyer-data/`, { headers }).subscribe(
         (response: any) => {
@@ -189,80 +199,86 @@
         }
       );
     }
-  
+
     fetchBuyerDataShortlisted() {
       this.loader = true;
       this.filteredData = [];
       const token = localStorage.getItem('access_token');
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       });
-      this.http.get(`${this.baseUrl}/buyer-data/?status=1`, { headers }).subscribe(
-        (response: any) => {
-          this.buyerData = response;
-          this.filteredData = response;
-          this.buyerData.forEach((item: any) => {
-            if (item.user_feedback) {
-              this.submissionStatus.set(item.id, item.user_feedback?.action);
-            }
-          });
-          this.updatePaginatedData();
-          this.loader = false;
-        },
-        (error) => {
-          this.loader = false;
-          console.error('Error fetching buyer data:', error);
-        }
-      );
+      this.http
+        .get(`${this.baseUrl}/buyer-data/?status=1`, { headers })
+        .subscribe(
+          (response: any) => {
+            this.buyerData = response;
+            this.filteredData = response;
+            this.buyerData.forEach((item: any) => {
+              if (item.user_feedback) {
+                this.submissionStatus.set(item.id, item.user_feedback?.action);
+              }
+            });
+            this.updatePaginatedData();
+            this.loader = false;
+          },
+          (error) => {
+            this.loader = false;
+            console.error('Error fetching buyer data:', error);
+          }
+        );
     }
-  
+
     downloadCSV() {
       const token = localStorage.getItem('access_token');
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       });
       if (this.selectedTabIndex === 1) {
-        this.http.get(`${this.baseUrl}/buyer-data/?status=1&download=true`, {
-          headers,
-          responseType: 'blob'
-        }).subscribe(
-          (response: Blob) => {
-            const blob = new Blob([response], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'shortlisted_patents_data.csv';
-            a.click();
-            window.URL.revokeObjectURL(url);
-          },
-          (error) => {
-            console.error('Error downloading CSV:', error);
-          }
-        );
+        this.http
+          .get(`${this.baseUrl}/buyer-data/?status=1&download=true`, {
+            headers,
+            responseType: 'blob',
+          })
+          .subscribe(
+            (response: Blob) => {
+              const blob = new Blob([response], { type: 'text/csv' });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'shortlisted_patents_data.csv';
+              a.click();
+              window.URL.revokeObjectURL(url);
+            },
+            (error) => {
+              console.error('Error downloading CSV:', error);
+            }
+          );
       } else {
-        this.http.get(`${this.baseUrl}/buyer-data/?download=true`, {
-          headers,
-          responseType: 'blob'
-        }).subscribe(
-          (response: Blob) => {
-            const blob = new Blob([response], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'all_patents_data.csv';
-            a.click();
-            window.URL.revokeObjectURL(url);
-          },
-          (error) => {
-            console.error('Error downloading CSV:', error);
-          }
-        );
+        this.http
+          .get(`${this.baseUrl}/buyer-data/?download=true`, {
+            headers,
+            responseType: 'blob',
+          })
+          .subscribe(
+            (response: Blob) => {
+              const blob = new Blob([response], { type: 'text/csv' });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'all_patents_data.csv';
+              a.click();
+              window.URL.revokeObjectURL(url);
+            },
+            (error) => {
+              console.error('Error downloading CSV:', error);
+            }
+          );
       }
     }
-  
+
     changeTab(tabIndex: MatTabChangeEvent) {
       // console.log(tabIndex.index);
-      this.clearFilters()
+      this.clearFilters();
       if (tabIndex.index == 1) {
         this.fetchBuyerDataShortlisted();
         this.selectedTabIndex = 1;
@@ -271,23 +287,21 @@
         this.selectedTabIndex = 0;
       }
     }
-  
+
     applyFilters() {
       this.filteredData = this.buyerData.filter((buyer) => {
         return Object.keys(this.filters).every((key) => {
           const filterValue = this.filters[key];
           if (!filterValue) return true;
-          return (
-            String(buyer[key])
-              .toLowerCase()
-              .includes(String(filterValue).toLowerCase())
-          );
+          return String(buyer[key])
+            .toLowerCase()
+            .includes(String(filterValue).toLowerCase());
         });
       });
       this.pageIndex = 0;
       this.updatePaginatedData();
     }
-  
+
     clearFilters() {
       this.filters = {
         primary_technology: '',
@@ -304,54 +318,67 @@
       };
       this.applyFilters();
     }
-  
+
     selectAction(patentId: number, action: string) {
       this.selectedActions.set(patentId, action); // Save the selected action for the specific entry
       // console.log(`Selected action for patent ${patentId}: ${action}`);
     }
-  
+    logUrl(url: string) {
+      console.log('Download URL:', url);
+    }
+
     confirmSubmit(patentId: number) {
       const action = this.selectedActions.get(patentId);
       if (!action) {
         alert('Please select an action before submitting.');
         return;
       }
-      if (confirm(`Are you sure you want to submit "${action}" for patent ID ${patentId}?`)) {
+      if (
+        confirm(
+          `Are you sure you want to submit "${action}" for patent ID ${patentId}?`
+        )
+      ) {
         this.submitAction(patentId, action);
       }
     }
-  
+
     submitAction(patentId: number, action: string) {
       const token = localStorage.getItem('access_token');
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       });
-  
+
       const payload = { id: patentId, action: action };
-  
-      this.http.post(`${this.baseUrl}/buyerChoice/`, payload, { headers }).subscribe(
-        (response) => {
-          this.submissionStatus.set(patentId, action);
-          if (this.selectedTabIndex === 1) {
-            this.fetchBuyerDataShortlisted();
-          } else {
-            this.fetchBuyerData();
+
+      this.http
+        .post(`${this.baseUrl}/buyerChoice/`, payload, { headers })
+        .subscribe(
+          (response) => {
+            this.submissionStatus.set(patentId, action);
+            if (this.selectedTabIndex === 1) {
+              this.fetchBuyerDataShortlisted();
+            } else {
+              this.fetchBuyerData();
+            }
+          },
+          (error) => {
+            console.error(
+              `Error submitting action "${action}" for patent ID ${patentId}:`,
+              error
+            );
           }
-        },
-        (error) => {
-          console.error(`Error submitting action "${action}" for patent ID ${patentId}:`, error);
-        }
-      );
+        );
     }
-  
+
     enableResubmit(patentId: number) {
       this.submissionStatus.delete(patentId);
       this.selectedActions.delete(patentId);
     }
-  
+
     viewPatentDetails(patentId: number) {
       this.router.navigate(['/buyer-details', patentId]);
     }
+
   }
   
 

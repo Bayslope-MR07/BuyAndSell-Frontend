@@ -202,7 +202,7 @@
       </ng-template>
     </div>
   </div>  -->
-  <div class="page-wrapper">
+  <!-- <div class="page-wrapper"> -->
     <app-profile-header></app-profile-header>
   
     <div class="container-fluid content-wrapper">
@@ -229,7 +229,7 @@
   
           <div class="mb-3">
             <label class="form-label">Acquisition Status:</label>
-            <select class="form-select" [(ngModel)]="filters.acquisition_status" (change)="applyFilters()">
+            <select class="form-select"  [(ngModel)]="filters.acquisition_status" (change)="applyFilters()">
               <option value="">Any</option>
               <option value="open">Open</option>
               <option value="closed">Closed</option>
@@ -262,7 +262,7 @@
         <!-- Main Content (Table) -->
         <main class="col-md-9 col-lg-10 p-3">
           <div class="d-flex justify-content-center gap-5 align-items-center a-class mb-4">
-            <a class="nav-link text-green" style="cursor: pointer;color: #006241;" (click)="showDetails()">Details</a>
+            <a class="nav-link text-" style="cursor: pointer;color: #006241;" (click)="showDetails()">Details</a>
             <a class="nav-link text-green" style="cursor: pointer;color: #006241;" (click)="analytics()">Analytics</a>
           </div>
           <mat-tab-group class="mt-2" [selectedIndex]="selectedTabIndex" (selectedTabChange)="changeTab($event)" mat-stretch-tabs="false" mat-align-tabs="center">
@@ -290,7 +290,7 @@
                       <td>{{ buyer.entity_status }}</td>
                       <td>{{ buyer.expiry }}</td>
                       <td>
-                        <a *ngIf="buyer.uploaded_files" [href]="buyer.uploaded_files[0].url" target="_blank" class="link-dark">
+                        <a *ngIf="buyer.uploaded_files" style="cursor:pointer"  [href]="buyer.uploaded_files[0]?.url" target="_blank" class="link-dark">
                           📄 Download
                         </a>
                       </td>
@@ -375,7 +375,7 @@
                       <td>{{ buyer.entity_status }}</td>
                       <td>{{ buyer.expiry }}</td>
                       <td>
-                        <a *ngIf="buyer.uploaded_files" [href]="buyer.uploaded_files[0].url" target="_blank" class="link-dark">
+                        <a *ngIf="buyer.uploaded_files" [href]="buyer.uploaded_files[0]?.url" target="_blank" class="link-dark">
                           📄 Download
                         </a>
                       </td>
@@ -442,7 +442,7 @@
     </div>
   
     <app-footer></app-footer>
-  </div>
+  <!-- </div> -->
   
   <ng-template #loading>
     <div

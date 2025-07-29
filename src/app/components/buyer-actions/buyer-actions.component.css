@@ -58,7 +58,7 @@ mat-sidenav-content {
 
 /* Headings */
 h2.h5 {
-  color: #406fe8;
+  color: #006241;
   font-family: 'FortBook', Arial, sans-serif;
   font-weight: 700;
   font-size: 25px;
@@ -69,7 +69,7 @@ h2.h5 {
 /* Form Inputs */
 .form-control {
   border-radius: 8px;
-  border: 1px solid #007bff;
+  border: 1px solid #1E3932;
   padding: 12px;
   font-family: 'FortBook', Arial, sans-serif;
   font-weight: 400;
@@ -122,8 +122,8 @@ h2.h5 {
 }
 
 .table-color {
-  background-color: #eaf0ff !important;
-  color: #406fe8 !important;
+  background-color: #d4e9e2 !important;
+  color: #006241 !important;
 }
 
 .table thead th {

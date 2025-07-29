@@ -1,6 +1,15 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import 'ngx-toastr/toastr';
 
+/* Load Tenorite from external source */
+@font-face {
+  font-family: 'Tenorite';
+  src: url('https://db.onlinewebfonts.com/t/604c4aa7925b327ca117a55ba49275cd.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Define theme variables */
 :root {
   --primary-color: #006241;
   --secondary-color: #1E3932;
@@ -9,12 +18,18 @@
   --border-color: #dadce0;
 }
 
+/* Apply Tenorite globally */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Tenorite', sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
+}
+
+/* Optional: apply globally to all elements */
+* {
+  font-family: 'Tenorite', sans-serif;
 }
 
 .form-grid {
@@ -54,7 +69,15 @@ button {
   }
 }
 
-
+/* Angular Material Menu override */
 ::ng-deep .mat-menu-panel.green-menu {
   background-color: #006241 !important;
 }
+
+/* For bold tab labels like "Buyer Actions" */
+.bold-tab-label {
+  font-weight: bold;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

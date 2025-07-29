@@ -440,7 +440,7 @@ input.form-control:focus {
   outline: none;           /* outline hata diya */
 }
 
-.form-select:focus{
+select.form-select:focus{
   border-color: #006241;      /* halka grey border */
   box-shadow: none;        /* shadow hata diya */
   outline: none;  

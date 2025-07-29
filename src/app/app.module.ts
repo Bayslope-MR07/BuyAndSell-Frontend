@@ -32,6 +32,7 @@ import { BuyerDetailsComponent } from './components/buyer-details/buyer-details.
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { BuyerActionsComponent } from './components/buyer-actions/buyer-actions.component';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { OtpComponent } from './components/otp/otp.component';
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'user-profile-update', component: UserProfileUpdateComponent },
   { path: 'google-callback', component: GoogleCallbackComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
+
 ];
 
 library.add(faTwitter, faFacebook, faInstagram, faLinkedin);

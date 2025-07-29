@@ -11,4 +11,3 @@ export const environment = {
 
   // GOOGLE_CALLBACK_URI: "http://ec2-3-144-99-241.us-east-2.compute.amazonaws.com/google-callback"
 };
-  

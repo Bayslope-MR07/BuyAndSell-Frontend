@@ -2,37 +2,37 @@
   <mat-sidenav #drawer mode="side" opened [fixedInViewport]="true" [fixedTopGap]="210">
     <h2 class="h5 mb-4">Filters</h2>
     <div class="d-flex flex-column gap-1">
-      <label class="form-label">Email</label>
+      <label class="form-label" style="color:#1E3932; font-weight: bold;">Email</label>
       <input
         type="text"
         [(ngModel)]="emailFilter"
         placeholder="Filter by Email"
-        class="form-control border-primary"
+        class="form-control border-success"
         (keyup.enter)="applyFilters()"
       />
-      <label class="form-label">Action</label>
+      <label class="form-label" style="color:#1E3932; font-weight: bold;">Action</label>
       <input
         type="text"
         [(ngModel)]="actionFilter"
         (input)="applyFilters()"
         placeholder="Filter by Action"
-        class="form-control border-primary"
+        class="form-control border-success"
       />
-      <label class="form-label">Patent</label>
+      <label class="form-label" style="color:#1E3932; font-weight: bold;">Patent</label>
       <input
         type="text"
         [(ngModel)]="patentFilter"
         (input)="applyFilters()"
         placeholder="Filter by Patent"
-        class="form-control border-primary"
+        class="form-control border-success"
       />
-      <label class="form-label">Date</label>
+      <label class="form-label" style="color:#1E3932; font-weight: bold;">Date</label>
       <input
         type="date"
         placeholder="Filter by Date"
         [(ngModel)]="dateFrom"
         (change)="applyFilters()"
-        class="form-control border-primary"
+        class="form-control border-success"
       />
     </div>
   </mat-sidenav>
