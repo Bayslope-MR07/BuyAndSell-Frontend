@@ -21,8 +21,8 @@
                 <mat-icon class="login-icon">person</mat-icon>
               </button>
               <mat-menu #menu="matMenu" class="login-menu bg-dark" xPosition="before">
-                <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAdmin()">Login as Admin</button>
-                <button mat-menu-item class="menu-item user-login text-white" (click)="loginAdmin()">Login as User</button>
+                <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsBuyer()">Login as Buyer</button>
+                <button mat-menu-item class="menu-item user-login text-white" (click)="loginAsSeller()">Login as Seller</button>
               </mat-menu>
             </li>
           </ul>
@@ -102,7 +102,7 @@
 
     <section class="join-community" id="join-community">
       <h2 style="font-weight: 600;">Join our Community</h2>
-      <p style="color: black">
+      <p style="color: black; font-size: 26px;font-weight: bolder;">
         "Ready to
         <button class="btn-buy p-4" (click)="naviagateToBuy()"
         style="background-color: #2C5F2D; "

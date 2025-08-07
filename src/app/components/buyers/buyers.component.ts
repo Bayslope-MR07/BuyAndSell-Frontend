@@ -112,7 +112,14 @@
     styleUrls: ['./buyers.component.css'],
   })
   export class BuyersComponent implements OnInit {
+    decodeURIComponent = decodeURIComponent;
+
     baseUrl: any = environment.apiUrl;
+    exclusivePatents: any[] = [];
+    nonExclusivePatents: any[] = [];
+
+    // exclusivePatents: any[] = [];
+    // nonExclusivePatents: any[] = [];
     buyerData: any[] = [];
     filteredData: any[] = [];
     paginatedData: any[] = [];
@@ -144,9 +151,23 @@
 
     ngOnInit() {
       this.fetchBuyerData();
+      this.applyFilters();
     }
 
+    // selectedTabIndex: number = 0;
+    nestedTabIndex: number = 0;
     updatePaginatedData() {
+      const start = this.pageIndex * this.pageSize;
+      const end = start + this.pageSize;
+
+      if (this.nestedTabIndex === 0) {
+        this.paginatedExclusive = this.filteredExclusive.slice(start, end);
+      } else {
+        this.paginatedNonExclusive = this.filteredNonExclusive.slice(
+          start,
+          end
+        );
+      }
       const startIndex = this.pageIndex * this.pageSize;
       const endIndex = startIndex + this.pageSize;
       this.paginatedData = this.filteredData.slice(startIndex, endIndex);
@@ -184,10 +205,34 @@
       this.http.get(`${this.baseUrl}/buyer-data/`, { headers }).subscribe(
         (response: any) => {
           this.buyerData = response;
+          this.exclusivePatents = this.buyerData.filter(
+            (b) => b.exclusive === true
+          );
+          this.nonExclusivePatents = this.buyerData.filter(
+            (b) => b.exclusive === false
+          );
+          this.applyFilters();
           this.filteredData = response;
-          this.buyerData.forEach((item: any) => {
-            if (item.user_feedback) {
-              this.submissionStatus.set(item.id, item.user_feedback?.action);
+          console.log('Fetched Buyer Data:', this.buyerData); // Log full data
+          this.buyerData.forEach((item: any, index: number) => {
+            console.log(`Item ${index + 1}:`, item); // Log each item
+            if (item.uploaded_files) {
+              console.log(
+                `Patent ID ${item.id} Uploaded Files:`,
+                item.uploaded_files
+              );
+              if (item.uploaded_files[0]?.url) {
+                console.log(
+                  `Patent ID ${item.id} URL:`,
+                  item.uploaded_files[0].url
+                );
+              } else {
+                console.log(
+                  `Patent ID ${item.id} - No valid URL in uploaded_files`
+                );
+              }
+            } else {
+              console.log(`Patent ID ${item.id} - No uploaded_files array`);
             }
           });
           this.updatePaginatedData();
@@ -287,8 +332,20 @@
         this.selectedTabIndex = 0;
       }
     }
+    filteredExclusive: any[] = [];
+    filteredNonExclusive: any[] = [];
+
+    paginatedExclusive: any[] = [];
+    paginatedNonExclusive: any[] = [];
 
     applyFilters() {
+      this.filteredExclusive = this.exclusivePatents.filter((buyer) =>
+        this.passesFilters(buyer)
+      );
+      this.filteredNonExclusive = this.nonExclusivePatents.filter((buyer) =>
+        this.passesFilters(buyer)
+      );
+      // this.updatePaginatedData();
       this.filteredData = this.buyerData.filter((buyer) => {
         return Object.keys(this.filters).every((key) => {
           const filterValue = this.filters[key];
@@ -300,6 +357,15 @@
       });
       this.pageIndex = 0;
       this.updatePaginatedData();
+    }
+    passesFilters(buyer: any): boolean {
+      return Object.keys(this.filters).every((key) => {
+        const filterValue = this.filters[key];
+        if (!filterValue) return true;
+        return String(buyer[key] || '')
+          .toLowerCase()
+          .includes(filterValue.toLowerCase());
+      });
     }
 
     clearFilters() {
@@ -324,7 +390,14 @@
       // console.log(`Selected action for patent ${patentId}: ${action}`);
     }
     logUrl(url: string) {
-      console.log('Download URL:', url);
+      const decoded = decodeURIComponent(url.split('/').pop() || '');
+      console.log('📥 Downloading:', decoded);
+    }
+
+    getGoogleViewerUrl(fileUrl: string): string {
+      return `https://docs.google.com/gview?url=${encodeURIComponent(
+        fileUrl
+      )}&embedded=true`;
     }
 
     confirmSubmit(patentId: number) {
@@ -378,7 +451,6 @@
     viewPatentDetails(patentId: number) {
       this.router.navigate(['/buyer-details', patentId]);
     }
-
   }
   
 

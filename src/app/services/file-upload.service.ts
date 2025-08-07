@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class FileUploadService {
   // private uploadUrl = 'http://3.144.99.241/api/accounts/upload_excel/'; // Replace with your endpoint
   private uploadUrl =
-    'https://buyandsell-backend.onrender.com/api/accounts/upload_excel/';
+    // 'https://buyandsell-backend.onrender.com/api/accounts/upload_excel/';
+    'http://127.0.0.1:8000/api/accounts/upload_excel/';
 
   constructor(private http: HttpClient) {}
 

@@ -38,6 +38,10 @@ body {
   gap: 1rem;
   padding: 1rem;
 }
+h1, h2, h3, h4, h5, h6,
+p, span, div, label, input, textarea, select {
+  font-family: 'Tenorite', sans-serif !important;
+}
 
 .form-field {
   display: flex;

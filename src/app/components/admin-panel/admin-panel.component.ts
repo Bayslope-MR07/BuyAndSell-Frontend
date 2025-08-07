@@ -1,5 +1,7 @@
 // admin-panel.component.ts
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -20,6 +22,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
   selector: 'app-admin-panel',
   standalone: true,
   imports: [
+    // MatSnackBar,
     FormsModule,
     CommonModule,
     MatTabsModule,
@@ -28,7 +31,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   templateUrl: './admin-panel.component.html',
   styleUrls: ['./admin-panel.component.css'],
@@ -52,8 +55,8 @@ export class AdminPanelComponent implements OnInit {
   selectedFile: File | null = null;
   uploadStatus: string = '';
   showFilterAndTable: boolean = false; // New property to control visibility
-  loader : boolean = false;
-  selectedTabIndex: any =0;
+  loader: boolean = false;
+  selectedTabIndex: any = 0;
   loader2: boolean = false;
   pageSize = 10; // Rows per page
   pageIndex = 0; // Current page index
@@ -61,10 +64,11 @@ export class AdminPanelComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fileUploadService: FileUploadService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
-  confirmPassword(){
+  confirmPassword() {
     this.router.navigateByUrl('confirm-password');
   }
 
@@ -83,17 +87,12 @@ export class AdminPanelComponent implements OnInit {
     this.updatePaginatedData();
   }
 
-
   logout() {
-
     this.router.navigateByUrl('login');
-
   }
 
   homePage() {
-
     this.router.navigateByUrl('/');
-
   }
   subAdmin() {
     this.router.navigate(['/sub-admin']);
@@ -107,63 +106,96 @@ export class AdminPanelComponent implements OnInit {
     this.router.navigateByUrl('user-profile-update');
   }
 
+  // changeTab(tabIndex: MatTabChangeEvent) {
+  //   console.log(tabIndex.index);
+  //   this.resetFilters()
+  //   if (tabIndex.index == 1) {
+  //     this.fetchSellerDataUnverified();
+  //     this.selectedTabIndex=1;
+  //   } else {
+  //     this.fetchSellerData();
+  //     this.selectedTabIndex=0;
+  //   }
+  // }
+
   changeTab(tabIndex: MatTabChangeEvent) {
     console.log(tabIndex.index);
-    this.resetFilters()
-    if (tabIndex.index == 1) {
-      this.fetchSellerDataUnverified();
-      this.selectedTabIndex=1;
-    } else {
-      this.fetchSellerData();
-      this.selectedTabIndex=0;
+    this.resetFilters();
+    this.selectedTabIndex = tabIndex.index;
+
+    if (tabIndex.index === 0) {
+      this.fetchSellerData(); // All
+    } else if (tabIndex.index === 1) {
+      this.fetchSellerDataVerified(); // Verified
+    } else if (tabIndex.index === 2) {
+      this.fetchSellerDataUnverified(); // Unverified
     }
+  }
+
+  fetchSellerDataVerified() {
+    this.loader = true;
+    this.http.get(`${this.baseUrl}/seller-da/?status=2`).subscribe(
+      (response: any) => {
+        this.sellerData = response;
+        this.filteredData = response.filter(
+          (seller: any) => seller.verified === true
+        );
+        this.updatePaginatedData();
+        this.loader = false;
+      },
+      (error) => {
+        this.loader = false;
+        console.error('Error fetching verified sellers:', error);
+      }
+    );
   }
 
   downloadCSV() {
-    this.loader2=true;
+    this.loader2 = true;
     if (this.selectedTabIndex === 1) {
-      this.http.get(`${this.baseUrl}/seller-da/?status=1&download=true`, {
-        responseType: 'blob' // Expecting binary data (CSV file)
-      }).subscribe(
-        (response: Blob) => {
-          const blob = new Blob([response], { type: 'text/csv' });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'Seller_data_pending.csv';
-          a.click();
-          window.URL.revokeObjectURL(url); // Clean up
-          this.loader2=false;
-        },
-        (error) => {
-          this.loader2=false;
-          console.error('Error downloading CSV:', error);
-        }
-      );
+      this.http
+        .get(`${this.baseUrl}/seller-da/?status=1&download=true`, {
+          responseType: 'blob', // Expecting binary data (CSV file)
+        })
+        .subscribe(
+          (response: Blob) => {
+            const blob = new Blob([response], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Seller_data_pending.csv';
+            a.click();
+            window.URL.revokeObjectURL(url); // Clean up
+            this.loader2 = false;
+          },
+          (error) => {
+            this.loader2 = false;
+            console.error('Error downloading CSV:', error);
+          }
+        );
+    } else {
+      this.http
+        .get(`${this.baseUrl}/seller-da/?download=true`, {
+          responseType: 'blob', // Expecting binary data (CSV file)
+        })
+        .subscribe(
+          (response: Blob) => {
+            const blob = new Blob([response], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'All_Seller_data.csv';
+            a.click();
+            window.URL.revokeObjectURL(url); // Clean up
+            this.loader2 = false;
+          },
+          (error) => {
+            this.loader2 = false;
+            console.error('Error downloading CSV:', error);
+          }
+        );
     }
-    else{
-      this.http.get(`${this.baseUrl}/seller-da/?download=true`, {
-        responseType: 'blob' // Expecting binary data (CSV file)
-      }).subscribe(
-        (response: Blob) => {
-          const blob = new Blob([response], { type: 'text/csv' });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'All_Seller_data.csv';
-          a.click();
-          window.URL.revokeObjectURL(url); // Clean up
-          this.loader2=false;
-        },
-        (error) => {
-          this.loader2=false;
-          console.error('Error downloading CSV:', error);
-        }
-      );
-    }
-
   }
-  
 
   fetchSellerData() {
     this.loader = true;
@@ -181,16 +213,16 @@ export class AdminPanelComponent implements OnInit {
     );
   }
   fetchSellerDataUnverified() {
-    this.loader=true;
+    this.loader = true;
     this.http.get(`${this.baseUrl}/seller-da/?status=1`).subscribe(
       (response: any) => {
         this.sellerData = response;
         this.filteredData = [...this.sellerData];
-        this.updatePaginatedData();// Initialize paginated data
-        this.loader=false;
+        this.updatePaginatedData(); // Initialize paginated data
+        this.loader = false;
       },
       (error) => {
-        this.loader=false;
+        this.loader = false;
         console.error('Error fetching seller data:', error);
       }
     );
@@ -210,12 +242,52 @@ export class AdminPanelComponent implements OnInit {
     }
 
     this.fileUploadService.uploadFile(this.selectedFile).subscribe({
-      next: (response) => {
-        this.uploadStatus = 'File uploaded successfully!';
-        this.selectedFile = null;
+      next: (response: any) => {
+        if (response && response.total_created > 0) {
+          this.uploadStatus = 'File uploaded successfully!';
+          this.selectedFile = null;
+          this.snackBar.open('File uploaded successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snack-bar'],
+          });
+        } else {
+          this.uploadStatus =
+            'File not uploaded. Server response: ' +
+            (response?.error || 'Unknown error');
+          this.snackBar.open(
+            'File not uploaded. Server response: ' +
+              (response?.error || 'Unknown error'),
+            'Close',
+            {
+              duration: 3000,
+              panelClass: ['error-snack-bar'],
+            }
+          );
+        }
       },
       error: (error) => {
-        this.uploadStatus = `Error uploading file: ${error.error?.error || 'Unknown error'}`;
+        // Extract exact error message from backend response
+        let errorMessage = 'Unknown error';
+        if (error.error && typeof error.error === 'object') {
+          errorMessage =
+            error.error.error ||
+            error.error.detail ||
+            error.error.message ||
+            'Unknown error';
+        } else if (error.error) {
+          errorMessage = error.error.toString();
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+        this.uploadStatus = `File not uploaded: ${errorMessage}`; // Prefix with "File not uploaded"
+        this.snackBar.open(`File not uploaded: ${errorMessage}`, 'Close', {
+          duration: 3000,
+          panelClass: ['error-snack-bar'],
+        });
+        console.log('Full error response:', error); // Debug
+      },
+      complete: () => {
+        console.log('Upload process completed');
       },
     });
   }
@@ -237,21 +309,25 @@ export class AdminPanelComponent implements OnInit {
       entity_status: this.entityStatus,
     };
 
-    this.http.patch(`${this.baseUrl}/accounts/verify-seller/${this.selectedSeller.id}/`, payload).subscribe(
-      (response) => {
-        this.message = 'Seller data verified successfully!';
-        if(this.selectedTabIndex===1){
-          this.fetchSellerDataUnverified()
+    this.http
+      .patch(
+        `${this.baseUrl}/accounts/verify-seller/${this.selectedSeller.id}/`,
+        payload
+      )
+      .subscribe(
+        (response) => {
+          this.message = 'Seller data verified successfully!';
+          if (this.selectedTabIndex === 1) {
+            this.fetchSellerDataUnverified();
+          } else {
+            this.fetchSellerData(); // Refresh data
+          }
+          this.selectedSeller = null; // Close form
+        },
+        (error) => {
+          console.error('Error verifying seller data:', error);
         }
-        else{
-          this.fetchSellerData(); // Refresh data
-        }
-        this.selectedSeller = null; // Close form
-      },
-      (error) => {
-        console.error('Error verifying seller data:', error);
-      }
-    );
+      );
   }
 
   unverifySeller(seller: any) {
@@ -261,15 +337,17 @@ export class AdminPanelComponent implements OnInit {
       additional_notes: '',
     };
 
-    this.http.patch(`${this.baseUrl}/accounts/verify-seller/${seller.id}/`, payload).subscribe(
-      (response) => {
-        this.message = 'Seller data unverified successfully!';
-        this.fetchSellerData();
-      },
-      (error) => {
-        console.error('Error unverifying seller data:', error);
-      }
-    );
+    this.http
+      .patch(`${this.baseUrl}/accounts/verify-seller/${seller.id}/`, payload)
+      .subscribe(
+        (response) => {
+          this.message = 'Seller data unverified successfully!';
+          this.fetchSellerData();
+        },
+        (error) => {
+          console.error('Error unverifying seller data:', error);
+        }
+      );
   }
 
   applyFilters() {
@@ -294,7 +372,7 @@ export class AdminPanelComponent implements OnInit {
 
   handleBuyerData(id: any) {
     this.router.navigate(['buyer-actions'], {
-      queryParams: { sid: id }
+      queryParams: { sid: id },
     });
   }
 

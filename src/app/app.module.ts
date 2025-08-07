@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'otp', component: OtpComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'seller', component: SellerFormComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard2] },
+  { path: 'admin', component: AdminPanelComponent },
   { path: 'buyer', component: BuyersComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },
   { path: 'buyer-details/:patentId', component: BuyerDetailsComponent },

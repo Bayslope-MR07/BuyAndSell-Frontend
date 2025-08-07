@@ -6,18 +6,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: false,
-  
+
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  constructor(private router :Router){
-
-  }
-  ngOnInit(){
-    let token=localStorage.getItem('access_token')
-    if(token){
-      this.scrollToJoinCommunity()
+  constructor(private router: Router) {}
+  ngOnInit() {
+    let token = localStorage.getItem('access_token');
+    if (token) {
+      this.scrollToJoinCommunity();
     }
   }
   scrollToJoinCommunity() {
@@ -27,21 +25,27 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  naviagateToBuy(){
+  naviagateToBuy() {
     this.router.navigateByUrl('buyer');
   }
-  naviagateToShell(){
+  naviagateToShell() {
     this.router.navigateByUrl('user-seller-data');
   }
-  contactUs(){
+  contactUs() {
     this.router.navigateByUrl('contact-us');
   }
-  aboutUs(){
-    this.router.navigateByUrl('about-us')
+  aboutUs() {
+    this.router.navigateByUrl('about-us');
   }
-  loginAdmin(){
-    this.router.navigateByUrl('login')
+  loginAdmin() {
+    this.router.navigateByUrl('login');
   }
-  
+  // Login methods
+  loginAsBuyer() {
+    this.router.navigateByUrl('/login?user_type=Buyer');
+  }
 
+  loginAsSeller() {
+    this.router.navigateByUrl('/login?user_type=Seller');
+  }
 }

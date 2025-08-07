@@ -3,27 +3,55 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-logout',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <button (click)="logout()">Logout</button>
-  `,
-  styleUrls: ['./logout.component.css']
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.css'],
 })
 export class LogoutComponent {
-  constructor(private authService: AuthService, private router: Router,private toster:ToastrService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
-  logout(): void {
+  onLogout(): void {
     this.authService.logout().subscribe(
       () => {
-        this.toster.success('Logout Successful!', 'Success');
+        this.toastr.success('Logout Successful!', 'Success');
         this.authService.clearSession();
-        this.router.navigate(['/login']); // Redirect to login after logout
-        console.log("success");
+        this.router.navigate(['/login'], { replaceUrl: true }).then(() => {
+          // Reset history to prevent back navigation
+          window.history.replaceState(null, '', '/login');
+          window.onpopstate = () => {
+            window.history.replaceState(null, '', '/login');
+            this.router.navigate(['/login'], { replaceUrl: true });
+          };
+          // Clear all previous history
+          while (window.history.length > 1) {
+            window.history.back();
+            window.history.forward();
+          }
+        });
+        console.log('Logout success');
       },
-      error => {
+      (error) => {
+        this.toastr.error('Logout failed', 'Error');
+        this.authService.clearSession();
+        this.router.navigate(['/login'], { replaceUrl: true }).then(() => {
+          window.history.replaceState(null, '', '/login');
+          window.onpopstate = () => {
+            window.history.replaceState(null, '', '/login');
+            this.router.navigate(['/login'], { replaceUrl: true });
+          };
+          while (window.history.length > 1) {
+            window.history.back();
+            window.history.forward();
+          }
+        });
         console.error('Logout failed:', error);
       }
     );

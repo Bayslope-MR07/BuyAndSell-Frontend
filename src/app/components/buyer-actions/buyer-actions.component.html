@@ -3,29 +3,42 @@
     <h2 class="h5 mb-4">Filters</h2>
     <div class="d-flex flex-column gap-1">
       <label class="form-label" style="color:#1E3932; font-weight: bold;">Email</label>
-      <input
-        type="text"
-        [(ngModel)]="emailFilter"
-        placeholder="Filter by Email"
-        class="form-control border-success"
-        (keyup.enter)="applyFilters()"
-      />
-      <label class="form-label" style="color:#1E3932; font-weight: bold;">Action</label>
+  <select class="form-select border-success" [(ngModel)]="emailFilter" (change)="applyFilters()">
+    <option value="">All</option>
+    <option *ngFor="let email of uniqueEmails" [value]="email">{{ email }}</option>
+  </select>
+      <!-- <label class="form-label" style="color:#1E3932; font-weight: bold;">Action</label>
       <input
         type="text"
         [(ngModel)]="actionFilter"
         (input)="applyFilters()"
         placeholder="Filter by Action"
         class="form-control border-success"
-      />
-      <label class="form-label" style="color:#1E3932; font-weight: bold;">Patent</label>
+      /> -->
+
+      <label class="form-label" style="color:#17382f; font-weight: bold;">Action</label>
+  <select class="form-select border-success" [(ngModel)]="actionFilter" (change)="applyFilters()">
+    <option value="">All</option>
+    <option value="Chase">Chase</option>
+    <option value="Skip">Skip</option>
+    <option value="Delay">Delay</option>
+  </select>
+      <!-- <label class="form-label" style="color:#1E3932; font-weight: bold;">Patent</label>
       <input
         type="text"
         [(ngModel)]="patentFilter"
         (input)="applyFilters()"
         placeholder="Filter by Patent"
         class="form-control border-success"
-      />
+      /> -->
+
+
+<label class="form-label" style="color:#1E3932; font-weight: bold;">Patent</label>
+  <select class="form-select border-success" [(ngModel)]="patentFilter" (change)="applyFilters()">
+    <option value="">All</option>
+    <option *ngFor="let patent of uniquePatents" [value]="patent">{{ patent }}</option>
+  </select>
+
       <label class="form-label" style="color:#1E3932; font-weight: bold;">Date</label>
       <input
         type="date"
