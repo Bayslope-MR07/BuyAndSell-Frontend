@@ -49,8 +49,8 @@ export class BuyerDetailsComponent implements OnInit {
     }
     this.http
       .get(
-        `https://buyandsell-backend.onrender.com/api/accounts/buyer-data/${this.patentId}/`,
-        // `http://127.0.0.1:8000/api/accounts/buyer-data/${this.patentId}/`,
+        // `https://buyandsell-backend.onrender.com/api/accounts/buyer-data/${this.patentId}/`,
+        `http://127.0.0.1:8000/api/accounts/buyer-data/${this.patentId}/`,
 
         { headers }
       )

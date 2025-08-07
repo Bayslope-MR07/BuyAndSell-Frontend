@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
       environment.GOOGLE_CLIENT_ID
     )}&redirect_uri=${encodeURIComponent(
-      'http://localhost:4200/google-callback'
+      'https://bas-3nw9.onrender.com/google-callback'
     )}&response_type=code&scope=openid%20email%20profile%20https://www.googleapis.com/auth/userinfo.profile&access_type=offline&prompt=consent`;
     console.log('Redirecting to Google:', googleAuthUrl);
     window.location.href = googleAuthUrl;
