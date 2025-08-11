@@ -241,29 +241,34 @@ footer {
   font-size: 16px;
   color: #333;
   margin-bottom: 10px;
-  font-weight: 400;
+  /* font-weight: 400; */
+  font-weight: bolder;
 }
 
 .links a {
-  color: #007bff;
+  color: #006241;
   text-decoration: none;
   font-size: 16px;
   margin: 0 10px;
-  font-weight: 400;
+  /* font-weight: 400; */
+  font-weight: bolder;
 }
 
 .social-media p {
   font-size: 16px;
-  font-weight: 400;
+  /* font-weight: 400; */
+  font-weight: bolder;
 }
 
 .icons i {
   padding: 10px;
-  color: #007bff;
+  color: #006241;
   font-size: 20px;
   margin-right: 10px;
+  font-weight: bolder;
 }
 
 .icons i:hover {
-  color: #0056b3;
+  color: #006241;
+  font-weight: bolder;
 }

@@ -296,7 +296,11 @@ export class AdminPanelComponent implements OnInit {
     this.selectedSeller = seller;
     this.additionalNotes = seller.additional_notes || '';
     this.important = seller.important || false;
-    this.entityStatus = seller.entity_status || 'active';
+    // this.entityStatus = seller.entity_status || 'active';
+    this.entityStatus =
+      (seller.entity_status || 'Micro').charAt(0).toUpperCase() +
+      (seller.entity_status || 'Micro').slice(1).toLowerCase();
+
   }
 
   verifySeller() {

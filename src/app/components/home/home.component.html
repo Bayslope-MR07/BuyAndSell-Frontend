@@ -21,8 +21,10 @@
                 <mat-icon class="login-icon">person</mat-icon>
               </button>
               <mat-menu #menu="matMenu" class="login-menu bg-dark" xPosition="before">
-                <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsBuyer()">Login as Buyer</button>
+                <!-- <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsAdmin()">Login as Admin</button> -->
+                <button mat-menu-item class="menu-item user-login text-white" (click)="loginAsBuyer()">Login as Buyer</button>
                 <button mat-menu-item class="menu-item user-login text-white" (click)="loginAsSeller()">Login as Seller</button>
+
               </mat-menu>
             </li>
           </ul>
@@ -209,7 +211,7 @@
       <div class="footer-content">
         <div class="left-section">
           <p class="copyright">
-            © 2024 Bayslope Business Solutions Private Limited
+            © 2025 Bayslope Business Solutions Private Limited
           </p>
           <div class="links">
             <a href="#">Terms of Service</a>

@@ -107,6 +107,7 @@
       ProfileHeaderComponent,
       MatProgressSpinnerModule,
       MatPaginatorModule,
+      FormsModule
     ],
     templateUrl: './buyers.component.html',
     styleUrls: ['./buyers.component.css'],
@@ -135,6 +136,7 @@
       company_name: '',
       target: '',
       expiry: '',
+      bay_overall_rating:'',
     };
     selectedActions: Map<number, string> = new Map();
     submissionStatus: Map<number, string> = new Map();
@@ -202,6 +204,48 @@
       const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`,
       });
+      // this.http.get(`${this.baseUrl}/buyer-data/`, { headers }).subscribe(
+      //   (response: any) => {
+      //     this.buyerData = response;
+      //     this.exclusivePatents = this.buyerData.filter(
+      //       (b) => b.exclusive === true
+      //     );
+      //     this.nonExclusivePatents = this.buyerData.filter(
+      //       (b) => b.exclusive === false
+      //     );
+      //     this.applyFilters();
+      //     this.filteredData = response;
+      //     console.log('Fetched Buyer Data:', this.buyerData); // Log full data
+      //     this.buyerData.forEach((item: any, index: number) => {
+      //       console.log(`Item ${index + 1}:`, item); // Log each item
+      //       if (item.uploaded_files) {
+      //         console.log(
+      //           `Patent ID ${item.id} Uploaded Files:`,
+      //           item.uploaded_files
+      //         );
+      //         if (item.uploaded_files[0]?.url) {
+      //           console.log(
+      //             `Patent ID ${item.id} URL:`,
+      //             item.uploaded_files[0].url
+      //           );
+      //         } else {
+      //           console.log(
+      //             `Patent ID ${item.id} - No valid URL in uploaded_files`
+      //           );
+      //         }
+      //       } else {
+      //         console.log(`Patent ID ${item.id} - No uploaded_files array`);
+      //       }
+      //     });
+      //     this.updatePaginatedData();
+      //     this.loader = false;
+      //   },
+      //   (error) => {
+      //     this.loader = false;
+      //     console.error('Error fetching buyer data:', error);
+      //   }
+      // );
+
       this.http.get(`${this.baseUrl}/buyer-data/`, { headers }).subscribe(
         (response: any) => {
           this.buyerData = response;
@@ -211,30 +255,22 @@
           this.nonExclusivePatents = this.buyerData.filter(
             (b) => b.exclusive === false
           );
+
+          // --- NEW: set submissionStatus map from backend user_feedback if present
+          this.submissionStatus.clear();
+          this.buyerData.forEach((item: any, index: number) => {
+            if (item.user_feedback && item.user_feedback.action) {
+              this.submissionStatus.set(item.id, item.user_feedback.action);
+            } else {
+              // ensure no stale entry
+              this.submissionStatus.delete(item.id);
+            }
+          });
+
           this.applyFilters();
           this.filteredData = response;
           console.log('Fetched Buyer Data:', this.buyerData); // Log full data
-          this.buyerData.forEach((item: any, index: number) => {
-            console.log(`Item ${index + 1}:`, item); // Log each item
-            if (item.uploaded_files) {
-              console.log(
-                `Patent ID ${item.id} Uploaded Files:`,
-                item.uploaded_files
-              );
-              if (item.uploaded_files[0]?.url) {
-                console.log(
-                  `Patent ID ${item.id} URL:`,
-                  item.uploaded_files[0].url
-                );
-              } else {
-                console.log(
-                  `Patent ID ${item.id} - No valid URL in uploaded_files`
-                );
-              }
-            } else {
-              console.log(`Patent ID ${item.id} - No uploaded_files array`);
-            }
-          });
+          // existing logging code kept...
           this.updatePaginatedData();
           this.loader = false;
         },
@@ -258,11 +294,18 @@
           (response: any) => {
             this.buyerData = response;
             this.filteredData = response;
+
+            // set submission statuses
+            this.submissionStatus.clear();
             this.buyerData.forEach((item: any) => {
               if (item.user_feedback) {
                 this.submissionStatus.set(item.id, item.user_feedback?.action);
               }
             });
+
+            // reset selectedActions to avoid stale selections
+            this.selectedActions.clear();
+
             this.updatePaginatedData();
             this.loader = false;
           },
@@ -322,42 +365,79 @@
     }
 
     changeTab(tabIndex: MatTabChangeEvent) {
-      // console.log(tabIndex.index);
+      // clear filters and local selection maps to avoid stale UI
       this.clearFilters();
-      if (tabIndex.index == 1) {
+      this.selectedActions.clear();
+      this.submissionStatus.clear();
+
+      // set selectedTabIndex first
+      this.selectedTabIndex = tabIndex.index;
+
+      if (tabIndex.index === 1) {
+        // shortlisted
         this.fetchBuyerDataShortlisted();
-        this.selectedTabIndex = 1;
       } else {
+        // all patents
         this.fetchBuyerData();
-        this.selectedTabIndex = 0;
       }
     }
+
     filteredExclusive: any[] = [];
     filteredNonExclusive: any[] = [];
 
     paginatedExclusive: any[] = [];
     paginatedNonExclusive: any[] = [];
 
+    // applyFilters() {
+    //   this.filteredExclusive = this.exclusivePatents.filter((buyer) =>
+    //     this.passesFilters(buyer)
+    //   );
+    //   this.filteredNonExclusive = this.nonExclusivePatents.filter((buyer) =>
+    //     this.passesFilters(buyer)
+    //   );
+    //   // this.updatePaginatedData();
+    //   this.filteredData = this.buyerData.filter((buyer) => {
+    //     return Object.keys(this.filters).every((key) => {
+    //       const filterValue = this.filters[key];
+    //       if (!filterValue) return true;
+    //       return String(buyer[key])
+    //         .toLowerCase()
+    //         .includes(String(filterValue).toLowerCase());
+    //     });
+    //   });
+    //   this.pageIndex = 0;
+    //   this.updatePaginatedData();
+    // }
     applyFilters() {
-      this.filteredExclusive = this.exclusivePatents.filter((buyer) =>
-        this.passesFilters(buyer)
-      );
-      this.filteredNonExclusive = this.nonExclusivePatents.filter((buyer) =>
-        this.passesFilters(buyer)
-      );
-      // this.updatePaginatedData();
-      this.filteredData = this.buyerData.filter((buyer) => {
+      const keyMapping: { [key: string]: string } = {
+        primary_technology: 'primary_technology',
+        entity_status: 'entity_status',
+        acquisition_status: 'acquisition_status',
+        bay_rating: 'bay_overall_rating', // mapping fixed
+        target: 'target',
+        patent_number: 'patent_number',
+      };
+
+      const filterFn = (buyer: any) => {
         return Object.keys(this.filters).every((key) => {
           const filterValue = this.filters[key];
           if (!filterValue) return true;
-          return String(buyer[key])
+          const actualKey = keyMapping[key] || key;
+          const buyerValue = buyer[actualKey] ? String(buyer[actualKey]) : '';
+          return buyerValue
             .toLowerCase()
             .includes(String(filterValue).toLowerCase());
         });
-      });
+      };
+
+      this.filteredExclusive = this.exclusivePatents.filter(filterFn);
+      this.filteredNonExclusive = this.nonExclusivePatents.filter(filterFn);
+      this.filteredData = this.buyerData.filter(filterFn);
+
       this.pageIndex = 0;
       this.updatePaginatedData();
     }
+
     passesFilters(buyer: any): boolean {
       return Object.keys(this.filters).every((key) => {
         const filterValue = this.filters[key];
@@ -382,6 +462,7 @@
         target: '',
         expiry: '',
       };
+      Object.keys(this.filters).forEach((key) => (this.filters[key] = ''));
       this.applyFilters();
     }
 
@@ -415,6 +496,34 @@
       }
     }
 
+    // submitAction(patentId: number, action: string) {
+    //   const token = localStorage.getItem('access_token');
+    //   const headers = new HttpHeaders({
+    //     Authorization: `Bearer ${token}`,
+    //   });
+
+    //   const payload = { id: patentId, action: action };
+
+    //   this.http
+    //     .post(`${this.baseUrl}/buyerChoice/`, payload, { headers })
+    //     .subscribe(
+    //       (response) => {
+    //         this.submissionStatus.set(patentId, action);
+    //         if (this.selectedTabIndex === 1) {
+    //           this.fetchBuyerDataShortlisted();
+    //         } else {
+    //           this.fetchBuyerData();
+    //         }
+    //       },
+    //       (error) => {
+    //         console.error(
+    //           `Error submitting action "${action}" for patent ID ${patentId}:`,
+    //           error
+    //         );
+    //       }
+    //     );
+    // }
+
     submitAction(patentId: number, action: string) {
       const token = localStorage.getItem('access_token');
       const headers = new HttpHeaders({
@@ -427,10 +536,19 @@
         .post(`${this.baseUrl}/buyerChoice/`, payload, { headers })
         .subscribe(
           (response) => {
-            this.submissionStatus.set(patentId, action);
+            // Update local buyerData optimistically
+            const updatedPatent = this.buyerData.find((b) => b.id === patentId);
+            if (updatedPatent) {
+              updatedPatent.user_feedback = { action: action };
+              this.submissionStatus.set(patentId, action);
+            }
+
+            // REFRESH: fetch fresh data for the current tab to avoid stale shortlist
             if (this.selectedTabIndex === 1) {
+              // if currently on shortlisted tab, re-fetch shortlisted list from server
               this.fetchBuyerDataShortlisted();
             } else {
+              // otherwise refresh the full buyer list
               this.fetchBuyerData();
             }
           },
@@ -443,9 +561,39 @@
         );
     }
 
+    // enableResubmit(patentId: number) {
+    //   this.submissionStatus.delete(patentId);
+    //   this.selectedActions.delete(patentId);
+    // }
+
     enableResubmit(patentId: number) {
-      this.submissionStatus.delete(patentId);
-      this.selectedActions.delete(patentId);
+      const token = localStorage.getItem('access_token');
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+
+      this.http
+        .request('delete', `${this.baseUrl}/buyerChoice/`, {
+          body: { id: patentId },
+          headers,
+        })
+        .subscribe(
+          () => {
+            this.submissionStatus.delete(patentId);
+            this.selectedActions.delete(patentId);
+
+            const updatedPatent = this.buyerData.find((b) => b.id === patentId);
+            if (updatedPatent) {
+              updatedPatent.user_feedback = null;
+            }
+          },
+          (error) => {
+            console.error(
+              `Error clearing submission for patent ${patentId}:`,
+              error
+            );
+          }
+        );
     }
 
     viewPatentDetails(patentId: number) {

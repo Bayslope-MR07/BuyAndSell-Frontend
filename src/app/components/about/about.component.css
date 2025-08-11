@@ -169,14 +169,14 @@ footer {
 
 .links a {
   text-decoration: none; /* Removed hover and other effects */
-  color: #007bff;
+  color: #006241;
   font-size: 16px;
   margin: 0 10px;
 }
 
 .icons i {
   padding: 10px;
-  color: #007bff;
+  color: #006241;
   font-size: 18px;
   margin-right: 10px;
 }

@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'otp', component: OtpComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'seller', component: SellerFormComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminPanelComponent },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard] },
   { path: 'buyer', component: BuyersComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },
   { path: 'buyer-details/:patentId', component: BuyerDetailsComponent },
@@ -69,7 +69,6 @@ const routes: Routes = [
   { path: 'user-profile-update', component: UserProfileUpdateComponent },
   { path: 'google-callback', component: GoogleCallbackComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
-
 ];
 
 library.add(faTwitter, faFacebook, faInstagram, faLinkedin);

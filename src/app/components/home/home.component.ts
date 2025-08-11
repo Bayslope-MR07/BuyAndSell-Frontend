@@ -45,6 +45,10 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/login?user_type=Buyer');
   }
 
+    loginAsAdmin() {
+    this.router.navigateByUrl('/login?user_type=Admin');
+  }
+
   loginAsSeller() {
     this.router.navigateByUrl('/login?user_type=Seller');
   }
