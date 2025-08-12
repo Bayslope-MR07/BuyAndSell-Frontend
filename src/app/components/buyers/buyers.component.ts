@@ -92,6 +92,7 @@
   import { MatFormFieldModule } from '@angular/material/form-field';
   import { MatSelectModule } from '@angular/material/select';
   import { MatOptionModule } from '@angular/material/core';
+  import { MatTableDataSource } from '@angular/material/table';
   
   @Component({
     selector: 'app-buyers',
@@ -107,7 +108,7 @@
       ProfileHeaderComponent,
       MatProgressSpinnerModule,
       MatPaginatorModule,
-      FormsModule
+      FormsModule,
     ],
     templateUrl: './buyers.component.html',
     styleUrls: ['./buyers.component.css'],
@@ -129,15 +130,15 @@
       important: '',
       entity_status: '',
       acquisition_status: '',
-      bay_rating: '',
+      bay_overall_rating: '',
       enforceability: '',
       keywords: '',
       patent_number: '',
       company_name: '',
       target: '',
       expiry: '',
-      bay_overall_rating:'',
     };
+
     selectedActions: Map<number, string> = new Map();
     submissionStatus: Map<number, string> = new Map();
     loader: boolean = false;
@@ -180,6 +181,9 @@
       this.pageSize = event.pageSize;
       this.updatePaginatedData();
     }
+    // import { MatTableDataSource } from '@angular/material/table';
+
+    dataSource = new MatTableDataSource<any>([]);
 
     logout() {
       this.router.navigateByUrl('login');
@@ -196,6 +200,8 @@
     seller() {
       this.router.navigateByUrl('user-seller-data');
     }
+    originalData: any[] = []; // For storing unfiltered data
+    // filteredData: any[] = []; // For storing filtered data
 
     fetchBuyerData() {
       this.loader = true;
@@ -249,6 +255,8 @@
       this.http.get(`${this.baseUrl}/buyer-data/`, { headers }).subscribe(
         (response: any) => {
           this.buyerData = response;
+          this.originalData = [...response];
+
           this.exclusivePatents = this.buyerData.filter(
             (b) => b.exclusive === true
           );
@@ -408,34 +416,103 @@
     //   this.pageIndex = 0;
     //   this.updatePaginatedData();
     // }
+    // applyFilters() {
+    //   const keyMapping: { [key: string]: string } = {
+    //     primary_technology: 'primary_technology',
+    //     entity_status: 'entity_status',
+    //     acquisition_status: 'acquisition_status',
+    //     bay_overall_rating: 'bay_overall_rating', // fixed here
+    //     target: 'target',
+    //     patent_number: 'patent_number',
+    //   };
+
+    //   const filterFn = (buyer: any) => {
+    //     return Object.keys(this.filters).every((key) => {
+    //       const filterValue = this.filters[key];
+    //       if (!filterValue) return true;
+    //       const actualKey = keyMapping[key] || key;
+    //       const buyerValue = buyer[actualKey] ? String(buyer[actualKey]) : '';
+    //       return buyerValue
+    //         .toLowerCase()
+    //         .includes(String(filterValue).toLowerCase());
+    //     });
+    //   };
+
+    //   this.filteredExclusive = this.exclusivePatents.filter(filterFn);
+    //   this.filteredNonExclusive = this.nonExclusivePatents.filter(filterFn);
+    //   this.filteredData = this.buyerData.filter(filterFn);
+
+    //   this.pageIndex = 0;
+    //   this.updatePaginatedData();
+    // }
+
     applyFilters() {
+      console.log('==== APPLY FILTERS CALLED ====');
+      console.log('Current Filters Object:', this.filters);
+      console.log('Bay Rating filter value:', this.filters.bay_overall_rating);
+
       const keyMapping: { [key: string]: string } = {
         primary_technology: 'primary_technology',
         entity_status: 'entity_status',
         acquisition_status: 'acquisition_status',
-        bay_rating: 'bay_overall_rating', // mapping fixed
+        bay_overall_rating: 'bay_overall_rating',
         target: 'target',
         patent_number: 'patent_number',
+        company_name: 'company_name',
+        important: 'important',
+        enforceability: 'enforceability',
+        expiry: 'expiry',
+        keywords: 'keywords',
       };
 
-      const filterFn = (buyer: any) => {
-        return Object.keys(this.filters).every((key) => {
-          const filterValue = this.filters[key];
-          if (!filterValue) return true;
-          const actualKey = keyMapping[key] || key;
-          const buyerValue = buyer[actualKey] ? String(buyer[actualKey]) : '';
-          return buyerValue
-            .toLowerCase()
-            .includes(String(filterValue).toLowerCase());
+      if (!this.originalData || this.originalData.length === 0) {
+        console.warn('⚠ originalData is empty! Filtering will do nothing.');
+      } else {
+        console.log(
+          `originalData length before filtering: ${this.originalData.length}`
+        );
+        console.log('Sample object keys:', Object.keys(this.originalData[0]));
+        console.log('Sample bay_overall_rating values from API:');
+        this.originalData.forEach((item, idx) => {
+          console.log(`#${idx + 1}:`, item.bay_overall_rating);
         });
-      };
+      }
 
-      this.filteredExclusive = this.exclusivePatents.filter(filterFn);
-      this.filteredNonExclusive = this.nonExclusivePatents.filter(filterFn);
-      this.filteredData = this.buyerData.filter(filterFn);
+      this.filteredData = this.originalData.filter((item) => {
+        return Object.keys(this.filters).every((filterKey) => {
+          const filterValue = this.filters[filterKey]
+            ?.toString()
+            .trim()
+            .toLowerCase();
+          if (!filterValue) return true;
 
-      this.pageIndex = 0;
-      this.updatePaginatedData();
+          const dataKey = keyMapping[filterKey];
+          const dataValue = (item[dataKey] ?? '')
+            .toString()
+            .trim()
+            .toLowerCase();
+
+          if (filterKey === 'bay_overall_rating') {
+            console.log(
+              `Checking item: "${dataValue}" against filter: "${filterValue}"`
+            );
+            return dataValue === filterValue; // exact match for rating
+          }
+
+          return dataValue.includes(filterValue); // partial + case-insensitive match
+        });
+      });
+
+      console.log(`Filtered data length: ${this.filteredData.length}`);
+      console.log('Filtered Data Sample:', this.filteredData.slice(0, 5));
+
+      // 🔹 UI me tab ke liye exclusivePatents update karna zaroori hai
+      this.exclusivePatents = this.filteredData.filter(
+        (b) => b.exclusive === true
+      );
+
+      // Agar tum table ke liye dataSource use kar rahe ho
+      this.dataSource.data = this.exclusivePatents;
     }
 
     passesFilters(buyer: any): boolean {
@@ -454,7 +531,7 @@
         important: '',
         entity_status: '',
         acquisition_status: '',
-        bay_rating: '',
+        bay_overall_rating: '', // added here
         enforceability: '',
         keywords: '',
         patent_number: '',
@@ -462,7 +539,6 @@
         target: '',
         expiry: '',
       };
-      Object.keys(this.filters).forEach((key) => (this.filters[key] = ''));
       this.applyFilters();
     }
 

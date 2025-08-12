@@ -213,10 +213,10 @@
           <div class="text-primary1">
             <h2 class="mb-4">Filters</h2>
           </div>
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label class="form-label">Select by Category:</label>
             <input type="text" class="form-control" [(ngModel)]="filters.primary_technology" (input)="applyFilters()" placeholder="Search...">
-          </div>
+          </div> -->
   
           <div class="mb-3">
             <label class="form-label">Entity Status:</label>
@@ -359,7 +359,7 @@
             </tr>
           </tbody>
         </table>
-        <div *ngIf="exclusivePatents.length === 0 && !loader" class="text-center p-5">
+        <div *ngIf="filteredData.length === 0 && !loader" class="text-center p-5">
           No Exclusive patents
         </div>
         <!-- <mat-paginator 
