@@ -295,7 +295,7 @@
             <tr *ngFor="let buyer of exclusivePatents; let i = index">
               <td>{{ i + 1 }}</td>
               <td>
-                <a [href]="'/buyer-details/' + buyer.id" target="_blank" class="link-primary">
+                <a [href]="'/buyer-details/' + buyer.id"  class="link-primary">
                   {{ buyer.patent_number }}
                 </a>
               </td>
