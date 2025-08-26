@@ -463,6 +463,8 @@
         enforceability: 'enforceability',
         expiry: 'expiry',
         keywords: 'keywords',
+        tech_domain: 'tech_domain',
+        relevant_companies:'relevant_companies',
       };
 
       if (!this.originalData || this.originalData.length === 0) {
@@ -538,6 +540,7 @@
         company_name: '',
         target: '',
         expiry: '',
+        relevant_companies:'',
       };
       this.applyFilters();
     }

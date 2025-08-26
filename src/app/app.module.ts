@@ -47,6 +47,7 @@ import { GoogleCallbackComponent } from './google-callback/google-callback.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { BuyerFormComponent } from './buyer-form/buyer-form.component';
 
 // Define routes
 const routes: Routes = [
@@ -69,6 +70,7 @@ const routes: Routes = [
   { path: 'user-profile-update', component: UserProfileUpdateComponent },
   { path: 'google-callback', component: GoogleCallbackComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
+  {path:'buyerform',component:BuyerFormComponent}
 ];
 
 library.add(faTwitter, faFacebook, faInstagram, faLinkedin);
@@ -76,9 +78,11 @@ library.add(faTwitter, faFacebook, faInstagram, faLinkedin);
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    AboutComponent,
+    
+    
     GoogleCallbackComponent,
+    
+    
     // PieChartComponent,
   ],
   imports: [

@@ -150,9 +150,11 @@
   </p>
 
   <form #sellerForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- ========== Section: Expectation Details ========== -->
+     <h4 class="mt-2 mb-3">Expectation Details</h4>
     <div class="row">
       <div class="col-md-4 mb-3">
-        <label for="portfolio_type" class="form-label">Patent Portfolio</label>
+        <label for="portfolio_type" class="form-label">Monetization Options</label>
         <select
           class="form-select"
           [(ngModel)]="formData.portfolio_type"
@@ -161,26 +163,11 @@
         >
           <option value="sale_only">Sale Only</option>
           <option value="license_only">License Only</option>
-          <option value="sale_and_license">Sale and License</option>
+          <option value="sale_and_license">Any</option>
         </select>
       </div>
 
-      <div class="col-md-4 mb-3">
-        <label for="patent_owner_status" class="form-label"
-          >Patent Owner or Broker</label
-        >
-        <select
-          class="form-select"
-          [(ngModel)]="formData.patent_owner_status"
-          name="patent_owner_status"
-          required
-        >
-          <option value="owner">Owner</option>
-          <option value="broker">Broker</option>
-        </select>
-      </div>
-
-      <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3">
         <label for="price_expectation" class="form-label"
           >Price Expectation</label
         >
@@ -190,11 +177,74 @@
           name="price_expectation"
           required
         >
-          <option value="10000">Low 5 Figures - $10,000</option>
-          <option value="25000">Low to Mid 5 Figures - $25,000</option>
+<!-- <option value="10000">Low 5 Figures range - $10,000</option>
+<option value="50000">Mid 5 Figures range - $50,000</option>
+<option value="100000">Low 6 Figures range - $100,000</option>
+<option value="250000">Mid 6 Figures range - $250,000</option>
+<option value="1000000">Low 7 Figures range - $1,000,000</option> -->
+
+<!-- <select> -->
+  <option value="10000">Low 5 Figures range </option>
+  <option value="25000">Low-to-Mid 5 Figures range </option>
+  <option value="50000">Mid-to-High 5 Figures range </option>
+
+  <option value="100000">Low 6 Figures range </option>
+  <option value="250000">Low-to-Mid 6 Figures range</option>
+  <option value="500000">Mid-to-High 6 Figures range </option>
+  <option value="999999">High 6 Figures range </option>
+
+  <option value="1000000">Low 7 Figures range </option>
+  <option value="2500000">Low-to-Mid 7 Figures range </option>
+  <option value="5000000">Mid-to-High 7 Figures range </option>
+  <option value="9999999">High 7 Figures range </option>
           <option value="">Other</option>
         </select>
       </div>
+
+      <!-- <div class="col-md-4 mb-3">
+        <label for="encumbrances" class="form-label">Encumbrances</label>
+        <select class="form-select" [(ngModel)]="formData.encumbrances" name="encumbrances">
+          <option value="none">None</option>
+          <option value="pledged">Pledged</option>
+          <option value="licensed">Licensed</option>
+          <option value="liens">Liens</option>
+          <option value="litigation">Litigation (ongoing / past)</option>
+        </select>
+      </div> -->
+
+
+            <div class="col-md-4 mb-3">
+        <label for="motivation_to_sell" class="form-label">Motivation to sell</label>
+        <select class="form-select" [(ngModel)]="formData.motivation_to_sell" name="motivation_to_sell">
+          <option value="non_core">Non-Core</option>
+          <option value="need_funding">Need Funding</option>
+          <option value="bankruptcy">Bankruptcy</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+
+      <!-- ========== Section: Owner Details ========== -->
+
+<h4 class="mt-4 mb-3">Owner Details</h4>
+<div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="patent_owner_status" class="form-label"
+          >Who are you</label
+        >
+        <select
+          class="form-select"
+          [(ngModel)]="formData.patent_owner_status"
+          name="patent_owner_status"
+          required
+        >
+          <option value="owner">Patent Owner</option>
+          <option value="broker">Patent Broker</option>
+          <option value="broker">Others</option>
+        </select>
+      </div>
+
+
 
       <div class="col-md-4 mb-3">
         <label for="first_name" class="form-label">First Name</label>
@@ -252,6 +302,14 @@
           name="patent_owner_website"
         />
       </div>
+      </div>
+
+
+      <!-- ========== Section: Patent Details ========== -->
+  <h4 class="mt-4 mb-3">Patent Details</h4>
+
+
+
       <div class="col-md-4 mb-3">
         <label for="primary_technology" class="form-label"
           >Primary Technology</label
@@ -265,7 +323,7 @@
         />
       </div>
 
-      <div class="col-md-4 mb-3">
+      <!-- <div class="col-md-4 mb-3">
         <label for="deadline" class="form-label">Deadline (Optional)</label>
         <input
           type="date"
@@ -283,25 +341,39 @@
           [(ngModel)]="formData.expiry"
           name="expiry"
         />
-      </div>
+      </div> -->
+
+
+
+
+
+
+
+    <!-- </div> -->
+
+
+
+
 
       <div
         *ngFor="let patent of formData.patents; let i = index"
         class="col-12 mt-4 border p-3 rounded bg-white"
       >
         <h5 class="mb-3">Patent {{ i + 1 }}</h5>
+
         <div class="row">
-          <div class="col-md-4 mb-3">
-            <label class="form-label">Country:</label>
+
+                    <div class="col-md-4 mb-3">
+            <label class="form-label">Patent No {{ i + 1 }}:</label>
             <input
               type="text"
               class="form-control"
-              [(ngModel)]="patent.country"
-              [name]="'country_' + i"
+              [(ngModel)]="patent.patent_number"
+              [name]="'patent_number_' + i"
               required
             />
           </div>
-          <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-3">
             <label class="form-label">Status:</label>
             <input
               type="text"
@@ -312,15 +384,17 @@
             />
           </div>
           <div class="col-md-4 mb-3">
-            <label class="form-label">Patent No {{ i + 1 }}:</label>
+            <label class="form-label">Country:</label>
             <input
               type="text"
               class="form-control"
-              [(ngModel)]="patent.patent_number"
-              [name]="'patent_number_' + i"
+              [(ngModel)]="patent.country"
+              [name]="'country_' + i"
               required
             />
           </div>
+
+
           <!-- <div class="col-md-4 mb-3">
             <label class="form-label">Publication #:</label>
             <input type="text" class="form-control" [(ngModel)]="patent.publication_number" [name]="'publication_number_' + i" />
@@ -359,7 +433,7 @@
       </div>
 
       <div class="w-100 mb-4">
-        <label for="file" class="form-label">File Upload</label>
+        <label for="file" class="form-label">Supporting material (if available)</label>
         <input
           type="file"
           class="form-control form-control-md"

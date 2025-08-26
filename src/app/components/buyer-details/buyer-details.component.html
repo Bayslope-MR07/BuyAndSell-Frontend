@@ -229,7 +229,7 @@
 </button> -->
 <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
   <button class="btn btn-success" (click)="downloadAsExcel()">
-    ⬇️ Download Excel
+    ⬇️ Download Document
   </button>
 </div>
 
@@ -244,24 +244,44 @@
     </div>
    -->
     <!-- Details Section -->
-    <h2 class="section-title">Details</h2>
+    <h2 class="section-title">Overview</h2>
     <div class="grid-container" *ngIf="patentDetails; else loading">
       <div class="grid-item">
-        <strong>Patent No.</strong> <br />
-        <span class="highlight" style="color: #007bff">{{ patentDetails.patent_number }}</span>
+        <strong>Portfolio Code</strong> <br />
+        <span class="highlight" style="color: #007bff">{{ patentDetails.portfolio_code }}</span>
+      </div>
+            <div class="grid-item">
+        <strong>Industry</strong> <br />
+        <span class="highlight">{{ patentDetails.industry }}</span>
       </div>
       <div class="grid-item">
         <strong>Tech Domain</strong> <br />
         <span class="highlight">{{ patentDetails.tech_domain }}</span>
       </div>
-      
-      <div class="grid-item">
-        <strong>Expiry</strong> <br />
-        <span class="highlight">{{ patentDetails.expiry }}</span>
+
+            <div class="grid-item">
+        <strong>Priority Date</strong> <br />
+        <span class="highlight">{{ patentDetails.priority }}</span>
       </div>
       
       <div class="grid-item">
-        <strong>Status of Acquisition</strong> <br />
+        <strong>Expiry Date</strong> <br />
+        <span class="highlight">{{ patentDetails.expiry }}</span>
+      </div>
+      
+
+
+
+      <div class="grid-item">
+        <strong>Number of Patents</strong> <br />
+        <span class="highlight">{{ patentDetails.number_of_patents }}</span>
+      </div>
+            <div class="grid-item">
+        <strong>Number of Patent Families</strong> <br />
+        <span class="highlight">{{ patentDetails.number_of_patent_families }}</span>
+      </div>
+            <div class="grid-item">
+        <strong>Acquisition Status</strong> <br />
         <span class="highlight">{{ patentDetails.acquisition_status }}</span>
       </div>
       <!-- <div class="grid-item" style="">
@@ -285,9 +305,12 @@
     <div class="grid-container" *ngIf="patentDetails; else loading">
 
       <div class="grid-item" *ngIf="patentDetails.claim_charts">
-      <strong>Claim Charts</strong> <br />
-      <a [href]="patentDetails.claim_charts" target="_blank" class="link-dark">
-      📄 {{ patentDetails.claim_charts.split('/').pop() }}
+      <strong> Charts</strong> <br />
+      <a [href]="patentDetails.claim_charts" target="_blank" class="link-danger">
+      {{ patentDetails.claim_charts.split('/').pop() }}
+      claim Charts
+      <i class="fa-solid fa-file-pdf"></i>
+      
     </a>
 </div>
 
@@ -295,10 +318,15 @@
   <strong>Analysis Sheet</strong> <br />
   <a [href]="patentDetails.analysis_sheet" 
      target="_blank" 
-     class="link-dark"
+     class="link-success"
      >
-    📄 {{ patentDetails.analysis_sheet.split('/').pop() }}
+    {{ patentDetails.analysis_sheet.split('/').pop() }}
+    <i class="fa-solid fa-file-excel"></i>
   </a>
+      </div>
+      <div class="grid-item">
+        <strong>Relevant Companies</strong> <br />
+        <span class="highlight">{{ patentDetails.relevant_companies }}</span>
       </div>
       <div class="grid-item">
         <strong>Market Relevance</strong> <br />
@@ -312,10 +340,7 @@
         <strong>Enforceability</strong> <br />
         <span class="highlight">{{ patentDetails.enforceability }}</span>
       </div>
-      <div class="grid-item">
-        <strong>Targets</strong> <br />
-        <span class="highlight">{{ patentDetails.target }}</span>
-      </div>
+
 
 
     </div>
@@ -326,15 +351,13 @@
 
     <h2 class="section-title">Bibliographic Details</h2>
     <div class="grid-container" *ngIf="patentDetails; else loading">
-    <div class="grid-item">
-        <strong>Entity Status</strong> <br />
-        <span class="highlight">{{ patentDetails.entity_status }}</span>
+
+            <div class="grid-item">
+        <strong>Parent Patent Number</strong> <br />
+        <span class="highlight" style="color: #007bff">{{ patentDetails.patent_number }}</span>
       </div>
-      <div class="grid-item">
-        <strong>Upcoming Fees</strong> <br />
-        <span class="highlight">{{ patentDetails.upcoming_fees }}</span>
-      </div>
-      <div class="grid-item">
+
+            <div class="grid-item">
         <strong>Title</strong> <br />
         <span class="highlight">{{ patentDetails.title }}</span>
       </div>
@@ -342,12 +365,16 @@
         <strong>Abstract</strong> <br />
         <span class="highlight">{{ patentDetails.abstract }}</span>
       </div>
-      <div class="grid-item">
+
+            <div class="grid-item">
         <strong>First Claim </strong> <br />
         <span class="highlight">{{ patentDetails.first_claim }}</span>
       </div>
-
-      <div class="grid-item">
+                  <div class="grid-item">
+        <strong>Priority Date</strong> <br />
+        <span class="highlight">{{ patentDetails.priority }}</span>
+      </div>
+            <div class="grid-item">
         <strong>Filing Date </strong> <br />
         <span class="highlight">{{ patentDetails.filing_date }}</span>
       </div>
@@ -355,6 +382,12 @@
         <strong>Grant Date </strong> <br />
         <span class="highlight">{{ patentDetails.grant_date }}</span>
       </div>
+      
+      <div class="grid-item">
+        <strong>Expiry Date</strong> <br />
+        <span class="highlight">{{ patentDetails.expiry }}</span>
+      </div>
+      
       <div class="grid-item">
         <strong>Current Assignee </strong> <br />
         <span class="highlight">{{ patentDetails.current_assignee }}</span>
@@ -371,6 +404,18 @@
         <strong>Technology Keywords </strong> <br />
         <span class="highlight">{{ patentDetails.keywords }}</span>
       </div>
+    <div class="grid-item">
+        <strong>Entity Status</strong> <br />
+        <span class="highlight">{{ patentDetails.entity_status }}</span>
+      </div>
+      <div class="grid-item">
+        <strong>Upcoming Fees</strong> <br />
+        <span class="highlight">{{ patentDetails.upcoming_fees }}</span>
+      </div>
+
+
+
+
 
 
 
@@ -378,20 +423,44 @@
 
 
 
-    <h2 class="section-title">Contact Details</h2>
+    <h2 class="section-title">Spoc Details</h2>
     <div class="grid-container">
       <div class="grid-item">
-        <strong>Contact</strong> <br />
-        <span class="highlight">{{ patentDetails?.admin_contact }}</span>
+        <strong>Phone</strong> <br />
+        <span class="highlight">{{ patentDetails?.phone }}</span>
 
       </div>
       <div class="grid-item">
         <strong>Email</strong> <br />
-        <span class="highlight">{{ patentDetails?.admin_email }}</span>
+        <span class="highlight">{{ patentDetails?.email }}</span>
       </div>
       <div class="grid-item">
-        <strong>Spoc Compant</strong> <br />
+        <strong>Spoc Company</strong> <br />
         <span class="highlight">{{ patentDetails.spoc_company }}</span>
+      </div>
+     
+    </div>
+
+
+        <h2 class="section-title">Seller</h2>
+    <div class="grid-container">
+      <div class="grid-item">
+        <strong>Seller interest</strong> <br />
+        <span class="highlight">{{ patentDetails?.seller_interest }}</span>
+
+      </div>
+      <div class="grid-item">
+        <strong>Reason of Selling</strong> <br />
+        <span class="highlight">{{ patentDetails?.reason_of_selling }}</span>
+      </div>
+      <div class="grid-item">
+        <strong>Encumbrances</strong> <br />
+        <span class="highlight">{{ patentDetails.encumbrances }}</span>
+      </div>
+
+            <div class="grid-item">
+        <strong>Seller Jurisdiction</strong> <br />
+        <span class="highlight">{{ patentDetails.seller_jurisdiction }}</span>
       </div>
      
     </div>

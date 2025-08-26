@@ -219,7 +219,7 @@
           </div> -->
   
           <div class="mb-3">
-            <label class="form-label">Entity Status:</label>
+            <label class="form-label">Entity Status</label>
             <select class="form-select" [(ngModel)]="filters.entity_status" (change)="applyFilters()">
               <option value="">Any</option>
               <option value="micro">Micro</option>
@@ -229,7 +229,7 @@
           </div>
   
           <div class="mb-3">
-            <label class="form-label">Acquisition Status:</label>
+            <label class="form-label">Acquisition Status</label>
             <select class="form-select"  [(ngModel)]="filters.acquisition_status" (change)="applyFilters()">
               <option value="">Any</option>
               <option value="open">Open</option>
@@ -238,7 +238,7 @@
           </div>
   
           <div class="mb-3">
-            <label class="form-label">Bay Rating:</label>
+            <label class="form-label">Bay Rating</label>
             <!-- <select class="form-select" [(ngModel)]="filters.bay_rating" (change)="applyFilters()"> -->
               <select class="form-select" [(ngModel)]="filters.bay_overall_rating" (change)="applyFilters()">
 
@@ -250,13 +250,21 @@
           </div>
   
           <div class="mb-3">
-            <label class="form-label">Targets:</label>
-            <input type="text" class="form-control" [(ngModel)]="filters.target" (input)="applyFilters()" placeholder="Search...">
+            <label class="form-label">Relevant Companies</label>
+            <input type="text" class="form-control" [(ngModel)]="filters.relevant_companies" (input)="applyFilters()" placeholder="Search...">
           </div>
   
           <div class="mb-3">
-            <label class="form-label">Patent Number:</label>
+            <label class="form-label">Patent Number</label>
             <input type="text" class="form-control" [(ngModel)]="filters.patent_number" (input)="applyFilters()" placeholder="Search...">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tech Domain</label>
+            <input type="text" class="form-control" [(ngModel)]="filters.tech_domain" (input)="applyFilters()" placeholder="Search...">
+          </div>
+                    <div class="mb-3">
+            <label class="form-label">Tech Keywords</label>
+            <input type="text" class="form-control" [(ngModel)]="filters.keywords" (input)="applyFilters()" placeholder="Search...">
           </div>
   
           <button class="btn btn-primary w-100 mt-3" (click)="clearFilters()">Clear Filters</button>
@@ -273,6 +281,117 @@
   <mat-tab-group>
     <!-- ✅ Exclusive Patents Tab -->
     <mat-tab label="Exclusive Patents">
+      <div class="table-container">
+        <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm">
+          <thead class="table-color">
+            <tr>
+              <th>Sr. No.</th>
+              <th>Patent No.</th>
+              <th>Industry</th>
+              <th>Tech Domain</th>
+              <th>Number of Patents</th>
+              <th>Number of Patent families</th>
+              <!-- <th>Entity Status</th> -->
+              <th>Priority Date</th>
+              <th>Expiry</th>
+              <th>Claim Charts</th>
+              <th>Analysis Sheet</th>
+              <th>Status of Acquisition</th>
+              <th>Buying Options</th>
+              <th>Bay Rating</th>
+              <th>Acquisition Status</th>
+              <!-- <th>Bay Rating</th> -->
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let buyer of exclusivePatents; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <a [href]="'/buyer-details/' + buyer.id"  class="link-primary">
+                  {{ buyer.patent_number }}
+                </a>
+              </td>
+              <td>{{ buyer.industry }}</td>
+              <td>{{ buyer.tech_domain }}</td>
+              <td>{{ buyer.number_of_patents }}</td>
+              <td>{{ buyer.number_of_patent_families }}</td>
+              <!-- <td>{{buyer.entity_status}}</td> -->
+              <td>{{ buyer.priority }}</td>
+              <td>{{ buyer.expiry }}</td>
+              <td>
+               <a *ngIf="buyer.claim_charts" 
+  [href]="buyer.claim_charts" 
+  target="_blank" 
+  class="link-danger"
+  (click)="logUrl(buyer.claim_charts)">
+  
+  <i class="fa-solid fa-file-pdf"></i>
+  
+</a>
+              </td>
+              <td>
+                <a *ngIf="buyer.analysis_sheet" 
+                   [href]="buyer.analysis_sheet" 
+                   target="_blank" 
+                   class="link-success"
+                   (click)="logUrl(buyer.analysis_sheet)">
+                   <i class="fa-solid fa-file-excel"></i>
+                  
+                </a>
+              </td>
+              <td>{{ buyer.acquisition_status }}</td>
+              <!-- <td>{{ buyer.buying_options }}</td> -->
+               <td>
+                        <ng-container *ngIf="!submissionStatus.get(buyer.id); else resubmitTemplate">
+                          <div class="d-flex justify-content-center gap-2">
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Chase')">
+                              <label class="form-check-label">Chase</label>
+                            </div>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Skip')">
+                              <label class="form-check-label">Skip</label>
+                            </div>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Delay')">
+                              <label class="form-check-label">Delay</label>
+                            </div>
+                          </div>
+                          <div class="text-center mt-2">
+                            <button type="button" class="btn btn-primary" [disabled]="!selectedActions.get(buyer.id)" (click)="confirmSubmit(buyer.id)">
+                              Submit
+                            </button>
+                          </div>
+                        </ng-container>
+                        <ng-template #resubmitTemplate>
+                          <div class="alert alert-warning d-flex justify-content-between align-items-center">
+                            <p class="mb-0">
+                              You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes.
+                            </p>
+                            <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>
+                          </div>
+                        </ng-template>
+                      </td>
+              <td>{{ buyer.bay_overall_rating }}</td>
+              <td>{{ buyer.acquisition_status }}</td>
+              <!-- <td>{{ buyer.bay_overall_rating }}</td> -->
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="filteredData.length === 0 && !loader" class="text-center p-5">
+          No Exclusive patents
+        </div>
+        <!-- <mat-paginator 
+                  [pageSizeOptions]="[10]" 
+                  [pageSize]="10" 
+                  [length]="exclusivePatents.length" 
+                  (page)="handlePageEvent($event)"
+                ></mat-paginator> -->
+      </div>
+    </mat-tab>
+
+        <mat-tab label="Best Matching Portfolios
+">
       <div class="table-container">
         <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm">
           <thead class="table-color">
@@ -305,21 +424,24 @@
               <td>{{buyer.entity_status}}</td>
               <td>{{ buyer.expiry }}</td>
               <td>
-                <a *ngIf="buyer.claim_charts" 
-                   [href]="buyer.claim_charts" 
-                   target="_blank" 
-                   class="link-dark"
-                   (click)="logUrl(buyer.claim_charts)">
-                  📄 pdf
-                </a>
+               <a *ngIf="buyer.claim_charts" 
+  [href]="buyer.claim_charts" 
+  target="_blank" 
+  class="link-danger"
+  (click)="logUrl(buyer.claim_charts)">
+  
+  <i class="fa-solid fa-file-pdf"></i>
+  
+</a>
               </td>
               <td>
                 <a *ngIf="buyer.analysis_sheet" 
                    [href]="buyer.analysis_sheet" 
                    target="_blank" 
-                   class="link-dark"
+                   class="link-success"
                    (click)="logUrl(buyer.analysis_sheet)">
-                  📄 Excel Sheet
+                   <i class="fa-solid fa-file-excel"></i>
+                  
                 </a>
               </td>
               <td>{{ buyer.acquisition_status }}</td>
@@ -370,6 +492,109 @@
                 ></mat-paginator> -->
       </div>
     </mat-tab>
+
+        <mat-tab label="Shortlisted Portolfios">
+      <div class="table-container">
+        <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm">
+          <thead class="table-color">
+            <tr>
+              <th>Sr. No.</th>
+              <th>Patent No.</th>
+              <th>Tech Domain</th>
+              <th>Number of Patents</th>
+              <th>Number of Patent families</th>
+              <th>Entity Status</th>
+              <th>Expiry</th>
+              <th>Claim Charts</th>
+              <th>Analysis Sheet</th>
+              <th>Status of Acquisition</th>
+              <th>Buying Options</th>
+              <th>Bay Rating</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let buyer of exclusivePatents; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <a [href]="'/buyer-details/' + buyer.id"  class="link-primary">
+                  {{ buyer.patent_number }}
+                </a>
+              </td>
+              <td>{{ buyer.tech_domain }}</td>
+              <td>{{ buyer.number_of_patents }}</td>
+              <td>{{ buyer.number_of_patent_families }}</td>
+              <td>{{buyer.entity_status}}</td>
+              <td>{{ buyer.expiry }}</td>
+              <td>
+               <a *ngIf="buyer.claim_charts" 
+  [href]="buyer.claim_charts" 
+  target="_blank" 
+  class="link-danger"
+  (click)="logUrl(buyer.claim_charts)">
+  
+  <i class="fa-solid fa-file-pdf"></i>
+  
+</a>
+              </td>
+              <td>
+                <a *ngIf="buyer.analysis_sheet" 
+                   [href]="buyer.analysis_sheet" 
+                   target="_blank" 
+                   class="link-success"
+                   (click)="logUrl(buyer.analysis_sheet)">
+                   <i class="fa-solid fa-file-excel"></i>
+                  
+                </a>
+              </td>
+              <td>{{ buyer.acquisition_status }}</td>
+              <!-- <td>{{ buyer.buying_options }}</td> -->
+               <td>
+                        <ng-container *ngIf="!submissionStatus.get(buyer.id); else resubmitTemplate">
+                          <div class="d-flex justify-content-center gap-2">
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Chase')">
+                              <label class="form-check-label">Chase</label>
+                            </div>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Skip')">
+                              <label class="form-check-label">Skip</label>
+                            </div>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Delay')">
+                              <label class="form-check-label">Delay</label>
+                            </div>
+                          </div>
+                          <div class="text-center mt-2">
+                            <button type="button" class="btn btn-primary" [disabled]="!selectedActions.get(buyer.id)" (click)="confirmSubmit(buyer.id)">
+                              Submit
+                            </button>
+                          </div>
+                        </ng-container>
+                        <ng-template #resubmitTemplate>
+                          <div class="alert alert-warning d-flex justify-content-between align-items-center">
+                            <p class="mb-0">
+                              You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes.
+                            </p>
+                            <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>
+                          </div>
+                        </ng-template>
+                      </td>
+              <td>{{ buyer.bay_overall_rating }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="filteredData.length === 0 && !loader" class="text-center p-5">
+          No Exclusive patents
+        </div>
+        <!-- <mat-paginator 
+                  [pageSizeOptions]="[10]" 
+                  [pageSize]="10" 
+                  [length]="exclusivePatents.length" 
+                  (page)="handlePageEvent($event)"
+                ></mat-paginator> -->
+      </div>
+    </mat-tab>
+
 
     <!-- ✅ Non-Exclusive Patents Tab -->
     <mat-tab label="Non-Exclusive Patents">

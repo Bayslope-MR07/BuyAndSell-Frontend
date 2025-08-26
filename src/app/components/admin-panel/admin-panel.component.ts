@@ -132,6 +132,13 @@ export class AdminPanelComponent implements OnInit {
     }
   }
 
+  // downloadFile(fileName: string) {
+  //   const link = document.createElement('a');
+  //   link.href = `assets/${fileName}`;
+  //   link.download = fileName;
+  //   link.click();
+  // }
+
   fetchSellerDataVerified() {
     this.loader = true;
     this.http.get(`${this.baseUrl}/seller-da/?status=2`).subscribe(
@@ -300,7 +307,6 @@ export class AdminPanelComponent implements OnInit {
     this.entityStatus =
       (seller.entity_status || 'Micro').charAt(0).toUpperCase() +
       (seller.entity_status || 'Micro').slice(1).toLowerCase();
-
   }
 
   verifySeller() {

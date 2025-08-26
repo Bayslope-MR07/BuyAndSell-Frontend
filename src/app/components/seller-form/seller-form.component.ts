@@ -251,6 +251,8 @@ export class SellerFormComponent {
   }
 }
   */
+
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -266,7 +268,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-seller-form',
   standalone: true,
-  imports: [FormsModule, CommonModule,FooterComponent,ProfileHeaderComponent],
+  imports: [FormsModule, CommonModule, FooterComponent, ProfileHeaderComponent],
   templateUrl: './seller-form.component.html',
   styleUrls: ['./seller-form.component.css'],
 })
@@ -275,19 +277,23 @@ export class SellerFormComponent {
     portfolio_type: '', // Sale only, License only, Sale and License
     patent_owner_status: '', // Owner or Broker
     patent_owner_website: '', // Optional
+
     first_name: '',
     last_name: '',
     country: '',
     email: '',
     phone: '',
+    
     city: '',
     postal_code: '',
     current_assignee_status: '', // Yes or No
     price_expectation: '', // Dropdown values
     deadline: '', // Optional date
-    expiry:'',
+    expiry: '',
     primary_technology: '',
-    
+    encumbrances: '',
+    motivation_to_sell: '',
+
     file: null as File | null,
     patents: [
       {
@@ -302,11 +308,16 @@ export class SellerFormComponent {
   };
 
   message: string = '';
-  baseUrl: any= environment.apiUrl;
+  baseUrl: any = environment.apiUrl;
 
-  constructor(private http: HttpClient,private router:Router,private toastr: ToastrService, private authService : AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastr: ToastrService,
+    private authService: AuthService
+  ) {}
 
-  logout(){
+  logout() {
     this.router.navigateByUrl('login');
   }
   // Handle file input change
@@ -314,13 +325,12 @@ export class SellerFormComponent {
     this.formData.file = event.target.files[0];
   }
 
-  buyer(){
+  buyer() {
     this.router.navigateByUrl('buyer');
   }
-  seller(){
+  seller() {
     this.router.navigateByUrl('user-seller-data');
   }
-
 
   // Add a new patent object dynamically
   addPatent() {
@@ -341,14 +351,17 @@ export class SellerFormComponent {
 
   // Submit the form
   onSubmit() {
-   
     const formDataToSend = new FormData();
-    
+
     Object.entries(this.formData).forEach(([key, value]) => {
       if (key === 'patents') {
         formDataToSend.append(key, JSON.stringify(value)); // Send patents as JSON string
       } else if (key === 'file' && this.formData.file) {
-        formDataToSend.append('file', this.formData.file, this.formData.file.name);
+        formDataToSend.append(
+          'file',
+          this.formData.file,
+          this.formData.file.name
+        );
       } else {
         formDataToSend.append(key, value as string);
       }
@@ -356,37 +369,37 @@ export class SellerFormComponent {
     console.log('Form Data to Send:', formDataToSend);
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-  
+
     this.http
       .post(`${this.baseUrl}/seller-form/`, formDataToSend, { headers })
       .subscribe({
-        next: (response: any) => { // Replace 'any' with a response interface
-          this.toastr.success('Data submitted successfully!')
+        next: (response: any) => {
+          // Replace 'any' with a response interface
+          this.toastr.success('Data submitted successfully!');
           if (response.status === 201) {
             this.message = 'Data submitted successfully!';
             this.router.navigateByUrl('user-seller-data');
-          } 
+          }
           // else {
           //   this.message = 'Data submitted, but unexpected status: ' + response.status;
           // }
           console.log('Response:', response);
-          if (response === 201||201) {
+          if (response === 201 || 201) {
             this.router.navigateByUrl('user-seller-data');
-        } else {
+          } else {
             this.router.navigateByUrl('#');
-        }
-
+          }
         },
         error: (error) => {
-          this.toastr.error(error?.message)
+          this.toastr.error(error?.message);
           this.message = 'Error submitting data!';
           console.error('Error:', error);
         },
         complete: () => {
           console.log('Request completed');
-        }
+        },
       });
   }
 }

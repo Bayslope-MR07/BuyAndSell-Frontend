@@ -2,11 +2,16 @@ import { Component,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfileHeaderComponent } from '../profile-header/profile-header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuContent, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-home',
-  standalone: false,
-
+  standalone: true,
+  imports: [FormsModule, CommonModule,MatIcon,MatMenu,MatMenuTrigger],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -45,7 +50,7 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/login?user_type=Buyer');
   }
 
-    loginAsAdmin() {
+  loginAsAdmin() {
     this.router.navigateByUrl('/login?user_type=Admin');
   }
 

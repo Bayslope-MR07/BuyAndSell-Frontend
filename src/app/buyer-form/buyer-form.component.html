@@ -1,0 +1,175 @@
+<div class="mb-xxl-2">
+  <app-profile-header></app-profile-header>
+</div>
+
+<div class="container p-2 bg-light rounded shadow" style="margin-top: 5%;">
+  <p class="subtitle text-start mb-4 mt-lg-1">
+    Please enter the details below as a Buyer.
+  </p>
+
+  <form #buyerForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- ========== Section 1: Your Identity ========== -->
+    <h4 class="mt-2 mb-3">Your Identity</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Buyer Category</label>
+        <select class="form-select" [(ngModel)]="formData.buyerCategory" name="buyerCategory" required>
+          <option value="npe">NPE</option>
+          <option value="investor">Investor</option>
+          <option value="licensing">Licensing House</option>
+          <option value="operating">Operating Company</option>
+          <option value="litigation">Litigation Company</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ========== Section 2: Acquisition Goals ========== -->
+    <h4 class="mt-4 mb-3">Acquisition Goals</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Purpose</label>
+        <select class="form-select" [(ngModel)]="formData.purpose" name="purpose">
+          <option value="litigation_defense">Litigation Defense</option>
+          <option value="offensive_litigation">Offensive Litigation</option>
+          <option value="licensing_rnd">Licensing / R&D</option>
+          <option value="blocking_competitor">Blocking Competitor</option>
+          <option value="investment">Investment</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Desired Patent Types</label>
+        <input type="text" class="form-control" [(ngModel)]="formData.desiredPatentTypes" name="desiredPatentTypes"
+          placeholder="Granted patents, applications, families, standards-related, etc." />
+      </div>
+    </div>
+
+    <!-- ========== Section 3: Technology Focus ========== -->
+    <h4 class="mt-4 mb-3">Technology Focus</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Technology Fields of Interest</label>
+        <input type="text" class="form-control" [(ngModel)]="formData.technologyFields" name="technologyFields"
+          placeholder="Keywords, CPC/IPC classes" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Specific Companies of Interest</label>
+        <input type="text" class="form-control" [(ngModel)]="formData.companies" name="companies" />
+      </div>
+    </div>
+
+    <!-- ========== Section 4: Portfolio Size & Geography ========== -->
+    <h4 class="mt-4 mb-3">Portfolio Size & Geography</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Number of Patents Sought</label>
+        <select class="form-select" [(ngModel)]="formData.numPatents" name="numPatents">
+          <option value="single">Single</option>
+          <option value="small_package">Small Package (2-10)</option>
+          <option value="large_portfolio">Large Portfolio (10+)</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Jurisdictions of Interest</label>
+        <input type="text" class="form-control" [(ngModel)]="formData.jurisdictions" name="jurisdictions"
+          placeholder="US, EP, CN, JP, etc." />
+      </div>
+    </div>
+
+    <!-- ========== Section 5: Budget & Deal Structure ========== -->
+    <h4 class="mt-4 mb-3">Budget & Deal Structure</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Budget Range</label>
+        <input type="text" class="form-control" [(ngModel)]="formData.budgetRange" name="budgetRange"
+          placeholder="Optional" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Preferred Structure</label>
+        <select class="form-select" [(ngModel)]="formData.structure" name="structure">
+          <option value="outright">Outright Purchase</option>
+          <option value="license">License</option>
+          <option value="exclusive">Exclusive License</option>
+          <option value="revenue_share">Revenue Share</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ========== Section 6: Risk Appetite ========== -->
+    <h4 class="mt-4 mb-3">Risk Appetite</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Accept Patents Under Litigation?</label>
+        <select class="form-select" [(ngModel)]="formData.acceptLitigation" name="acceptLitigation">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="case_by_case">Case by Case</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Tolerance for Encumbrances</label>
+        <input type="text" class="form-control" [(ngModel)]="formData.encumbrances" name="encumbrances"
+          placeholder="Existing licenses, liens, pledges" />
+      </div>
+    </div>
+
+    <!-- ========== Section 7: Timeline & Urgency ========== -->
+    <h4 class="mt-4 mb-3">Timeline & Urgency</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Preferred Timeline for Closing</label>
+        <select class="form-select" [(ngModel)]="formData.timeline" name="timeline">
+          <option value="3_months">3 Months</option>
+          <option value="6_months">6 Months</option>
+          <option value="1_year">1 Year</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Acquisition Interest</label>
+        <input type="text" class="form-control" [(ngModel)]="formData.acquisitionInterest" name="acquisitionInterest"
+          placeholder="Short-term / Long-term" />
+      </div>
+    </div>
+
+    <!-- ========== Section 8: Confidentiality & Restrictions ========== -->
+    <h4 class="mt-4 mb-3">Confidentiality & Restrictions</h4>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">NDA Required?</label>
+        <select class="form-select" [(ngModel)]="formData.ndaRequired" name="ndaRequired">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Restrictions on Disclosure</label>
+        <textarea class="form-control" [(ngModel)]="formData.restrictions" name="restrictions"
+          placeholder="e.g. I acknowledge and agree to the restrictions on disclosure"></textarea>
+      </div>
+
+      <div class="col-md-12 mb-3 form-check mt-3">
+        <input type="checkbox" class="form-check-input" [(ngModel)]="formData.directContactAck" name="directContactAck" />
+        <label class="form-check-label">
+          I agree not to contact patent owners or other parties directly.
+        </label>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="d-flex flex-row-reverse mt-4">
+      <button type="submit" class="btn btn-success btn-md" [disabled]="buyerForm.invalid">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>

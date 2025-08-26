@@ -115,6 +115,19 @@
     width: 100%;
     z-index: 1000;
   }
+
+    ::ng-deep .mat-h4,
+::ng-deep .mat-body-1,
+::ng-deep .mat-typography .mat-h4,
+::ng-deep .mat-typography .mat-body-1,
+::ng-deep .mat-typography h4 {
+  font: 400 16px/24px Roboto, sans-serif;
+  letter-spacing: 0.03125em;
+  margin: 0 0 16px;
+  color: #006641;
+  font-size: 2rem;
+  font-weight: bolder;
+}
   
   .navbar.scrolled {
     background-color: #343a40 !important;
@@ -240,10 +253,10 @@
    }
    
    .subtitle {
-     font-size: 16px;
-     color: gray;
-     margin-bottom: 30px;
-     font-weight: 400;
+font-size: 20px;
+    color: black;
+    margin-bottom: 30px;
+    font-weight: bolder;
    }
    
    /* Grid Layout for Fields */
@@ -263,10 +276,10 @@
    
    label {
      font-family: FortBook, Arial, sans-serif;
-    font-weight: 400;
+    font-weight: bolder;
      margin-bottom: 8px;
      font-size: 16px;
-     color: #333;
+     color: black;
    }
    
    .input-container {
@@ -332,4 +345,14 @@
        gap: 20px;
      }
    }
+
+
+   .typography h4 {
+    font: 400 16px / 24px Roboto, sans-serif;
+    letter-spacing: .03125em;
+    margin: 0 0 16px;
+    color: #006241;
+    font-weight: bolder;
+    font-size: 2rem;
+}
    
