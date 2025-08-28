@@ -120,6 +120,8 @@
     exclusivePatents: any[] = [];
     nonExclusivePatents: any[] = [];
 
+    shortlistedPortfolios: any[] = [];
+
     // exclusivePatents: any[] = [];
     // nonExclusivePatents: any[] = [];
     buyerData: any[] = [];
@@ -464,7 +466,7 @@
         expiry: 'expiry',
         keywords: 'keywords',
         tech_domain: 'tech_domain',
-        relevant_companies:'relevant_companies',
+        relevant_companies: 'relevant_companies',
       };
 
       if (!this.originalData || this.originalData.length === 0) {
@@ -540,7 +542,7 @@
         company_name: '',
         target: '',
         expiry: '',
-        relevant_companies:'',
+        relevant_companies: '',
       };
       this.applyFilters();
     }
@@ -680,150 +682,3 @@
     }
   }
   
-
-  // import { Component, OnInit } from '@angular/core';
-  // import { HttpClient, HttpHeaders } from '@angular/common/http';
-  // import { FormsModule } from '@angular/forms';
-  // import { CommonModule } from '@angular/common';
-  // import { Router } from '@angular/router';
-  // import { HeaderComponent } from '../header/header.component';
-  // import { FooterComponent } from '../footer/footer.component';
-
-  
-  // @Component({
-  //   selector: 'app-buyers',
-  //   standalone: true,
-  //   imports: [HeaderComponent,FooterComponent,FormsModule, CommonModule],
-  //   templateUrl: './buyers.component.html',
-  //   styleUrls: ['./buyers.component.css']
-  // })
-  // export class BuyersComponent implements OnInit {
-  //   buyerData: any[] = [ // Manually inserted 10 data entries
-  //     { id: 1, patent_number: 'US10789892', primary_technology: 'Automobile', entity_status: 'Micro', expiry: '2029-01-10', file: 'path/to/file1.pdf', acquisition_status: 'Open', bay_rating: 'High-Potential' },
-  //     { id: 2, patent_number: 'US10278952', primary_technology: 'Virtual Reality', entity_status: 'Micro', expiry: '2028-05-29', file: 'path/to/file2.pdf', acquisition_status: 'Open', bay_rating: 'Mid-Potential' },
-  //     { id: 3, patent_number: 'US98710282', primary_technology: 'Identity Verification', entity_status: 'Micro', expiry: '2030-06-02', file: 'path/to/file3.pdf', acquisition_status: 'Open', bay_rating: 'Low-Potential' },
-  //     { id: 4, patent_number: 'US10298382', primary_technology: 'Multimedia', entity_status: 'Micro', expiry: '2027-07-17', file: 'path/to/file4.pdf', acquisition_status: 'Open', bay_rating: 'Mid-Potential' },
-  //     { id: 5, patent_number: 'US04689782', primary_technology: 'UAV', entity_status: 'Micro', expiry: '2028-08-13', file: 'path/to/file5.pdf', acquisition_status: 'Open', bay_rating: 'High-Potential' },
-  //     { id: 6, patent_number: 'US89569802', primary_technology: 'Advertising', entity_status: 'Micro', expiry: '2029-08-20', file: 'path/to/file6.pdf', acquisition_status: 'Open', bay_rating: 'Low-Potential' },
-  //     { id: 7, patent_number: 'US10787892', primary_technology: 'Authentication', entity_status: 'Micro', expiry: '2030-11-01', file: 'path/to/file7.pdf', acquisition_status: 'Open', bay_rating: 'Mid-Potential' },
-  //     { id: 8, patent_number: 'US10278982', primary_technology: 'Networking', entity_status: 'Micro', expiry: '2029-03-15', file: 'path/to/file8.pdf', acquisition_status: 'Open', bay_rating: 'High-Potential' },
-  //     { id: 9, patent_number: 'US98765432', primary_technology: 'AI', entity_status: 'Micro', expiry: '2028-12-25', file: 'path/to/file9.pdf', acquisition_status: 'Open', bay_rating: 'Mid-Potential' },
-  //     { id: 10, patent_number: 'US12345678', primary_technology: 'Blockchain', entity_status: 'Micro', expiry: '2031-04-30', file: 'path/to/file10.pdf', acquisition_status: 'Open', bay_rating: 'Low-Potential' }
-  //   ];
-  //   filteredData: any[] = []; // Data to display after filtering
-  //   filters: any = {
-  //     primary_technology: '',
-  //     entity_status: '',
-  //     acquisition_status: '',
-  //     bay_rating: '',
-  //     target: '',
-  //     patent_number: ''
-  //   };
-  //   expiryYears: number = 1;
-  //   selectedActions: Map<number, string> = new Map(); // Tracks selected actions
-  //   submissionStatus: Map<number, boolean> = new Map(); // Tracks submission status
-  
-  //   constructor(private http: HttpClient, private router: Router) {}
-  //   buyerDetails(){
-  //     this.router.navigateByUrl('buyer');
-  //   }
-  //   analyticsFunction(){
-  //     this.router.navigateByUrl('analytics');
-  //   }
-  
-  //   ngOnInit() {
-  //     this.filteredData = [...this.buyerData]; // Initialize filteredData with all data
-  //   }
-  
-  //   // Apply filters to buyer data
-  //   applyFilters() {
-  //     this.filteredData = this.buyerData.filter((buyer) => {
-  //       const expiryDate = buyer.expiry ? new Date(buyer.expiry) : null;
-  //       const maxExpiryDate = new Date();
-  //       maxExpiryDate.setFullYear(maxExpiryDate.getFullYear() + this.expiryYears);
-    
-  //       return (
-  //         (this.filters.primary_technology === '' || 
-  //           buyer.primary_technology.toLowerCase().includes(this.filters.primary_technology.toLowerCase())) &&
-  //         (this.filters.entity_status === '' || 
-  //           buyer.entity_status === this.filters.entity_status) &&
-  //         (this.filters.acquisition_status === '' || 
-  //           buyer.acquisition_status === this.filters.acquisition_status) &&
-  //         (this.filters.bay_rating === '' || 
-  //           buyer.bay_rating === this.filters.bay_rating) &&
-  //         (this.filters.target === '' || 
-  //           buyer.target.toLowerCase().includes(this.filters.target.toLowerCase())) &&
-  //         (this.filters.patent_number === '' || 
-  //           buyer.patent_number.toLowerCase().includes(this.filters.patent_number.toLowerCase())) &&
-  //         (!expiryDate || expiryDate <= maxExpiryDate) // Compare Date objects directly
-  //       );
-  //     });
-  //   }
-  
-  //   // Clear all filters
-  //   clearFilters() {
-  //     this.filters = {
-  //       primary_technology: '',
-  //       entity_status: '',
-  //       acquisition_status: '',
-  //       bay_rating: '',
-  //       target: '',
-  //       patent_number: ''
-  //     };
-  //     this.expiryYears = 1; // Reset expiry filter to default
-  //     this.applyFilters();
-  //   }
-  
-  //   selectAction(patentId: number, action: string) {
-  //     this.selectedActions.set(patentId, action); // Save the selected action for the specific entry
-  //     console.log(`Selected action for patent ${patentId}: ${action}`);
-  //   }
-  
-  //   confirmSubmit(patentId: number) {
-  //     const action = this.selectedActions.get(patentId);
-  //     if (!action) {
-  //       alert('Please select an action before submitting.');
-  //       return;
-  //     }
-  //     if (confirm(`Are you sure you want to submit "${action}" for patent ID ${patentId}?`)) {
-  //       this.submitAction(patentId, action);
-  //     }
-  //   }
-  
-  //   submitAction(patentId: number, action: string) {
-  //     const token = localStorage.getItem('access_token'); // Retrieve token from storage
-  //     const headers = new HttpHeaders({
-  //       Authorization: `Bearer ${token}` // Use Bearer for JWT
-  //     });
-  
-  //     const payload = { id: patentId, action: action };
-      
-  //     this.http.post('${this.baseUrl}/buyerChoice/', payload, { headers }).subscribe(
-  //       (response) => {
-  //         console.log(`Action "${action}" for patent ID ${patentId} submitted successfully:`, response);
-  //         this.submissionStatus.set(patentId, true); // Mark this entry as submitted
-  //       },
-  //       (error) => {
-  //         console.error(`Error submitting action "${action}" for patent ID ${patentId}:`, error);
-  //       }
-  //     );
-  //   }
-  
-  //   adjustExpiryYears(value: number) {
-  //     this.expiryYears += value;
-  //     if (this.expiryYears < 1) {
-  //       this.expiryYears = 1; // Ensure expiry filter doesn't go below 1 year
-  //     }
-  //     this.applyFilters();
-  //   }
-  
-  //   enableResubmit(patentId: number) {
-  //     this.submissionStatus.set(patentId, false); // Allow resubmission for the specific patent
-  //     this.selectedActions.delete(patentId); // Clear the previously selected action
-  //   }
-  
-  //   viewPatentDetails(patentId: number) {
-  //     this.router.navigate(['/buyer-details', patentId]); // Pass patentId in the route
-  //   }
-  // }
-

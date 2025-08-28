@@ -167,7 +167,7 @@ table{
 .table-container {
   display: flex;
   flex-direction: column;
-  height: 70vh; /* Adjust as needed */
+  /* height: 110vh; Adjust as needed */
   width: 100%;
   margin-top: 20px;
   overflow-x: scroll;
@@ -183,6 +183,7 @@ table{
   color: rgb(36, 28, 28);
   margin-top: 10px;
 }
+
 
 
 
@@ -271,7 +272,7 @@ main .table tbody tr:nth-child(even) {
 }
 
 main .table td, main .table th {
-  border-color: #ddd;
+  border-color: black;
   padding: 12px;
   text-align: center;
   vertical-align: middle;
@@ -279,6 +280,25 @@ main .table td, main .table th {
   font-weight: 400; /* Normal weight for table body */
   font-size: 16px; /* Matches table body text size */
 }
+
+
+
+.table-container table th,
+.table-container table td {
+  border-top: 1px solid #000 !important;   /* upar ki line black */
+  border-bottom: 1px solid #000 !important; /* neeche ki line black */
+}
+
+.table-container table {
+  border-collapse: collapse; /* lines ek saath stick ho jayein */
+}
+
+
+
+
+
+
+
 
 main .table .form-check-label {
   cursor: pointer;
@@ -444,4 +464,16 @@ select.form-select:focus{
   border-color: #006241;      /* halka grey border */
   box-shadow: none;        /* shadow hata diya */
   outline: none;  
+}
+
+
+.table-container {
+  max-height: 563px;   /* jitna height chahiye set karo */
+  overflow-y: auto;
+}
+.table-container thead th {
+  position: sticky;
+  top: 0;
+  background: #D4E9E2;
+  z-index: 2;           /* taki upar rahe */
 }

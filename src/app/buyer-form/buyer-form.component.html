@@ -9,7 +9,7 @@
 
   <form #buyerForm="ngForm" (ngSubmit)="onSubmit()">
     <!-- ========== Section 1: Your Identity ========== -->
-    <h4 class="mt-2 mb-3">Your Identity</h4>
+    <h4 class="mt-4 mb-3">Your Identity</h4>
     <div class="row">
       <div class="col-md-6 mb-3">
         <label class="form-label">Buyer Category</label>
@@ -66,7 +66,7 @@
     <div class="row">
       <div class="col-md-6 mb-3">
         <label class="form-label">Number of Patents Sought</label>
-        <select class="form-select" [(ngModel)]="formData.numPatents" name="numPatents">
+        <select class="form-select" style="width:49%" [(ngModel)]="formData.numPatents" name="numPatents">
           <option value="single">Single</option>
           <option value="small_package">Small Package (2-10)</option>
           <option value="large_portfolio">Large Portfolio (10+)</option>
