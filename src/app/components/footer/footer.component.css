@@ -1,6 +1,9 @@
 /* footer.component.css */
+*{
+  font-family: 'Tenorite', sans-serif;
+}
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Tenorite', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;

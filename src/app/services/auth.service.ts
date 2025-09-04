@@ -200,4 +200,49 @@ export class AuthService {
         localStorage.setItem('token_expiry', expiryDate.toString());
       });
   }
+
+  buyerForm(data: any): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    return this.http.post(
+      `${this.baseUrl}/accounts/buyer_form_submission/`,
+      data,
+      { headers }
+    );
+  }
+
+  sellerForm(data: any): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    return this.http.post(
+      `${this.baseUrl}/accounts/seller_form_submission/`,
+      data,
+      { headers }
+    );
+  }
+
+  getBuyerMatches(buyerId: number): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    return this.http.get(
+      `${this.baseUrl}/accounts/buyers/${buyerId}/matches/`,
+      { headers }
+    );
+  }
+  uploadMainExcel(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.baseUrl}/accounts/upload_excel/`, formData);
+  }
+
+  
 }

@@ -14,6 +14,7 @@ import { BuyerActionsComponent } from './components/buyer-actions/buyer-actions.
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { GoogleCallbackComponent } from './google-callback/google-callback.component';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
+import { BuyerFormComponent } from './buyer-form/buyer-form.component';
 // Define your routes
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'google/callback/', component: GoogleCallbackComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
+  { path: 'buyerform', component: BuyerFormComponent },
 ];
 
 @NgModule({

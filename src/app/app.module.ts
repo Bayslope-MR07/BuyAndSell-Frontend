@@ -48,6 +48,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { BuyerFormComponent } from './buyer-form/buyer-form.component';
+import { TechDomainDialogComponent } from './tech-domain-dialog/tech-domain-dialog.component';
 
 // Define routes
 const routes: Routes = [
@@ -81,6 +82,7 @@ library.add(faTwitter, faFacebook, faInstagram, faLinkedin);
     
     
     GoogleCallbackComponent,
+              // TechDomainDialogComponent,
     
     
     // PieChartComponent,

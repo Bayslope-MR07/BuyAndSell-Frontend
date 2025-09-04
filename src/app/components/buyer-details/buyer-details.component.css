@@ -1,5 +1,8 @@
+/* * {
+  font-family: "Tenorite", sans-serif;
+} */
 body {
-  font-family: 'FortBook', Arial, sans-serif; /* Consistent with previous style */
+  font-family: "Tenorite", sans-serif; /* Consistent with previous style */
   font-weight: 400; /* Normal weight for body text */
   font-size: 16px; /* Standard size for body text */
   background-color: #f8f8f8;
@@ -27,14 +30,14 @@ body {
 }
 
 .title {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 700; /* Bold for main title */
   font-size: 32px; /* Matches the "BSP" title size in the image */
   text-align: center;
 }
 
 .nav a {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight for navigation */
   font-size: 16px; /* Matches navigation link size in the image */
   text-decoration: none;
@@ -43,7 +46,7 @@ body {
 }
 
 .back-link {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Matches link size in the image */
   text-decoration: none;
@@ -57,20 +60,20 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Matches input text size in the image */
 }
 
 .search-box input::placeholder {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font for placeholder */
+  font-family: "Tenorite", sans-serif; /* Updated font for placeholder */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Consistent size */
   color: #6c757d; /* Placeholder color similar to previous style */
 }
 
 .section-title {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 700; /* Bold for section titles */
   font-size: 20px; /* Matches section title size in the image */
   color: #006241; /* Updated to blue from the previous style */
@@ -94,14 +97,14 @@ body {
 }
 
 .grid-item strong {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 600; /* Semi-bold for labels */
   font-size: 16px; /* Matches label size in the image */
   color: black;
 }
 
 .highlight {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 700; /* Bold for highlights */
   font-size: 16px; /* Matches highlighted text size in the image */
   color: #006241; /* Updated to blue from the previous style */
@@ -113,10 +116,10 @@ body {
 }
 
 .more-link {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Matches link size in the image */
-  color: #406FE8; /* Updated to blue from the previous style */
+  color: #406fe8; /* Updated to blue from the previous style */
   cursor: pointer;
 }
 
@@ -126,13 +129,13 @@ body {
   margin-top: 30px;
   padding: 5px;
   background: #f1f1f1;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 14px; /* Matches footer text size in the image */
 }
 
 .footer-links a {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 14px; /* Matches footer link size in the image */
   margin: 0 10px;
@@ -146,23 +149,11 @@ body {
 }
 
 #loading p {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 18px; /* Slightly larger for loading message */
   color: #6c757d; /* Gray color for loading message, matching previous style */
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .container {
   max-width: 100%;
@@ -172,7 +163,7 @@ body {
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
-  font-family: 'FortBook', sans-serif;
+  font-family: "FortBook", sans-serif;
 }
 
 .section-title {
@@ -203,7 +194,8 @@ body {
     font-size: 0.95rem;
   }
 
-  span, div {
+  span,
+  div {
     font-size: 0.9rem;
     color: #333;
   }

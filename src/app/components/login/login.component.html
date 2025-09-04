@@ -34,3 +34,27 @@
     <p>Email: {{ userData.email }}</p>
   </div>
 </div>
+
+
+<!-- Buyer Popup -->
+<!-- <div *ngIf="showBuyerPopup" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Welcome Buyer!</h3>
+    <p>For a better experience, please complete your Buyer Form.</p>
+    <button (click)="goToBuyerForm()">Fill Buyer Form</button>
+    <button (click)="skipBuyerForm()">Skip for now</button>
+  </div>
+</div> -->
+
+
+<!-- Buyer Popup -->
+<div *ngIf="showBuyerPopup" class="modal-overlay">
+  <div class="modal-content">
+    <h3>👋 Welcome Buyer!</h3>
+    <p>For a better experience, please complete your Buyer Form.</p>
+    <div class="button-group">
+      <button class="primary-btn" (click)="goToBuyerForm()">Fill Buyer Form</button>
+      <button class="secondary-btn" (click)="skipBuyerForm()">Skip for now</button>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,9 @@
+*{
+  font-family: 'Tenorite', sans-serif;
+}
 .navbar {
   background-color: transparent !important;
-  font-family: FortBook, Arial, sans-serif;
+  font-family: 'Tenorite', sans-serif;
   font-weight: bold;
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);

@@ -38,6 +38,18 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 })
 export class AdminPanelComponent implements OnInit {
   baseUrl = environment.apiUrl;
+
+  selectedMainFile: File | null = null;
+  selectedEmbeddedFile: File | null = null;
+
+  onMainFileSelected(event: any): void {
+    this.selectedMainFile = event.target.files[0];
+  }
+
+  onEmbeddedFileSelected(event: any): void {
+    this.selectedEmbeddedFile = event.target.files[0];
+  }
+
   sellerData: any[] = [];
   filteredData: any[] = [];
   paginatedData: any[] = [];
@@ -250,13 +262,16 @@ export class AdminPanelComponent implements OnInit {
 
     this.fileUploadService.uploadFile(this.selectedFile).subscribe({
       next: (response: any) => {
-        if (response && response.total_created > 0) {
+        if (response && (response.total_created > 0 || response.message)) {
           this.uploadStatus = 'File uploaded successfully!';
           this.selectedFile = null;
           this.snackBar.open('File uploaded successfully!', 'Close', {
             duration: 3000,
             panelClass: ['success-snack-bar'],
           });
+
+          // ✅ Refresh seller data after upload
+          // this.fetchSellerData();
         } else {
           this.uploadStatus =
             'File not uploaded. Server response: ' +
@@ -273,7 +288,6 @@ export class AdminPanelComponent implements OnInit {
         }
       },
       error: (error) => {
-        // Extract exact error message from backend response
         let errorMessage = 'Unknown error';
         if (error.error && typeof error.error === 'object') {
           errorMessage =
@@ -286,12 +300,12 @@ export class AdminPanelComponent implements OnInit {
         } else if (error.message) {
           errorMessage = error.message;
         }
-        this.uploadStatus = `File not uploaded: ${errorMessage}`; // Prefix with "File not uploaded"
+        this.uploadStatus = `File not uploaded: ${errorMessage}`;
         this.snackBar.open(`File not uploaded: ${errorMessage}`, 'Close', {
           duration: 3000,
           panelClass: ['error-snack-bar'],
         });
-        console.log('Full error response:', error); // Debug
+        console.log('Full error response:', error);
       },
       complete: () => {
         console.log('Upload process completed');
@@ -399,5 +413,26 @@ export class AdminPanelComponent implements OnInit {
 
   viewFeedbackDetails(seller: any) {
     this.selectedFeedback = seller;
+  }
+
+  uploadEmbeddedFile(): void {
+    if (!this.selectedEmbeddedFile) {
+      this.uploadStatus = 'Please select an embedded file (Excel/PDF).';
+      return;
+    }
+
+    this.fileUploadService.uploadEmbedded(this.selectedEmbeddedFile).subscribe({
+      next: (response: any) => {
+        this.uploadStatus = 'Embedded file uploaded successfully!';
+        console.log('Updated seller:', response.seller);
+
+        // ✅ Refresh buyer/seller data table
+        this.fetchSellerData();
+      },
+      error: (err) => {
+        this.uploadStatus = 'Error uploading embedded file.';
+        console.error(err);
+      },
+    });
   }
 }

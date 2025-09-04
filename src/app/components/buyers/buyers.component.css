@@ -1,9 +1,13 @@
 /* Ensure the entire page takes up the full height */
-html, body {
+/* * {
+  font-family: "Tenorite", sans-serif;
+} */
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight for body text */
   font-size: 16px; /* Standard size for body text */
   background-color: #f9f9f9;
@@ -11,8 +15,8 @@ html, body {
 
 /* Navbar */
 .navbar {
-  background: linear-gradient(to right, #BACBF7, #CEDAF9);
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  background: linear-gradient(to right, #bacbf7, #cedaf9);
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 700; /* Bold for navbar consistency */
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);
@@ -42,7 +46,7 @@ html, body {
 /* Link Styling */
 .navbar a {
   text-decoration: none;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight for links */
   font-size: 16px; /* Matches navigation link size */
   color: #007bff;
@@ -61,11 +65,11 @@ html, body {
 
 /* Active State Styling */
 .navbar a.active {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 700; /* Bold for active state */
   font-size: 16px; /* Matches link size */
   color: white;
-  background-color: #007BFF;
+  background-color: #007bff;
   padding: 10px 20px;
   border-radius: 20px;
   transform: scale(1.05);
@@ -146,10 +150,11 @@ html, body {
 }
 
 /* Footer styling */
-footer, app-footer {
+footer,
+app-footer {
   flex-shrink: 0;
   background-color: #e9ecef;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 600; /* Semi-bold for footer */
   font-size: 14px; /* Matches footer text size */
   padding: 10px 0;
@@ -157,8 +162,7 @@ footer, app-footer {
   border-top: 2px solid #ddd;
 }
 
-
-table{
+table {
   overflow-x: scroll;
   overflow: 90%;
 }
@@ -175,22 +179,20 @@ table{
 
 /* Paginator Styling */
 .mat-mdc-paginator {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   padding: 10px 0;
-  font-family: 'FortBook', Arial, sans-serif;
+  font-family: "Tenorite", sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   color: rgb(36, 28, 28);
   margin-top: 10px;
 }
 
-
-
-
 /* Existing styles (unchanged unless specified) */
 .table-color {
-  background-color: #D4E9E2;
+  background-color: #d4e9e2;
   color: #006241;
+  font-size: 10px;
 }
 
 .a-class {
@@ -199,7 +201,7 @@ table{
   border-bottom: 2px solid #000;
   border-top: 2px solid #000;
   padding: 20px;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 700; /* Bold for section titles */
   font-size: 20px; /* Matches section title size */
   text-decoration: none !important;
@@ -217,9 +219,22 @@ table{
 .link-primary {
   text-decoration: none !important;
   color: #007bff;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 500; /* Medium weight for links */
-  font-size: 16px; /* Matches link size */
+  font-size: 12px; /* Matches link size */
+}
+
+.truncate-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* ✅ sirf 4 line tak dikhayega */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  color: black;
+}
+.truncate-text:hover {
+  text-decoration: underline;
 }
 
 .link-primary:hover {
@@ -230,16 +245,16 @@ table{
 .btn-primary {
   background-color: #006241 !important;
   border-color: #006241 !important;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 600; /* Semi-bold for buttons */
   font-size: 16px; /* Matches button text size */
 }
 
 .btn-primary:hover {
-  background-color: #DFF9BA !important;
-  border-color: #DFF9BA !important;
+  background-color: #dff9ba !important;
+  border-color: #dff9ba !important;
   transform: scale(1.05);
-  color:#006241;
+  color: #006241;
 }
 
 .btn-primary:disabled {
@@ -251,7 +266,7 @@ table{
 .btn-danger {
   background-color: #dc3545 !important;
   border-color: #dc3545 !important;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 600; /* Semi-bold for buttons */
   font-size: 16px; /* Matches button text size */
 }
@@ -271,21 +286,20 @@ main .table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-main .table td, main .table th {
+main .table td,
+main .table th {
   border-color: black;
-  padding: 12px;
+  padding: 3px;
   text-align: center;
   vertical-align: middle;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight for table body */
-  font-size: 16px; /* Matches table body text size */
+  font-size: 12px; /* Matches table body text size */
 }
-
-
 
 .table-container table th,
 .table-container table td {
-  border-top: 1px solid #000 !important;   /* upar ki line black */
+  border-top: 1px solid #000 !important; /* upar ki line black */
   border-bottom: 1px solid #000 !important; /* neeche ki line black */
 }
 
@@ -293,16 +307,9 @@ main .table td, main .table th {
   border-collapse: collapse; /* lines ek saath stick ho jayein */
 }
 
-
-
-
-
-
-
-
 main .table .form-check-label {
   cursor: pointer;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 14px; /* Matches label size */
   color: #333;
@@ -316,7 +323,7 @@ main .alert-warning {
 }
 
 main .alert-warning p {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Matches alert text size */
 }
@@ -327,14 +334,14 @@ main .alert-warning button {
 
 /* Sidebar (Filters) Styling */
 aside {
-  background-color: #D4E9E2;
-  border-right: 2px solid #D4E9E2;
+  background-color: #d4e9e2;
+  border-right: 2px solid #d4e9e2;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-top: 3%;
+  margin-top: 2%;
 }
 
 aside h2 {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 600; /* Semi-bold for heading */
   font-size: 24px; /* Matches filter heading size */
   color: black;
@@ -342,22 +349,23 @@ aside h2 {
 }
 
 aside .form-label {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: bolder; /* Medium weight for labels */
   font-size: 15px; /* Matches label size */
   color: #006241;
 }
 
-aside .form-control, aside .form-select {
+aside .form-control,
+aside .form-select {
   border-radius: 5px;
   border-color: green;
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font */
+  font-family: "Tenorite", sans-serif; /* Updated font */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Matches input text size */
 }
 
 aside .form-control::placeholder {
-  font-family: 'FortBook', Arial, sans-serif; /* Updated font for placeholder */
+  font-family: "Tenorite", sans-serif; /* Updated font for placeholder */
   font-weight: 400; /* Normal weight */
   font-size: 16px; /* Consistent size */
   color: #006241; /* Placeholder color matching previous style */
@@ -373,12 +381,14 @@ aside .btn-primary {
     margin-top: 1%;
   }
 
-  .col-md-3, .col-lg-2 {
+  .col-md-3,
+  .col-lg-2 {
     flex: 0 0 100%;
     max-width: 100%;
   }
 
-  .col-md-9, .col-lg-10 {
+  .col-md-9,
+  .col-lg-10 {
     flex: 0 0 100%;
     max-width: 100%;
   }
@@ -389,7 +399,8 @@ aside .btn-primary {
     font-size: 16px; /* Adjusted for mobile */
   }
 
-  main .table td, main .table th {
+  main .table td,
+  main .table th {
     padding: 8px;
     font-size: 14px; /* Smaller font size for mobile */
   }
@@ -402,7 +413,8 @@ aside .btn-primary {
     font-size: 14px; /* Adjusted for mobile */
   }
 
-  aside .form-control, aside .form-select {
+  aside .form-control,
+  aside .form-select {
     font-size: 14px; /* Adjusted for mobile */
   }
 
@@ -423,11 +435,11 @@ header {
 
 .mat-elevation-z8 {
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0px 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-th, td {
+th,
+td {
   padding: 12px;
 }
 
@@ -453,27 +465,25 @@ th, td {
   color: #212529;
 }
 
-
 input.form-control:focus {
-  border-color: #006241;      /* halka grey border */
-  box-shadow: none;        /* shadow hata diya */
-  outline: none;           /* outline hata diya */
+  border-color: #006241; /* halka grey border */
+  box-shadow: none; /* shadow hata diya */
+  outline: none; /* outline hata diya */
 }
 
-select.form-select:focus{
-  border-color: #006241;      /* halka grey border */
-  box-shadow: none;        /* shadow hata diya */
-  outline: none;  
+select.form-select:focus {
+  border-color: #006241; /* halka grey border */
+  box-shadow: none; /* shadow hata diya */
+  outline: none;
 }
-
 
 .table-container {
-  max-height: 563px;   /* jitna height chahiye set karo */
+  max-height: 563px; /* jitna height chahiye set karo */
   overflow-y: auto;
 }
 .table-container thead th {
   position: sticky;
   top: 0;
-  background: #D4E9E2;
-  z-index: 2;           /* taki upar rahe */
+  background: #d4e9e2;
+  z-index: 2; /* taki upar rahe */
 }

@@ -1,24 +1,27 @@
 /* Button Styling */
+*{
+  font-family: 'Tenorite', sans-serif;
+}
 .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-family: 'FortBook', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 14px;
-    color: white;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-    transform: scale(1.05);
-  }
-  
-  .btn-danger:active {
-    background-color: #bd2130;
-    transform: scale(0.98); /* Slight shrink on click */
-  }
+  background-color: #dc3545;
+  border-color: #dc3545;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: "Tenorite", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+  transform: scale(1.05);
+}
+
+.btn-danger:active {
+  background-color: #bd2130;
+  transform: scale(0.98); /* Slight shrink on click */
+}

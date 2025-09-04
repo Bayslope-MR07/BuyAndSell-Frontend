@@ -304,15 +304,14 @@
     <h2 class="section-title">Analysis</h2>
     <div class="grid-container" *ngIf="patentDetails; else loading">
 
-      <div class="grid-item" *ngIf="patentDetails.claim_charts">
-      <strong> Charts</strong> <br />
-      <a [href]="patentDetails.claim_charts" target="_blank" class="link-danger">
-      {{ patentDetails.claim_charts.split('/').pop() }}
-      claim Charts
-      <i class="fa-solid fa-file-pdf"></i>
-      
-    </a>
+<div class="grid-item" *ngIf="patentDetails.claim_charts">
+  <strong>Charts</strong><br />
+  <a [href]="patentDetails.claim_charts" target="_blank" class="link-danger">
+    
+    <i class="fa-solid fa-file-pdf"></i>
+  </a>
 </div>
+
 
       <div class="grid-item" *ngIf="patentDetails.analysis_sheet">
   <strong>Analysis Sheet</strong> <br />
@@ -320,7 +319,7 @@
      target="_blank" 
      class="link-success"
      >
-    {{ patentDetails.analysis_sheet.split('/').pop() }}
+    
     <i class="fa-solid fa-file-excel"></i>
   </a>
       </div>
@@ -354,7 +353,7 @@
 
             <div class="grid-item">
         <strong>Parent Patent Number</strong> <br />
-        <span class="highlight" style="color: #007bff">{{ patentDetails.patent_number }}</span>
+        <span class="highlight" style="color: #007bff">{{ patentDetails.parent_patent_number }}</span>
       </div>
 
             <div class="grid-item">

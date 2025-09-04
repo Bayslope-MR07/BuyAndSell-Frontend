@@ -11,10 +11,14 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
+import { BuyersComponent } from '../components/buyers/buyers.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-buyer-form',
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     FormsModule,
     FooterComponent,
@@ -28,6 +32,8 @@ import { environment } from '../../environments/environment';
 })
 export class BuyerFormComponent {
   buyerForm: FormGroup;
+  matches: any[] = [];
+
   formData: any = {};
   baseUrl: any = environment.apiUrl;
   message: string = '';
@@ -69,51 +75,53 @@ export class BuyerFormComponent {
     private toastr: ToastrService,
     private authService: AuthService
   ) {
-    this.buyerForm = this.fb.group({
-      companyName: ['', Validators.required],
-      contactPerson: ['', Validators.required],
-      position: [''],
-      whoAreYou: ['', Validators.required],
+this.buyerForm = this.fb.group({
+  whoAreYou: ['', Validators.required],
+  purpose: ['', Validators.required],
+  desiredPatentTypes: [''],
 
-      purpose: ['', Validators.required],
-      desiredPatentTypes: [[]],
+  techFields: [''],
+  competitors: [''],
 
-      techFields: [''],
-      competitors: [''],
+  portfolioSize: [''],
+  jurisdictions: [''],
 
-      portfolioSize: [''],
-      jurisdictions: [[]],
+  budget: [''],
+  dealStructure: [''],
 
-      budget: [''],
-      dealStructure: [''],
+  litigationRisk: ['case-by-case'],
+  encumbranceTolerance: [''],
 
-      litigationRisk: ['case-by-case'],
-      encumbranceTolerance: [''],
+  timeline: [''],
+  acquisitionInterest: [''],
 
-      timeline: [''],
-      acquisitionInterest: [''],
+  ndaRequired: [''],
+  disclosureRestrictions: [''],
+  directContactAck: [false],
+});
 
-      ndaRequired: [false],
-      disclosureRestrictions: [''],
-    });
   }
 
   onSubmit() {
     const formDataToSend = new FormData();
 
-    Object.entries(this.formData).forEach(([key, value]) => {
-      if (key === 'file' && this.formData.file) {
-        formDataToSend.append(
-          'file',
-          this.formData.file,
-          this.formData.file.name
-        );
-      } else {
-        formDataToSend.append(key, value as string);
-      }
-    });
+    // Use reactive form values
+Object.entries(this.buyerForm.value).forEach(([key, value]) => {
+  if (value === null || value === undefined) {
+    formDataToSend.append(key, '');
+  } else if (Array.isArray(value) || typeof value === 'object') {
+    formDataToSend.append(key, JSON.stringify(value)); // ✅ always string
+  } else {
+    formDataToSend.append(key, value.toString()); // ✅ ensure string
+  }
+});
 
-    console.log('Buyer Form Data to Send:', formDataToSend);
+
+
+    // File upload
+    if (this.selectedFile) {
+      formDataToSend.append('file', this.selectedFile, this.selectedFile.name);
+    }
 
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
@@ -127,24 +135,13 @@ export class BuyerFormComponent {
       .subscribe({
         next: (response: any) => {
           this.toastr.success('Buyer Data submitted successfully!');
-          if (response.status === 201) {
-            this.message = 'Data submitted successfully!';
-            this.router.navigateByUrl('user-buyer-data');
-          }
           console.log('Response:', response);
-          if (response === 201 || 201) {
-            this.router.navigateByUrl('user-buyer-data');
-          } else {
-            this.router.navigateByUrl('#');
-          }
+          this.router.navigate(['/buyer'])
         },
         error: (error) => {
-          this.toastr.error(error?.message);
-          this.message = 'Error submitting buyer data!';
-          console.error('Error:', error);
-        },
-        complete: () => {
-          console.log('Buyer request completed');
+          this.toastr.error(
+            error?.error?.detail || 'Error submitting buyer data!'
+          );
         },
       });
   }

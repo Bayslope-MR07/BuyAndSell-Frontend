@@ -14,6 +14,9 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  showBuyerPopup: boolean = false;
+  showSellerPopup: boolean = false;
+
   formData = {
     email: '',
     password: '',
@@ -74,6 +77,7 @@ export class LoginComponent implements OnInit {
           email: response.email,
           user_type: response.user_type,
           has_filled_seller_form: response.has_filled_seller_form || false,
+          has_filled_buyer_form: response.has_filled_buyer_form || false,
         };
 
         this.toastr.success('Login Successful!', 'Success');
@@ -89,7 +93,18 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/seller']);
             }
           } else if (userType === 'Buyer') {
-            this.router.navigate(['/buyer']);
+            // this.router.navigate(['/buyer']);
+            if (!this.userData.has_filled_buyer_form) {
+              // 👇 Buyer form fill nahi kiya → popup dikhao
+              // this.showBuyerPopup = true;
+               if (localStorage.getItem('buyerFormSkipped') === 'true') {
+      this.router.navigate(['/buyer']);
+    } else {
+      this.showBuyerPopup = true; // show popup only if not skipped
+    }
+            } else {
+              this.router.navigate(['/buyer']);
+            }
           } else {
             this.router.navigate(['/buyer']);
           }
@@ -108,5 +123,15 @@ export class LoginComponent implements OnInit {
         this.message = 'Invalid email or password.';
       },
     });
+  }
+  goToBuyerForm() {
+    this.showBuyerPopup = false;
+    this.router.navigate(['/buyerform']);
+  }
+
+  skipBuyerForm() {
+    this.showBuyerPopup = false;
+    localStorage.setItem('buyerFormSkipped', 'true'); // 👈 save skip status
+    this.router.navigate(['/buyer']); // Normal buyer dashboard
   }
 }

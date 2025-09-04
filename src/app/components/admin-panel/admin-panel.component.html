@@ -255,11 +255,24 @@
           <div class="d-flex flex-column align-items-center">
             <input type="file" accept=".xlsx, .xls" (change)="onFileSelected($event)"
               class="form-control mb-3" id="fileInput" />
+            
             <button (click)="uploadFile()" class="btn btn-success mb-2">Upload</button>
-<a href="assets/Bay_Portfolio analysis_JLondon.xlsx" download="sample.xlsx" class="btn btn-info mb-2">
+
+            
+
+        <a href="assets/Bay_Portfolio analysis_JLondon.xlsx" download="sample.xlsx" class="btn btn-info mb-2">
     Download Sample
 </a>
 <!-- <button (click)="downloadFile('Dummy_2.xlsx')">Download Dummy</button> -->
+
+            <p *ngIf="uploadStatus" class="upload-status text-muted">{{ uploadStatus }}</p>
+          </div>
+<h6 class="h4 mb-3 text-success">Upload Embedded Files </h6>
+                    <div class="d-flex flex-column align-items-center">
+            <input type="file" accept=".xlsx, .xls,.pdf" (change)="onEmbeddedFileSelected($event)"
+              class="form-control mb-3" id="fileInput" />
+            
+            <button (click)="uploadEmbeddedFile()" class="btn btn-success mb-2">Upload Embedded</button>
 
             <p *ngIf="uploadStatus" class="upload-status text-muted">{{ uploadStatus }}</p>
           </div>
