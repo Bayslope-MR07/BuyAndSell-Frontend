@@ -56,7 +56,7 @@
   
           <div class="mb-3">
             <label class="form-label">Patent Number</label>
-            <input type="text" class="form-control" [(ngModel)]="filters.patent_number" (input)="applyFilters()" placeholder="Search...">
+            <input type="text" class="form-control" [(ngModel)]="filters.parent_patent_number" (input)="applyFilters()" placeholder="Search...">
           </div>
           <div class="mb-3">
             <label class="form-label">Tech Domain</label>
@@ -94,7 +94,7 @@
               <th>Industry</th>
               <th style="width: 80px;text-align: center;">Tech Domain</th>
               <th>No. of Patents</th>
-              <th>No. of Patent families</th>
+              <th style="width: 79px;text-align: center;">No. of Patent families</th>
               <!-- <th>Entity Status</th> -->
               <th style="width: 80px;text-align: center;">Priority Date</th>
               <th style="width: 80px;text-align: center;">Expiry</th>
@@ -157,7 +157,7 @@
 
               <td>{{ buyer.bay_overall_rating }}</td>
               <!-- <td>{{ buyer.acquisition_status }}</td> -->
-                             <td>
+                      <td>
                         <ng-container *ngIf="!submissionStatus.get(buyer.id); else resubmitTemplate">
                           <div class="d-flex justify-content-center gap-2">
                             <div class="form-check">
@@ -290,16 +290,17 @@
           <thead class="table-color">
             <tr>
               <th>Sr. No.</th>
-              <th>Patent No.</th>
-              <th>Tech Domain</th>
+              <th>Portfolio Code</th>
+              <th style="width: 80px;text-align: center;">Tech Domain</th>
               <th>Number of Patents</th>
               <th>Number of Patent families</th>
               <th>Expiry</th>
-              <th>Claim Charts</th>
+              <!-- <th>Claim Charts</th> -->
               <th>Analysis Sheet</th>
               <th>Status of Acquisition</th>
-              <th>Buying Options</th>
               <th>Bay Rating</th>
+              <th>Buying Options</th>
+              
             </tr>
           </thead>
           <tbody class="table-group-divider">
@@ -307,31 +308,31 @@
               <td>{{ i + 1 }}</td>
               <td>
                 <a [href]="'/buyer-details/' + buyer.id" target="_blank" class="link-primary">
-                  {{ buyer.patent_number }}
+                  {{ buyer.portfolio_code }}
                 </a>
               </td>
-              <td>{{ buyer.tech_domain }}</td>
+              <!-- <td>{{ buyer.tech_domain }}</td> -->
+               <td style="width: 80px;text-align: center;">
+        <p class="truncate-text" (click)="openDialog(buyer.tech_domain)">
+          {{ buyer.tech_domain }}
+          
+        </p>
+      </td>
               <td>{{ buyer.number_of_patents }}</td>
               <td>{{ buyer.number_of_patent_families }}</td>
               <td>{{ buyer.expiry }}</td>
-              <td>
-                <a *ngIf="buyer.claim_charts" 
-                   [href]="buyer.claim_charts" 
-                   target="_blank" 
-                   class="link-dark"
-                   (click)="logUrl(buyer.claim_charts)">
-                  📄 pdf
-                </a>
-              </td>
+
               <td>
                 <a *ngIf="buyer.analysis_sheet" 
                    [href]="buyer.analysis_sheet" 
                    target="_blank" 
-                   class="link-dark"
+                   class="link-success"
                    (click)="logUrl(buyer.analysis_sheet)">
-                  📄 Excel Sheet
+                   <i class="fa-solid fa-file-excel"></i>
+                  
                 </a>
               </td>
+              <td>{{ buyer.bay_overall_rating }}</td>
               <td>{{ buyer.acquisition_status }}</td>
                              <td>
                         <ng-container *ngIf="!submissionStatus.get(buyer.id); else resubmitTemplate">
@@ -364,7 +365,7 @@
                           </div>
                         </ng-template>
                       </td>
-              <td>{{ buyer.bay_overall_rating }}</td>
+              
             </tr>
           </tbody>
         </table>
@@ -382,7 +383,7 @@
                   <thead class="table-color">
                     <tr>
                       <th>Sr. No.</th>
-                      <th>Patent No.</th>
+                      <th>Portfolio Code</th>
                       <th>Tech Domain</th>
                       <th>Number of Patents</th>
                       <th>Number of Patent families</th>
@@ -398,7 +399,7 @@
                   <tbody class="table-group-divider">
                     <tr *ngFor="let buyer of paginatedData; let i = index">
                       <td>{{ (pageIndex * pageSize) + i + 1 }}</td>
-                      <td><a [href]="'/buyer-details/' + buyer.id" target="_blank" class="link-primary">{{ buyer.patent_number }}</a></td>
+                      <td><a [href]="'/buyer-details/' + buyer.id" target="_blank" class="link-primary">{{ buyer.portfolio_code }}</a></td>
                       <td>{{ buyer.tech_domain }}</td>
                       <td>{{ buyer.number_of_patents }}</td>
                       <td>{{ buyer.number_of_patent_families }}</td>

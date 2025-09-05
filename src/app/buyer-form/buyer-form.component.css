@@ -363,3 +363,25 @@
      }
    }
    
+
+
+.small-checkbox {
+  width: 16px;
+  height: 20px;
+  cursor: pointer;
+}
+.small-checkbox {
+  appearance: auto !important;   /* default checkbox UI restore karega */
+  -webkit-appearance: auto !important;
+  -moz-appearance: auto !important;
+  accent-color: black;   /* tick ka color black hoga */
+}
+
+
+
+.form-check {
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 2.5em;
+  margin-bottom: .125rem;
+}

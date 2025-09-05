@@ -81,14 +81,14 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
       bay_overall_rating: '',
       enforceability: '',
       keywords: '',
-      patent_number: '',
+      parent_patent_number: '',
       company_name: '',
       target: '',
       expiry: '',
     };
 
     selectedActions: Map<number, string> = new Map();
-    submissionStatus: Map<number, string> = new Map();
+    submissionStatus: Map<number, boolean> = new Map();
     loader: boolean = false;
     selectedTabIndex: any = 0;
     pageSize = 10;
@@ -214,7 +214,6 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
           );
           this.exclusiveTotalCount = this.exclusivePatents.length;
           this.updateExclusivePaginatedData();
-
 
           // --- NEW: set submissionStatus map from backend user_feedback if present
           this.submissionStatus.clear();
@@ -423,7 +422,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         acquisition_status: 'acquisition_status',
         bay_overall_rating: 'bay_overall_rating',
         target: 'target',
-        patent_number: 'patent_number',
+        parent_patent_number: 'parent_patent_number',
         company_name: 'company_name',
         important: 'important',
         enforceability: 'enforceability',
@@ -479,9 +478,13 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
       this.exclusivePatents = this.filteredData.filter(
         (b) => b.exclusive === true
       );
-
+      // ✅ Reset paginator + refresh exclusivePaginatedData
+      this.exclusiveTotalCount = this.exclusivePatents.length;
+      this.exclusivePageIndex = 0; // first page reset
+      this.updateExclusivePaginatedData();
       // Agar tum table ke liye dataSource use kar rahe ho
-      this.dataSource.data = this.exclusivePatents;
+      // this.dataSource.data = this.exclusivePatents;
+      // this.dataSource.data = this.filteredData;
     }
 
     passesFilters(buyer: any): boolean {
@@ -503,7 +506,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         bay_overall_rating: '', // added here
         enforceability: '',
         keywords: '',
-        patent_number: '',
+        parent_patent_number: '',
         company_name: '',
         target: '',
         expiry: '',
@@ -521,7 +524,8 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         endIndex
       );
     }
-    onExclusivePageChange(event: any) {
+
+    onExclusivePageChange(event: PageEvent) {
       this.exclusivePageIndex = event.pageIndex;
       this.exclusivePageSize = event.pageSize;
       this.updateExclusivePaginatedData();
@@ -541,6 +545,8 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         fileUrl
       )}&embedded=true`;
     }
+    shortlistedRows: any[] = [];
+    // shortlistedBuyers: any[] = [];
 
     confirmSubmit(patentId: number) {
       const action = this.selectedActions.get(patentId);
@@ -548,12 +554,31 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         alert('Please select an action before submitting.');
         return;
       }
+
       if (
         confirm(
           `Are you sure you want to submit "${action}" for patent ID ${patentId}?`
         )
       ) {
         this.submitAction(patentId, action);
+
+        if (action === 'Chase') {
+          const patent = this.exclusivePatents.find(
+            (b: any) => b.id === patentId
+          );
+          if (
+            patent &&
+            !this.shortlistedPatents.some((p) => p.id === patentId)
+          ) {
+            this.shortlistedPatents = [...this.shortlistedPatents, patent]; // ✅ Angular detect karega
+            console.log(
+              '✅ Added to shortlistedPatents:',
+              this.shortlistedPatents
+            );
+          }
+        }
+
+        this.submissionStatus.set(patentId, true);
       }
     }
 
@@ -585,45 +610,29 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
     //     );
     // }
 
-submitAction(patentId: number, action: string) {
-  const token = localStorage.getItem('access_token');
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
+    submitAction(patentId: number, action: string) {
+      this.http
+        .post(`${environment.apiUrl}/buyerChoice/`, {
+          id: patentId,
+          action: action,
+        })
+        .subscribe((res: any) => {
+          console.log('Submit response:', res);
 
-  const payload = { id: patentId, action: action };
+          if (action === 'Chase') {
+            const patent = res.patent; // ✅ backend se full object aa raha hai
+            if (
+              patent &&
+              !this.shortlistedRows.some((p) => p.id === patent.id)
+            ) {
+              this.shortlistedRows.push(patent);
+            }
+          }
 
-  this.http.post(`${this.baseUrl}/buyerChoice/`, payload, { headers })
-    .subscribe(
-      (response) => {
-        const updatedPatent = this.buyerData.find((b) => b.id === patentId);
-        if (updatedPatent) {
-          updatedPatent.user_feedback = { action: action };
-          this.submissionStatus.set(patentId, action);
-        }
-
-        // ✅ shortlist me add/update karo har action pe
-        const alreadyShortlisted = this.shortlistedPatents.find(p => p.id === patentId);
-        if (alreadyShortlisted) {
-          alreadyShortlisted.user_feedback = { action: action };
-        } else {
-          this.shortlistedPatents.push(updatedPatent);
-        }
-
-        // Refresh UI
-        if (this.selectedTabIndex === 3) {
-          this.paginatedShortlisted = this.shortlistedPatents.slice(0, this.pageSize);
-        }
-      },
-      (error) => {
-        console.error(
-          `Error submitting action "${action}" for patent ID ${patentId}:`,
-          error
-        );
-      }
-    );
-}
-
+          // UI state update
+          this.submissionStatus.set(patentId, true);
+        });
+    }
 
     // enableResubmit(patentId: number) {
     //   this.submissionStatus.delete(patentId);
