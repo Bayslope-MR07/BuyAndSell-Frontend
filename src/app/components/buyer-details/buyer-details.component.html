@@ -304,13 +304,34 @@
     <h2 class="section-title">Analysis</h2>
     <div class="grid-container" *ngIf="patentDetails; else loading">
 
-<div class="grid-item" *ngIf="patentDetails.claim_charts">
+<!-- <div class="grid-item" *ngIf="patentDetails.claim_charts">
   <strong>Charts</strong><br />
   <a [href]="patentDetails.claim_charts" target="_blank" class="link-danger">
     
     <i class="fa-solid fa-file-pdf"></i>
   </a>
+</div> -->
+
+<div class="grid-item" *ngIf="patentDetails.claim_charts || patentDetails.word_docs">
+  <strong>Charts & Docs</strong><br />
+
+  <!-- Claim Charts (PDF) -->
+  <a *ngIf="patentDetails.claim_charts"
+     [href]="patentDetails.claim_charts"
+     target="_blank"
+     class="link-danger me-2">
+    <i class="fa-solid fa-file-pdf"></i>
+  </a>
+
+  <!-- Word Docs -->
+  <a *ngIf="patentDetails.word_docs"
+     [href]="patentDetails.word_docs"
+     target="_blank"
+     class="link-primary">
+    <i class="fa-solid fa-file-word"></i>
+  </a>
 </div>
+
 
 
       <div class="grid-item" *ngIf="patentDetails.analysis_sheet">
@@ -409,7 +430,7 @@
       </div>
       <div class="grid-item">
         <strong>Upcoming Fees</strong> <br />
-        <span class="highlight">{{ patentDetails.upcoming_fees }}</span>
+        <span class="highlight">{{ patentDetails.upcoming_fees_uspto }}</span>
       </div>
 
 

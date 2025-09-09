@@ -83,6 +83,7 @@ export class BuyerDetailsComponent implements OnInit {
       Feedback: this.userFeedback?.action,
       'Bay Rating': this.patentDetails.bay_overall_rating,
       'Market Relevance': this.patentDetails.market_relevance,
+      'Relevant Companies': this.patentDetails.relevant_companies,
       Enforceability: this.patentDetails.enforceability,
       Targets: this.patentDetails.target,
       'Entity Status': this.patentDetails.entity_status,
