@@ -43,6 +43,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
     styleUrls: ['./buyers.component.css'],
   })
   export class BuyersComponent implements OnInit {
+    globalSearch: string = ''; // 👈 new property
     shortlistedPatents: any[] = [];
     paginatedShortlisted: any[] = [];
 
@@ -209,6 +210,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
           this.exclusivePatents = this.buyerData.filter(
             (b) => b.exclusive === true
           );
+          this.originalExclusive = [...this.exclusivePatents];
           this.nonExclusivePatents = this.buyerData.filter(
             (b) => b.exclusive === false
           );
@@ -695,6 +697,33 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
             console.error('Error fetching best matches:', error);
           }
         );
+    }
+    originalExclusive: any[] = [];
+    applyGlobalSearch(): void {
+      const searchValue = this.globalSearch.trim().toLowerCase();
+
+      const matches = (patent: any) => {
+        const techDomain = (patent.tech_domain || '').toLowerCase();
+        const keywords = (patent.keywords || '').toLowerCase();
+        return (
+          techDomain.includes(searchValue) || keywords.includes(searchValue)
+        );
+      };
+
+      if (!searchValue) {
+        this.exclusivePatents = [...this.originalExclusive];
+      } else {
+        this.exclusivePatents = this.originalExclusive.filter(matches);
+      }
+
+      this.exclusivePageIndex = 0;
+      this.updateExclusivePaginatedData();
+    }
+    clearSearch(): void {
+      this.globalSearch = '';
+      this.exclusivePatents = [...this.originalExclusive];
+      this.exclusivePageIndex = 0;
+      this.updateExclusivePaginatedData();
     }
   }
   

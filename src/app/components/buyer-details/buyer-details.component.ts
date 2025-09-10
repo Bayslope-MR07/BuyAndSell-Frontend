@@ -6,9 +6,11 @@ import { CommonModule } from '@angular/common';
 import { ProfileHeaderComponent } from '../profile-header/profile-header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatIcon } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-buyer-details',
@@ -19,12 +21,20 @@ import * as FileSaver from 'file-saver';
     ProfileHeaderComponent,
     FooterComponent,
     MatProgressSpinnerModule,
+    
+    MatTabsModule,
+    MatIconModule,
+    MatButtonModule,
+    FooterComponent
   ],
   templateUrl: './buyer-details.component.html',
   styleUrls: ['./buyer-details.component.css'],
 })
 export class BuyerDetailsComponent implements OnInit {
   patentId: number | undefined;
+  showFullAbstract = false;
+  showFullClaim = false;
+  showFullConcepts = false;
   patentDetails: any;
   userFeedback: any;
 
@@ -40,8 +50,6 @@ export class BuyerDetailsComponent implements OnInit {
       this.fetchPatentDetails();
     });
   }
-
-
 
   fetchPatentDetails() {
     const token = localStorage.getItem('access_token'); // Retrieve token from local storage
@@ -71,7 +79,6 @@ export class BuyerDetailsComponent implements OnInit {
     this.router.navigate(['/buyer']);
   }
 
-  
   downloadAsExcel(): void {
     if (!this.patentDetails) return;
 

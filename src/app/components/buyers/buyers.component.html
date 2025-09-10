@@ -3,8 +3,8 @@
     <div class="container-fluid content-wrapper">
       <div class="row h-100 class-m">
         <!-- Sidebar (Filters) -->
-         
-        <aside class="col-md-3 col-lg-2  p-3 border-end">
+
+        <aside class="col-md-3 col-lg-2  p-3 border-end filters-sidebar">
           <div class="text-primary1">
             <h2 class="mb-4">Filters</h2>
           </div>
@@ -12,6 +12,37 @@
             <label class="form-label">Select by Category:</label>
             <input type="text" class="form-control" [(ngModel)]="filters.primary_technology" (input)="applyFilters()" placeholder="Search...">
           </div> -->
+
+                    <div class="mb-3">
+            <label class="form-label">Tech Domain</label>
+            <input type="text" class="form-control" [(ngModel)]="filters.tech_domain" (input)="applyFilters()" placeholder="Search...">
+          </div>
+                    <div class="mb-3">
+            <label class="form-label">Tech Keywords</label>
+            <input type="text" class="form-control" [(ngModel)]="filters.keywords" (input)="applyFilters()" placeholder="Search...">
+          </div>
+
+           <div class="mb-3">
+            <label class="form-label">Industry</label>
+            <input type="text" class="form-control" [(ngModel)]="filters.industry" (input)="applyFilters()" placeholder="Search...">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Relevant Companies</label>
+            <input type="text" class="form-control" [(ngModel)]="filters.relevant_companies" (input)="applyFilters()" placeholder="Search...">
+          </div>
+
+                    <div class="mb-3">
+            <label class="form-label">Bay Rating</label>
+            <!-- <select class="form-select" [(ngModel)]="filters.bay_rating" (change)="applyFilters()"> -->
+              <select class="form-select" [(ngModel)]="filters.bay_overall_rating" (change)="applyFilters()">
+
+              <option value="">Any</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
   
           <div class="mb-3">
             <label class="form-label">Entity Status</label>
@@ -32,54 +63,40 @@
             </select>
           </div>
   
-          <div class="mb-3">
-            <label class="form-label">Bay Rating</label>
-            <!-- <select class="form-select" [(ngModel)]="filters.bay_rating" (change)="applyFilters()"> -->
-              <select class="form-select" [(ngModel)]="filters.bay_overall_rating" (change)="applyFilters()">
 
-              <option value="">Any</option>
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
-            </select>
-          </div>
   
-          <div class="mb-3">
-            <label class="form-label">Relevant Companies</label>
-            <input type="text" class="form-control" [(ngModel)]="filters.relevant_companies" (input)="applyFilters()" placeholder="Search...">
-          </div>
+          
 
-                    <div class="mb-3">
-            <label class="form-label">Industry</label>
-            <input type="text" class="form-control" [(ngModel)]="filters.industry" (input)="applyFilters()" placeholder="Search...">
-          </div>
-  
-          <div class="mb-3">
-            <label class="form-label">Patent Number</label>
-            <input type="text" class="form-control" [(ngModel)]="filters.parent_patent_number" (input)="applyFilters()" placeholder="Search...">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Tech Domain</label>
-            <input type="text" class="form-control" [(ngModel)]="filters.tech_domain" (input)="applyFilters()" placeholder="Search...">
-          </div>
-                    <div class="mb-3">
-            <label class="form-label">Tech Keywords</label>
-            <input type="text" class="form-control" [(ngModel)]="filters.keywords" (input)="applyFilters()" placeholder="Search...">
-          </div>
+                   
+
   
           <button class="btn btn-primary w-100 mt-3" (click)="clearFilters()">Clear Filters</button>
         </aside>
   
         <!-- Main Content (Table) -->
-        <main class="col-md-9 col-lg-10 p-3" style="margin-top:13px">
+        <main class="col-md-9 col-lg-10 p-3" >
           <div class="w-100 d-flex justify-content-end">
           <button type="button" style="height: 30px; width: 100px; " class="btn btn-outline-success p-1"(click)="gotobuyerform()" >Buyer Form</button>
           </div>
+          <!-- ✅ Global Search Box (sabhi tabs ke liye) -->
+<div class="d-flex justify-content-center mb-3 "style="width:7    0% ; ">
+  <input type="text"
+         class="form-control w-50"
+         [(ngModel)]="globalSearch"
+         (input)="applyGlobalSearch()"
+         placeholder="Search patents by Tech Domain or Keywords...">
+         <!-- <span *ngIf="globalSearch" class="clear-btn" (click)="clearSearch()">✕</span> -->
+         <button 
+    *ngIf="globalSearch" 
+    class="clear-btn" 
+    (click)="clearSearch()">✕</button>
+</div>
           <!-- <div class="d-flex justify-content-center gap-5 align-items-center a-class mb-4">
             <a class="nav-link text-" style="cursor: pointer;color: #006241;" (click)="showDetails()">Details</a>
             <a class="nav-link text-green" style="cursor: pointer;color: #006241;" (click)="analytics()">Analytics</a>
           </div> -->
           <mat-tab-group class="mt-2" [selectedIndex]="selectedTabIndex" (selectedTabChange)="changeTab($event)" mat-stretch-tabs="false" mat-align-tabs="center">
+        
 <!-- <mat-tab label="All Patents"> -->
   <!-- <mat-tab-group> -->
     <!-- ✅ Exclusive Patents Tab -->
@@ -120,8 +137,8 @@
               <td>{{ buyer.industry }}</td>
               <!-- <td>{{ buyer.tech_domain }}</td> -->
                <!-- ✅ Tech Domain truncated -->
-      <td style="width: 80px;text-align: center;">
-        <p class="truncate-text" (click)="openDialog(buyer.tech_domain)">
+      <td style="width: 160px;text-align: center;">
+        <p >
           {{ buyer.tech_domain }}
           
         </p>
@@ -162,16 +179,16 @@
                           <div class="d-flex justify-content-center gap-2">
                             <div class="form-check">
                               <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Chase')">
-                              <label class="form-check-label">Chase</label>
+                              <label class="form-check-label">Persue</label>
                             </div>
                             <div class="form-check">
                               <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Skip')">
-                              <label class="form-check-label">Skip</label>
+                              <label class="form-check-label">Pass</label>
                             </div>
-                            <div class="form-check">
+                            <!-- <div class="form-check">
                               <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Delay')">
                               <label class="form-check-label">Delay</label>
-                            </div>
+                            </div> -->
                           </div>
                           <div class="text-center ">
                             <button type="button" class="btn btn-primary" [disabled]="!selectedActions.get(buyer.id)" (click)="confirmSubmit(buyer.id)">

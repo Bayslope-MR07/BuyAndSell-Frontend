@@ -185,7 +185,7 @@ table {
   font-family: "Tenorite", sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   color: rgb(36, 28, 28);
-  margin-top: 10px;
+  margin-top: -15px;
 }
 
 /* Existing styles (unchanged unless specified) */
@@ -337,7 +337,7 @@ aside {
   background-color: #d4e9e2;
   border-right: 2px solid #d4e9e2;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-top: 2%;
+  /* margin-top: 2%; */
 }
 
 aside h2 {
@@ -478,7 +478,7 @@ select.form-select:focus {
 }
 
 .table-container {
-  max-height: 563px; /* jitna height chahiye set karo */
+  max-height: 416px; /* jitna height chahiye set karo */
   overflow-y: auto;
 }
 .table-container thead th {
@@ -486,4 +486,47 @@ select.form-select:focus {
   top: 0;
   background: #d4e9e2;
   z-index: 2; /* taki upar rahe */
+}
+
+.search-box {
+  position: relative;
+  width: 70%; /* ya w-50 jaisa tum use kar rahe ho */
+  margin: 0 auto; /* center me rakhne ke liye */
+}
+
+.search-box input {
+  /* width: 100%; */
+  /* padding-right: 30px; ❌ ke liye space */
+  width: 100%;
+  padding-right: 30px; /* ❌ ke liye jagah */
+  border: 2px solid #000;   /* border pure black */
+  border-radius: 4px;       /* thoda curve (chaaho to 0 bhi kar sakte ho) */
+  outline: none;   
+}
+.search-box input:focus {
+  border: 2px solid #000;   /* focus hone ke baad bhi black hi rahe */
+  box-shadow: none;         /* extra glow remove */
+}
+
+.search-box .clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  color: #888;
+}
+
+.search-box .clear-btn:hover {
+  color: #000;
+}
+
+.filters-sidebar {
+  height: 100vh;      /* full screen height */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
