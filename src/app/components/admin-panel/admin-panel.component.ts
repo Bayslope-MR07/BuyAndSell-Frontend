@@ -341,8 +341,11 @@ export class AdminPanelComponent implements OnInit {
       .subscribe(
         (response) => {
           this.message = 'Seller data verified successfully!';
-          if (this.selectedTabIndex === 1) {
+          if (this.selectedTabIndex === 2) {
             this.fetchSellerDataUnverified();
+            this.fetchSellerDataVerified(); 
+          } else if (this.selectedTabIndex === 1) {
+            this.fetchSellerDataVerified(); // agar already verified tab me ho
           } else {
             this.fetchSellerData(); // Refresh data
           }

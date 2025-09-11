@@ -31,10 +31,10 @@ export class HomeComponent implements OnInit {
   }
 
   naviagateToBuy() {
-    this.router.navigateByUrl('buyer');
+    this.router.navigateByUrl('/login?user_type=Buyer');
   }
   naviagateToShell() {
-    this.router.navigateByUrl('user-seller-data');
+    this.router.navigateByUrl('/login?user_type=Seller');
   }
   contactUs() {
     this.router.navigateByUrl('contact-us');

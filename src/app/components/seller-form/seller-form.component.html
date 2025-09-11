@@ -151,9 +151,9 @@
 
   <form #sellerForm="ngForm" (ngSubmit)="onSubmit()">
     <!-- ========== Section: Expectation Details ========== -->
-     <h4 class="mt-2 mb-3">Expectation Details</h4>
+     <h4 class="mt-2 mb-3  ">Expectation Details</h4>
     <div class="row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3 swipe-left">
         <label for="portfolio_type" class="form-label">Monetization Options</label>
         <select
           class="form-select"
@@ -167,8 +167,8 @@
         </select>
       </div>
 
-            <div class="col-md-4 mb-3">
-        <label for="price_expectation" class="form-label"
+            <div class="col-md-3 mb-3 swipe-left">
+        <label for="price_expectation" class="form-label "
           >Price Expectation</label
         >
         <select
@@ -213,7 +213,7 @@
       </div> -->
 
 
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 swipe-left">
         <label for="motivation_to_sell" class="form-label">Motivation to sell</label>
         <select class="form-select" [(ngModel)]="formData.motivation_to_sell" name="motivation_to_sell">
           <option value="non_core">Non-Core</option>
@@ -228,7 +228,7 @@
 
 <h4 class="mt-4 mb-3">Owner Details</h4>
 <div class="row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3 swipe-left">
         <label for="patent_owner_status" class="form-label"
           >Who are you</label
         >
@@ -246,7 +246,7 @@
 
 
 
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3 swipe-left">
         <label for="first_name" class="form-label">First Name</label>
         <input
           type="text"
@@ -258,7 +258,7 @@
       </div>
       
 
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3 swipe-left">
         <label for="last_name" class="form-label">Last Name</label>
         <input
           type="text"
@@ -269,7 +269,7 @@
         />
       </div>
 
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3 swipe-left">
         <label for="email" class="form-label">Email</label>
         <input
           type="email"
@@ -280,7 +280,7 @@
         />
       </div>
 
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3 swipe-left">
         <label for="phone" class="form-label">Phone</label>
         <input
           type="text"
@@ -291,7 +291,7 @@
         />
       </div>
 
-      <div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3 swipe-left">
         <label for="patent_owner_website" class="form-label"
           >Patent Owner Website (Optional)</label
         >
@@ -310,7 +310,7 @@
 
 
 
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3 swipe-left">
         <label for="primary_technology" class="form-label"
           >Primary Technology</label
         >
@@ -363,7 +363,7 @@
 
         <div class="row">
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-3 swipe-left">
             <label class="form-label">Patent No {{ i + 1 }}:</label>
             <input
               type="text"
@@ -373,7 +373,7 @@
               required
             />
           </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3 swipe-left">
             <label class="form-label">Status:</label>
             <input
               type="text"
@@ -383,7 +383,7 @@
               required
             />
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-4 mb-3 swipe-left">
             <label class="form-label">Country:</label>
             <input
               type="text"
@@ -403,7 +403,7 @@
             <label class="form-label">Application #:</label>
             <input type="text" class="form-control" [(ngModel)]="patent.application_number" [name]="'application_number_' + i" />
           </div> -->
-          <div class="col-md-4 mb-3">
+          <div class="col-md-4 mb-3 swipe-left">
             <label class="form-label">Google Patent Link:</label>
             <input
               type="text"
@@ -432,7 +432,7 @@
         </button>
       </div>
 
-      <div class="w-100 mb-4">
+      <div class="w-100 mb-4 swipe-left">
         <label for="file" class="form-label">Supporting material (if available)</label>
         <input
           type="file"
