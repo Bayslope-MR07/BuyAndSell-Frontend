@@ -1,0 +1,11 @@
+<div class="container mt-5">
+  <h2>Upload Signed NDA</h2>
+  <p>Upload your signed NDA to proceed. Access to the portal will be granted upon admin verification.</p>
+
+  <div class="form-group">
+    <input type="file" class="form-control mb-3" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" />
+    <button class="btn btn-primary" (click)="uploadNDA()" [disabled]="uploading">
+      {{ uploading ? 'Uploading NDA...' : 'Upload NDA' }}
+    </button>
+  </div>
+</div>

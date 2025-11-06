@@ -130,9 +130,9 @@
               <tr *ngFor="let buyer of exclusivePaginatedData; let i = index">
               <td>{{ i + 1 }}</td>
               <td>
-                <a [href]="'/buyer-details/' + buyer.id"  class="link-primary" >
-                  {{ buyer.portfolio_code }}
-                </a>
+                <a [routerLink]="['/buyer-details', buyer.id]" class="link-primary">
+  {{ buyer.portfolio_code }}
+</a>
               </td>
               <td>{{ buyer.industry }}</td>
               <!-- <td>{{ buyer.tech_domain }}</td> -->
@@ -159,7 +159,7 @@
   
 </a>
               </td> -->
-              <td>
+              <!-- <td>
                 <a *ngIf="buyer.analysis_sheet" 
                    [href]="buyer.analysis_sheet" 
                    target="_blank" 
@@ -168,7 +168,15 @@
                    <i class="fa-solid fa-file-excel"></i>
                   
                 </a>
-              </td>
+              </td> -->
+              <td>
+  <a *ngIf="buyer.analysis_sheet"
+     href="javascript:void(0)"
+     class="link-success"
+     (click)="confirmDownloadAndSendEmail(buyer.analysis_sheet, buyer.id)">
+    <i class="fa-solid fa-file-excel"></i>
+  </a>
+</td>
               <td>{{ buyer.acquisition_status }}</td>
               <!-- <td>{{ buyer.buying_options }}</td> -->
 
@@ -179,7 +187,7 @@
                           <div class="d-flex justify-content-center gap-2">
                             <div class="form-check">
                               <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Chase')">
-                              <label class="form-check-label">Persue</label>
+                              <label class="form-check-label">Pursue</label>
                             </div>
                             <div class="form-check">
                               <input type="radio" class="form-check-input" [name]="'action_' + buyer.id" (change)="selectAction(buyer.id, 'Skip')">

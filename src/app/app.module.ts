@@ -49,6 +49,7 @@ import { ConfirmPasswordComponent } from './components/confirm-password/confirm-
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { BuyerFormComponent } from './buyer-form/buyer-form.component';
 import { TechDomainDialogComponent } from './tech-domain-dialog/tech-domain-dialog.component';
+import { NdaUploadComponent } from './nda-upload/nda-upload.component';
 
 // Define routes
 const routes: Routes = [
@@ -82,6 +83,7 @@ library.add(faTwitter, faFacebook, faInstagram, faLinkedin);
     
     
     GoogleCallbackComponent,
+              NdaUploadComponent,
               // TechDomainDialogComponent,
     
     

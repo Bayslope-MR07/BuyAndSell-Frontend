@@ -15,6 +15,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { GoogleCallbackComponent } from './google-callback/google-callback.component';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 import { BuyerFormComponent } from './buyer-form/buyer-form.component';
+import { NdaUploadComponent } from './nda-upload/nda-upload.component';
 // Define your routes
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'google/callback/', component: GoogleCallbackComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
   { path: 'buyerform', component: BuyerFormComponent },
+  { path: 'nda-upload',component: NdaUploadComponent },
 ];
 
 @NgModule({

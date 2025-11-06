@@ -11,6 +11,8 @@ import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-buyer-details',
@@ -21,22 +23,25 @@ import { MatButtonModule } from '@angular/material/button';
     ProfileHeaderComponent,
     FooterComponent,
     MatProgressSpinnerModule,
-    
+
     MatTabsModule,
     MatIconModule,
     MatButtonModule,
-    FooterComponent
+    FooterComponent,
   ],
   templateUrl: './buyer-details.component.html',
   styleUrls: ['./buyer-details.component.css'],
 })
 export class BuyerDetailsComponent implements OnInit {
+  apiUrl = environment.apiUrl;
+
   patentId: number | undefined;
   showFullAbstract = false;
   showFullClaim = false;
   showFullConcepts = false;
   patentDetails: any;
   userFeedback: any;
+  // apiUrl: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,17 +58,14 @@ export class BuyerDetailsComponent implements OnInit {
 
   fetchPatentDetails() {
     const token = localStorage.getItem('access_token'); // Retrieve token from local storage
+
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
-    this.http
-      .get(
-        `https://buyandsell-backend.onrender.com/api/accounts/buyer-data/${this.patentId}/`,
-        // `http://127.0.0.1:8000/api/accounts/buyer-data/${this.patentId}/`,
 
-        { headers }
-      )
+    this.http
+      .get(`${this.apiUrl}/buyer-data/${this.patentId}/`, { headers })
       .subscribe(
         (response: any) => {
           this.patentDetails = response;
@@ -85,7 +87,7 @@ export class BuyerDetailsComponent implements OnInit {
     const data = {
       'Portfolio Code': this.patentDetails.portfolio_code,
       // 'Patent No.': this.patentDetails.patent_number,
-      'Industry': this.patentDetails.industry,
+      Industry: this.patentDetails.industry,
       'Tech Domain': this.patentDetails.tech_domain,
       'Priority Date': this.patentDetails.priority,
       'Expiry Date': this.patentDetails.expiry,
@@ -96,13 +98,13 @@ export class BuyerDetailsComponent implements OnInit {
       'Relevant Companies': this.patentDetails.relevant_companies,
       'Market Relevance': this.patentDetails.market_relevance,
       'Bay Rating': this.patentDetails.bay_overall_rating,
-      'Enforceability': this.patentDetails.enforceability,
+      Enforceability: this.patentDetails.enforceability,
       'Patent No.': this.patentDetails.parent_patent_number,
-      'Title': this.patentDetails.title,
+      Title: this.patentDetails.title,
       'Entity Status': this.patentDetails.entity_status,
       'Upcoming Fees': this.patentDetails.upcoming_fees_uspto,
 
-      'Abstract': this.patentDetails.abstract,
+      Abstract: this.patentDetails.abstract,
       'First Claim': this.patentDetails.first_claim,
       'Filing Date': this.patentDetails.filing_date,
       'Grant Date': this.patentDetails.grant_date,
@@ -110,11 +112,11 @@ export class BuyerDetailsComponent implements OnInit {
       'IP Type': this.patentDetails.ip_type,
       'Technology Concepts': this.patentDetails.concepts,
       'Technology Keywords': this.patentDetails.keywords,
-      'Contact': this.patentDetails.phone,
-      'Email': this.patentDetails.email,
+      Contact: this.patentDetails.phone,
+      Email: this.patentDetails.email,
       'Spoc Company': this.patentDetails.spoc_company,
       'Selling Interest': this.patentDetails.seller_interest,
-      'Encumbrances': this.patentDetails.encumbrances,
+      Encumbrances: this.patentDetails.encumbrances,
       'Seller Jurisdiction': this.patentDetails.seller_jurisdiction,
       'Reason of Selling': this.patentDetails.reason_of_selling,
     };

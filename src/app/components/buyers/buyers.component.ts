@@ -2,7 +2,7 @@
   import { HttpClient, HttpHeaders } from '@angular/common/http';
   import { FormsModule } from '@angular/forms';
   import { CommonModule } from '@angular/common';
-  import { Router } from '@angular/router';
+  import { Router, RouterLink } from '@angular/router';
   import { FooterComponent } from '../footer/footer.component';
   import { environment } from '../../../environments/environment';
   import { AuthService } from '../../services/auth.service';
@@ -38,6 +38,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
       MatProgressSpinnerModule,
       MatPaginatorModule,
       FormsModule,
+      RouterLink,
     ],
     templateUrl: './buyers.component.html',
     styleUrls: ['./buyers.component.css'],
@@ -724,6 +725,47 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
       this.exclusivePatents = [...this.originalExclusive];
       this.exclusivePageIndex = 0;
       this.updateExclusivePaginatedData();
+    }
+    confirmDownloadAndSendEmail(analysisSheetUrl: string, portfolioId: number) {
+      const fileName = decodeURIComponent(
+        analysisSheetUrl.split('/').pop() || ''
+      );
+
+      const confirmed = confirm(
+        'Are you sure you want to access the diligence material for this portfolio?\n\nIf yes, click OK to proceed — an invoice will be generated and sent on your email.'
+      );
+
+      if (!confirmed) {
+        console.log('❌ Download cancelled.');
+        return;
+      }
+
+      // --> API Call: Send Invoice Email to logged-in user
+      const token = localStorage.getItem('access_token');
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      this.http
+        .post(
+          `${this.baseUrl}/send-analysis-email/`,
+          {
+            portfolio_id: portfolioId,
+          },
+          { headers }
+        )
+        .subscribe({
+          next: () => {
+            console.log('✅ Invoice email sent.');
+
+            // Now open the analysis sheet in new tab
+            window.open(analysisSheetUrl, '_blank');
+          },
+          error: (err) => {
+            console.error('❌ Failed to send email:', err);
+            alert('Something went wrong. Email not sent.');
+          },
+        });
     }
   }
   

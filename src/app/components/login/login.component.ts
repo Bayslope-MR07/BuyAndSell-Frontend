@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   formData = {
     email: '',
     password: '',
-    user_type: '', // No default, will use backend response
+    user_type: '',
   };
 
   message: string = '';
@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Get user_type from URL query parameter if available
     this.route.queryParams.subscribe((params) => {
       if (params['user_type']) {
         this.formData.user_type = params['user_type'];
@@ -58,7 +57,6 @@ export class LoginComponent implements OnInit {
     )}&redirect_uri=${encodeURIComponent(
       'https://bas-3nw9.onrender.com/google-callback'
     )}&response_type=code&scope=openid%20email%20profile%20https://www.googleapis.com/auth/userinfo.profile&access_type=offline&prompt=consent`;
-    console.log('Redirecting to Google:', googleAuthUrl);
     window.location.href = googleAuthUrl;
   }
 
@@ -76,54 +74,74 @@ export class LoginComponent implements OnInit {
           last_name: response.last_name,
           email: response.email,
           user_type: response.user_type,
-          has_filled_seller_form: response.has_filled_seller_form || false,
-          has_filled_buyer_form: response.has_filled_buyer_form || false,
+          has_filled_seller_form: response.has_filled_seller_form ?? false,
+          has_filled_buyer_form: response.has_filled_buyer_form ?? false,
+          is_verified: response.is_verified ?? false,
         };
 
         this.toastr.success('Login Successful!', 'Success');
 
+        // 👨‍💼 Admin
         if (response.is_admin === true) {
           this.router.navigate(['/admin']);
-        } else {
-          const userType = response.user_type;
-          if (userType === 'Seller' || userType === 'Both') {
-            if (this.userData.has_filled_seller_form) {
-              this.router.navigate(['/user-seller-data']);
-            } else {
-              this.router.navigate(['/seller']);
-            }
-          } else if (userType === 'Buyer') {
-            // this.router.navigate(['/buyer']);
-            if (!this.userData.has_filled_buyer_form) {
-              // 👇 Buyer form fill nahi kiya → popup dikhao
-              // this.showBuyerPopup = true;
-               if (localStorage.getItem('buyerFormSkipped') === 'true') {
-      this.router.navigate(['/buyer']);
-    } else {
-      this.showBuyerPopup = true; // show popup only if not skipped
-    }
-            } else {
+          return;
+        }
+
+        const userType = response.user_type;
+
+        // 👨‍🏫 Seller or Both
+        if (userType === 'Seller' || userType === 'Both') {
+          if (this.userData.has_filled_seller_form) {
+            this.router.navigate(['/user-seller-data']);
+          } else {
+            this.router.navigate(['/seller']);
+          }
+          return;
+        }
+
+        // 👤 Buyer Login Logic
+        if (userType === 'Buyer') {
+          // ❌ If not verified, go to NDA upload
+          if (!this.userData.is_verified) {
+            this.router.navigate(['/buyer']);
+            return;
+          }
+
+          // ✅ Verified Buyer
+          if (!this.userData.has_filled_buyer_form) {
+            const skipped = localStorage.getItem('buyerFormSkipped');
+            if (skipped === 'true') {
               this.router.navigate(['/buyer']);
+            } else {
+              this.showBuyerPopup = true;
             }
           } else {
             this.router.navigate(['/buyer']);
           }
+
+          return;
         }
+
+        // Default fallback
+        this.router.navigate(['/buyer']);
       },
       error: (error) => {
         console.error('Login Error:', error);
-        this.toastr.error('Login failed'); // Default message
+        this.toastr.error('Login failed ❌');
+
         if (error.error) {
           for (const key in error.error) {
             if (error.error.hasOwnProperty(key)) {
-              this.toastr.error(`${key}: ${error.error[key].join(' ')}`); // Specific errors
+              this.toastr.error(`${key}: ${error.error[key].join(' ')}`);
             }
           }
         }
+
         this.message = 'Invalid email or password.';
       },
     });
   }
+
   goToBuyerForm() {
     this.showBuyerPopup = false;
     this.router.navigate(['/buyerform']);
@@ -131,7 +149,7 @@ export class LoginComponent implements OnInit {
 
   skipBuyerForm() {
     this.showBuyerPopup = false;
-    localStorage.setItem('buyerFormSkipped', 'true'); // 👈 save skip status
-    this.router.navigate(['/buyer']); // Normal buyer dashboard
+    localStorage.setItem('buyerFormSkipped', 'true');
+    this.router.navigate(['/buyer']);
   }
 }
