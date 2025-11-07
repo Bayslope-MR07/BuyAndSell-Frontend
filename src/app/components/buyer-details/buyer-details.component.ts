@@ -87,7 +87,7 @@ export class BuyerDetailsComponent implements OnInit {
     const data = {
       'Portfolio Code': this.patentDetails.portfolio_code,
       // 'Patent No.': this.patentDetails.patent_number,
-      Industry: this.patentDetails.industry,
+      'Industry': this.patentDetails.industry,
       'Tech Domain': this.patentDetails.tech_domain,
       'Priority Date': this.patentDetails.priority,
       'Expiry Date': this.patentDetails.expiry,

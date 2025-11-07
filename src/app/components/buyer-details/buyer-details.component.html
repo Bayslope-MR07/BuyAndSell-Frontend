@@ -9,62 +9,110 @@
     <!-- <button (click)="downloadAsExcel()" class="btn btn-success" style="margin-bottom: 15px;text-align: right;">
   ⬇️ Download Buyer Details as Excel
 </button> -->
-<div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+<!-- Top Buttons Section -->
+<div style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px;">
+  <!-- Existing Download Button -->
   <button class="btn btn-success" (click)="downloadAsExcel()">
     ⬇️ Download Document
   </button>
+
+  <!-- New Buttons for Charts & Docs -->
+  <div *ngIf="patentDetails">
+    <!-- Claim Charts (PDF) -->
+    <a *ngIf="patentDetails.claim_charts"
+       [href]="patentDetails.claim_charts"
+       target="_blank"
+       class="btn btn-danger">
+      <i class="fa-solid fa-file-pdf"></i> Download Charts & Docs
+    </a>
+
+    <!-- Word Docs -->
+    <!-- <a *ngIf="patentDetails.word_docs"
+       [href]="patentDetails.word_docs"
+       target="_blank"
+       class="btn btn-primary">
+      <i class="fa-solid fa-file-word"></i>Download Charts & Docs
+    </a> -->
+
+    <!-- Analysis Sheet (Excel) -->
+    <a *ngIf="patentDetails.analysis_sheet"
+       [href]="patentDetails.analysis_sheet"
+       target="_blank"
+       class="btn btn-success">
+      <i class="fa-solid fa-file-excel"></i>Download Analysis Sheet
+    </a>
+  </div>
 </div>
 
+
     <!-- Details Section -->
-    <h2 class="section-title">Overview</h2>
-    <div class="grid-container" *ngIf="patentDetails; else loading">
-      <div class="grid-item">
-        <strong>Portfolio Code</strong> <br />
-        <span class="highlight" style="color: #007bff">{{ patentDetails.portfolio_code }}</span>
-      </div>
-            <div class="grid-item">
-        <strong>Industry</strong> <br />
-        <span class="highlight">{{ patentDetails.industry }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Tech Domain</strong> <br />
-        <span class="highlight">{{ patentDetails.tech_domain }}</span>
-      </div>
+<h2 class="section-title">Portolfio Overview</h2>
 
-            <div class="grid-item">
-        <strong>Priority Date</strong> <br />
-        <span class="highlight">{{ patentDetails.priority }}</span>
-      </div>
-      
-      <div class="grid-item">
-        <strong>Expiry Date</strong> <br />
-        <span class="highlight">{{ patentDetails.expiry }}</span>
-      </div>
-      
+<div *ngIf="patentDetails; else loading" class="table-responsive mt-3">
+  <table class="table table-bordered table-striped align-middle">
+    <tbody>
+      <tr>
+        <th>Portfolio Code</th>
+        <td style="color: #007bff; font-weight: 500;">
+          {{ patentDetails.portfolio_code }}
+        </td>
+      </tr>
+      <tr>
+        <th>Industry</th>
+        <td>{{ patentDetails.industry }}</td>
+      </tr>
+      <tr>
+        <th>Tech Domain</th>
+        <td>{{ patentDetails.tech_domain }}</td>
+      </tr>
+      <tr>
+        <th>Technology Tags</th>
+        <td>{{ patentDetails.technology_tags }}</td>
+      </tr>
+            <tr>
+        <th>Portolfio Coverage</th>
+        <td>{{ patentDetails.portfolio_coverage }}</td>
+      </tr>
+            <tr>
+        <th>No. of Patents</th>
+        <td>{{ patentDetails.number_of_patents }}</td>
+      </tr>
+            <tr>
+        <th>No. of Patent families</th>
+        <td>{{ patentDetails.number_of_patent_families }}</td>
+      </tr>
+            <tr>
+        <th>Patent Geographies</th>
+        <td>{{ patentDetails.patent_geographies }}</td>
+      </tr>
+            <tr>
+        <th>SEP patent</th>
+        <td>{{ patentDetails.sep_patent }}</td>
+      </tr>
+            <tr>
+        <th>Any Open continuation?</th>
+        <td>{{ patentDetails.any_ongoing_continuation }}</td>
+      </tr>
+            <tr>
+        <th>Any portion of the portfolio sold before?</th>
+        <td>{{ patentDetails.portfolio_sold_before }}</td>
+      </tr>
+            <tr>
+        <th>Upcoming Fees</th>
+        <td>{{ patentDetails.upcoming_fees }}</td>
+      </tr>
+            <tr>
+        <th>Patents Status</th>
+        <td>{{ patentDetails.patents_status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
+<ng-template #loading>
+  <p>Loading details...</p>
+</ng-template>
 
-
-      <div class="grid-item">
-        <strong>Number of Patents</strong> <br />
-        <span class="highlight">{{ patentDetails.number_of_patents }}</span>
-      </div>
-            <div class="grid-item">
-        <strong>Number of Patent Families</strong> <br />
-        <span class="highlight">{{ patentDetails.number_of_patent_families }}</span>
-      </div>
-            <div class="grid-item">
-        <strong>Acquisition Status</strong> <br />
-        <span class="highlight">{{ patentDetails.acquisition_status }}</span>
-      </div>
-      <!-- <div class="grid-item" style="">
-        <strong>Feedback</strong> <br />
-        <span class="highlight">{{ userFeedback?.action }}</span>
-      </div> -->
-      <!-- <div class="grid-item">
-        <strong>Bay Rating</strong> <br />
-        <span class="highlight">{{ patentDetails.bay_overall_rating }}</span>
-      </div> -->
-    </div>
 
 
 
@@ -72,190 +120,201 @@
 
 
 
-
-    <h2 class="section-title">Analysis</h2>
-    <div class="grid-container" *ngIf="patentDetails; else loading">
-
-<!-- <div class="grid-item" *ngIf="patentDetails.claim_charts">
-  <strong>Charts</strong><br />
-  <a [href]="patentDetails.claim_charts" target="_blank" class="link-danger">
-    
-    <i class="fa-solid fa-file-pdf"></i>
-  </a>
-</div> -->
-
-<div class="grid-item" *ngIf="patentDetails.claim_charts || patentDetails.word_docs">
-  <strong>Charts & Docs</strong><br />
-
-  <!-- Claim Charts (PDF) -->
-  <a *ngIf="patentDetails.claim_charts"
-     [href]="patentDetails.claim_charts"
-     target="_blank"
-     class="link-danger me-2">
-    <i class="fa-solid fa-file-pdf"></i>
-  </a>
-
-  <!-- Word Docs -->
-  <a *ngIf="patentDetails.word_docs"
-     [href]="patentDetails.word_docs"
-     target="_blank"
-     class="link-primary">
-    <i class="fa-solid fa-file-word"></i>
-  </a>
+<h2 class="section-title">Seller Overview</h2>
+<div *ngIf="patentDetails; else loading" class="table-responsive mt-3">
+  <table class="table table-bordered table-striped align-middle">
+    <tbody>
+      <!-- <tr> -->
+        <!-- <th>Charts & Docs</th> -->
+        <!-- <td>
+          <ng-container *ngIf="patentDetails.claim_charts || patentDetails.word_docs; else noDocs">
+            <a *ngIf="patentDetails.claim_charts"
+               [href]="patentDetails.claim_charts"
+               target="_blank"
+               class="link-danger me-2">
+              <i class="fa-solid fa-file-pdf fa-lg"></i>
+            </a>
+            <a *ngIf="patentDetails.word_docs"
+               [href]="patentDetails.word_docs"
+               target="_blank"
+               class="link-primary">
+              <i class="fa-solid fa-file-word fa-lg"></i>
+            </a>
+          </ng-container>
+          <ng-template #noDocs>—</ng-template>
+        </td> -->
+      <!-- </tr> -->
+      <!-- <tr>
+        <th>Analysis Sheet</th>
+        <td>
+          <ng-container *ngIf="patentDetails.analysis_sheet; else noSheet">
+            <a [href]="patentDetails.analysis_sheet"
+               target="_blank"
+               class="link-success">
+              <i class="fa-solid fa-file-excel fa-lg"></i>
+            </a>
+          </ng-container>
+          <ng-template #noSheet>—</ng-template>
+        </td>
+      </tr> -->
+      <tr>
+        <th>Seller Entity</th>
+        <td>{{ patentDetails.seller_entity || '—' }}</td>
+      </tr>
+            <tr>
+        <th>Seller Entity Status</th>
+        <td>{{ patentDetails.seller_entity_status || '—' }}</td>
+      </tr>
+            <tr>
+        <th>Seller Country</th>
+        <td>{{ patentDetails.seller_country || '—' }}</td>
+      </tr>
+            <tr>
+        <th>Seller Monetization Preference </th>
+        <td>{{ patentDetails.monetization_preference || '—' }}</td>
+      </tr>
+            <tr>
+        <th>Seller Monetization Strategy Preference </th>
+        <td>{{ patentDetails.monetization_strategy || '—' }}</td>
+      </tr>
+            <tr>
+        <th>Seller’s Willingness to Negotiate</th>
+        <td>{{ patentDetails.willingness_to_negotiate || '—' }}</td>
+      </tr>
+            <tr>
+        <th>Encumbrances</th>
+        <td>{{ patentDetails.encumbrances || '—' }}</td>
+      </tr>
+            <tr>
+        <th>Previous history of selling or licensing of the seller</th>
+        <td>{{ patentDetails.previous_history_selling || '—' }}</td>
+      </tr>
+            
+    </tbody>
+  </table>
 </div>
+<ng-template #loading>
+  <p>Loading analysis details...</p>
+</ng-template>
 
 
-
-      <div class="grid-item" *ngIf="patentDetails.analysis_sheet">
-  <strong>Analysis Sheet</strong> <br />
-  <a [href]="patentDetails.analysis_sheet" 
-     target="_blank" 
-     class="link-success"
-     >
-    
-    <i class="fa-solid fa-file-excel"></i>
-  </a>
-      </div>
-      <div class="grid-item">
-        <strong>Relevant Companies</strong> <br />
-        <span class="highlight">{{ patentDetails.relevant_companies }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Market Relevance</strong> <br />
-        <span class="highlight">{{ patentDetails.market_relevance }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Bay Rating</strong> <br />
-        <span class="highlight">{{ patentDetails.bay_overall_rating  }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Enforceability</strong> <br />
-        <span class="highlight">{{ patentDetails.enforceability }}</span>
-      </div>
-
-
-
-    </div>
     
 
     <!-- ---------------------------------------------------------------------------- -->
 
 
-    <h2 class="section-title">Bibliographic Details</h2>
-    <div class="grid-container" *ngIf="patentDetails; else loading">
-
-            <div class="grid-item">
-        <strong>Parent Patent Number</strong> <br />
-        <span class="highlight" style="color: #007bff">{{ patentDetails.parent_patent_number }}</span>
-      </div>
-
-            <div class="grid-item">
-        <strong>Title</strong> <br />
-        <span class="highlight">{{ patentDetails.title }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Abstract</strong> <br />
-        <span class="highlight">{{ patentDetails.abstract }}</span>
-      </div>
-
-            <div class="grid-item">
-        <strong>First Claim </strong> <br />
-        <span class="highlight">{{ patentDetails.first_claim }}</span>
-      </div>
-                  <div class="grid-item">
-        <strong>Priority Date</strong> <br />
-        <span class="highlight">{{ patentDetails.priority }}</span>
-      </div>
-            <div class="grid-item">
-        <strong>Filing Date </strong> <br />
-        <span class="highlight">{{ patentDetails.filing_date }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Grant Date </strong> <br />
-        <span class="highlight">{{ patentDetails.grant_date }}</span>
-      </div>
+<h2 class="section-title">Diligence Overview</h2>
+<div *ngIf="patentDetails; else loading" class="table-responsive mt-3">
+  <table class="table table-bordered table-striped align-middle">
+    <tbody>
+      <tr>
+        <th>Diligence Material</th>
+        <td>{{ patentDetails.diligence_material }}</td>
+      </tr>
+      <tr>
+        <th>Number of Relevant companies</th>
+        <td>{{ patentDetails.number_of_relevant_companies }}</td>
+      </tr>
+      <tr>
+        <th>Relevant Companies</th>
+        <td>{{ patentDetails.relevant_companies }}</td>
+      </tr>
+      <tr>
+        <th>Number of Charts</th>
+        <td>{{ patentDetails.number_of_charts }}</td>
+      </tr>
+      <tr>
+        <th>Patent Product Matrix</th>
+        <td>{{ patentDetails.product_matching }}</td>
+      </tr>
+      <tr>
+        <th>Standard Mapping</th>
+        <td>{{ patentDetails.standard_mapping }}</td>
+      </tr>
+      <tr>
+        <th>Products Category</th>
+        <td>{{ patentDetails.product_categories }}</td>
+      </tr>
+      <tr>
+        <th>Market size of products</th>
+        <td>{{ patentDetails.market_size }}</td>
+      </tr>
+      <tr>
+        <th>Any landmark litigation in the space</th>
+        <td>{{ patentDetails.current }}</td>
+      </tr>
       
-      <div class="grid-item">
-        <strong>Expiry Date</strong> <br />
-        <span class="highlight">{{ patentDetails.expiry }}</span>
-      </div>
-      
-      <div class="grid-item">
-        <strong>Current Assignee </strong> <br />
-        <span class="highlight">{{ patentDetails.current_assignee }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>IP Type </strong> <br />
-        <span class="highlight">{{ patentDetails.ip_type }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Technology Concepts </strong> <br />
-        <span class="highlight">{{ patentDetails.concepts }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Technology Keywords </strong> <br />
-        <span class="highlight">{{ patentDetails.keywords }}</span>
-      </div>
-    <div class="grid-item">
-        <strong>Entity Status</strong> <br />
-        <span class="highlight">{{ patentDetails.entity_status }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Upcoming Fees</strong> <br />
-        <span class="highlight">{{ patentDetails.upcoming_fees_uspto }}</span>
-      </div>
+    </tbody>
+  </table>
+</div>
+<ng-template #loading>
+  <p>Loading bibliographic details...</p>
+</ng-template>
+
+
+
+
+<h2 class="section-title">Analysis</h2>
+<div *ngIf="patentDetails; else loading" class="table-responsive mt-3">
+  <table class="table table-bordered table-striped align-middle">
+    <tbody>
+      <tr>
+        <th>Timeline to receiver offer</th>
+        <td>{{ patentDetails?.timeline_offer }}</td>
+      </tr>
+      <tr>
+        <th>Comments</th>
+        <td>{{ patentDetails?.comments }}</td>
+      </tr>
+      <tr>
+        <th>Acquisition Status</th>
+        <td>{{ patentDetails.acquisition_status }}</td>
+      </tr>
+      <tr>
+        <th>Bay Rating</th>
+        <td>{{ patentDetails.portfolio_rating }}</td>
+      </tr>
+      <tr>
+        <th>Buying Options</th>
+        <td>{{ patentDetails.buying_options }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #loading>
+  <p>Loading seller details...</p>
+</ng-template>
+
+
+
+
+<h2 class="section-title">Spoc Details</h2>
+<div *ngIf="patentDetails; else loading" class="table-responsive mt-3">
+  <table class="table table-bordered table-striped align-middle">
+    <tbody>
+      <tr>
+        <th>Phone</th>
+        <td>{{ patentDetails?.phone }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{ patentDetails?.email }}</td>
+      </tr>
+      <tr>
+        <th>Spoc Company</th>
+        <td>{{ patentDetails.spoc_company }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #loading>
+  <p>Loading Spoc details...</p>
+</ng-template>
 
 
 
 
 
-
-
-    </div>
-
-
-
-    <h2 class="section-title">Spoc Details</h2>
-    <div class="grid-container">
-      <div class="grid-item">
-        <strong>Phone</strong> <br />
-        <span class="highlight">{{ patentDetails?.phone }}</span>
-
-      </div>
-      <div class="grid-item">
-        <strong>Email</strong> <br />
-        <span class="highlight">{{ patentDetails?.email }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Spoc Company</strong> <br />
-        <span class="highlight">{{ patentDetails.spoc_company }}</span>
-      </div>
-     
-    </div>
-
-
-        <h2 class="section-title">Seller</h2>
-    <div class="grid-container">
-      <div class="grid-item">
-        <strong>Seller interest</strong> <br />
-        <span class="highlight">{{ patentDetails?.seller_interest }}</span>
-
-      </div>
-      <div class="grid-item">
-        <strong>Reason of Selling</strong> <br />
-        <span class="highlight">{{ patentDetails?.reason_of_selling }}</span>
-      </div>
-      <div class="grid-item">
-        <strong>Encumbrances</strong> <br />
-        <span class="highlight">{{ patentDetails.encumbrances }}</span>
-      </div>
-
-            <div class="grid-item">
-        <strong>Seller Jurisdiction</strong> <br />
-        <span class="highlight">{{ patentDetails.seller_jurisdiction }}</span>
-      </div>
-     
-    </div>
 
     <!-- Footer Section -->
    

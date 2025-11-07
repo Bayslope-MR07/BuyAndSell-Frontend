@@ -558,22 +558,23 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         return;
       }
 
-      if (
-        confirm(
-          `Are you sure you want to submit "${action}" for patent ID ${patentId}?`
-        )
-      ) {
+      // 🔍 Patent object dhoondo to get portfolio_code
+      const patent = this.exclusivePatents.find((b: any) => b.id === patentId);
+      const displayCode = patent?.portfolio_code || `Patent ID ${patentId}`;
+
+      const isConfirmed = confirm(
+        `Are you sure you want to submit "${action}" for portfolio: ${displayCode}?`
+      );
+
+      if (isConfirmed) {
         this.submitAction(patentId, action);
 
-        if (action === 'Chase') {
-          const patent = this.exclusivePatents.find(
-            (b: any) => b.id === patentId
-          );
+        if (action === 'Pursue') {
           if (
             patent &&
             !this.shortlistedPatents.some((p) => p.id === patentId)
           ) {
-            this.shortlistedPatents = [...this.shortlistedPatents, patent]; // ✅ Angular detect karega
+            this.shortlistedPatents = [...this.shortlistedPatents, patent];
             console.log(
               '✅ Added to shortlistedPatents:',
               this.shortlistedPatents
@@ -622,7 +623,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         .subscribe((res: any) => {
           console.log('Submit response:', res);
 
-          if (action === 'Chase') {
+          if (action === 'Pursue') {
             const patent = res.patent; // ✅ backend se full object aa raha hai
             if (
               patent &&
