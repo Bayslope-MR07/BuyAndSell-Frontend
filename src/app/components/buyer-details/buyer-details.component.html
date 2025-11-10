@@ -10,15 +10,17 @@
   ⬇️ Download Buyer Details as Excel
 </button> -->
 <!-- Top Buttons Section -->
-<div style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px;">
-  <!-- Existing Download Button -->
-  <button class="btn btn-success" (click)="downloadAsExcel()">
+<div
+  *ngIf="patentDetails?.acquisition_status === 'Open'"
+  style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px;"
+>
+  <!-- Download Document Button -->
+  <button class="btn btn-success" (click)="downloadAsPDF()">
     ⬇️ Download Document
   </button>
 
-  <!-- New Buttons for Charts & Docs -->
+  <!-- Charts & Docs Buttons -->
   <div *ngIf="patentDetails">
-    <!-- Claim Charts (PDF) -->
     <a *ngIf="patentDetails.claim_charts"
        [href]="patentDetails.claim_charts"
        target="_blank"
@@ -26,23 +28,19 @@
       <i class="fa-solid fa-file-pdf"></i> Download Charts & Docs
     </a>
 
-    <!-- Word Docs -->
-    <!-- <a *ngIf="patentDetails.word_docs"
-       [href]="patentDetails.word_docs"
-       target="_blank"
-       class="btn btn-primary">
-      <i class="fa-solid fa-file-word"></i>Download Charts & Docs
-    </a> -->
+<button *ngIf="patentDetails.analysis_sheet"
+   target="_blank"
+   class="btn btn-success"
+   (click)="confirmDownloadAndSendEmail(patentDetails.analysis_sheet, patentDetails.id)">
+  <i class="fa-solid fa-file-excel"></i> Download Analysis Sheet
+</button>
+  <button class="btn btn-success" (click)="downloadAllFiles()">
+  ⬇️ Download All Files (.zip)
+</button>
 
-    <!-- Analysis Sheet (Excel) -->
-    <a *ngIf="patentDetails.analysis_sheet"
-       [href]="patentDetails.analysis_sheet"
-       target="_blank"
-       class="btn btn-success">
-      <i class="fa-solid fa-file-excel"></i>Download Analysis Sheet
-    </a>
   </div>
 </div>
+
 
 
     <!-- Details Section -->
@@ -262,10 +260,10 @@
         <th>Timeline to receiver offer</th>
         <td>{{ patentDetails?.timeline_offer }}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th>Comments</th>
         <td>{{ patentDetails?.comments }}</td>
-      </tr>
+      </tr> -->
       <tr>
         <th>Acquisition Status</th>
         <td>{{ patentDetails.acquisition_status }}</td>
@@ -274,10 +272,10 @@
         <th>Bay Rating</th>
         <td>{{ patentDetails.portfolio_rating }}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th>Buying Options</th>
         <td>{{ patentDetails.buying_options }}</td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>

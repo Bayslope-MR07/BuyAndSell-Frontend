@@ -530,3 +530,44 @@ select.form-select:focus {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+
+
+/* Sirf Exclusive table ke liye */
+.exclusive-table {
+  border-collapse: collapse;
+}
+
+/* Pehle aur last column ke left/right borders hatao */
+.exclusive-table tr td:first-child,
+.exclusive-table tr th:first-child {
+  border-left: none !important;
+}
+
+.exclusive-table tr td:last-child,
+.exclusive-table tr th:last-child {
+  border-right: none !important;
+}
+/* Remove only left and right borders for Exclusive table */
+.exclusive-table {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Keep inner borders visible */
+.exclusive-table th,
+.exclusive-table td {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+/* Optional: make sure first and last column borders are hidden */
+.exclusive-table tr th:first-child,
+.exclusive-table tr td:first-child {
+  border-left: none !important;
+}
+
+.exclusive-table tr th:last-child,
+.exclusive-table tr td:last-child {
+  border-right: none !important;
+}

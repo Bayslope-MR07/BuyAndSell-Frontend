@@ -211,7 +211,24 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
           this.exclusivePatents = this.buyerData.filter(
             (b) => b.exclusive === true
           );
+          this.nonExclusivePatents = this.buyerData.filter(
+            (b) => b.exclusive === false
+          );
+
+          // ✅ Sort by No. of Patents (descending order)
+          // this.exclusivePatents.sort(
+          //   (a, b) => Number(b.number_of_patents) - Number(a.number_of_patents)
+          // );
+
+          // 🔽 Sort by No. of Patents (largest → smallest)
+          this.exclusivePatents.sort((a, b) => {
+            const numA = parseInt(a.number_of_patents || '0', 10);
+            const numB = parseInt(b.number_of_patents || '0', 10);
+            return numB - numA;
+          });
+
           this.originalExclusive = [...this.exclusivePatents];
+
           this.nonExclusivePatents = this.buyerData.filter(
             (b) => b.exclusive === false
           );
@@ -423,14 +440,14 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         primary_technology: 'primary_technology',
         entity_status: 'entity_status',
         acquisition_status: 'acquisition_status',
-        bay_overall_rating: 'bay_overall_rating',
+        bay_overall_rating: 'portfolio_rating',
         target: 'target',
         parent_patent_number: 'parent_patent_number',
         company_name: 'company_name',
         important: 'important',
         enforceability: 'enforceability',
         expiry: 'expiry',
-        keywords: 'keywords',
+        keywords: 'technology_tags',
         tech_domain: 'tech_domain',
         relevant_companies: 'relevant_companies',
         industry: 'industry',
@@ -623,6 +640,12 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         .subscribe((res: any) => {
           console.log('Submit response:', res);
 
+          // 🟢 1️⃣ Exclusive table se hatao
+          this.exclusivePatents = this.exclusivePatents.filter(
+            (p) => p.id !== patentId
+          );
+          this.updateExclusivePaginatedData();
+
           if (action === 'Pursue') {
             const patent = res.patent; // ✅ backend se full object aa raha hai
             if (
@@ -706,9 +729,15 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
 
       const matches = (patent: any) => {
         const techDomain = (patent.tech_domain || '').toLowerCase();
-        const keywords = (patent.keywords || '').toLowerCase();
+        const keywords = (patent.technology_tags || '').toLowerCase();
+        const portfoliocode = (patent.portfolio_code || '').toLowerCase();
+        // const industry = (patent.industry || '').toLowerCase();
+        // const acquisitionstatus = (patent.acquisition_status || '').toLowerCase();
         return (
-          techDomain.includes(searchValue) || keywords.includes(searchValue)
+          techDomain.includes(searchValue) ||
+          keywords.includes(searchValue) ||
+          portfoliocode.includes(searchValue) 
+
         );
       };
 
@@ -721,6 +750,8 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
       this.exclusivePageIndex = 0;
       this.updateExclusivePaginatedData();
     }
+
+
     clearSearch(): void {
       this.globalSearch = '';
       this.exclusivePatents = [...this.originalExclusive];

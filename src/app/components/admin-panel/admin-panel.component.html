@@ -269,13 +269,24 @@
           </div>
 <h6 class="h4 mb-3 text-success">Upload Embedded Files </h6>
                     <div class="d-flex flex-column align-items-center">
-            <input type="file" accept=".xlsx, .xls,.pdf" (change)="onEmbeddedFileSelected($event)"
+            <input type="file" accept=".xlsx, .xls,.pdf,.zip" (change)="onEmbeddedFileSelected($event)"
               class="form-control mb-3" id="fileInput" />
             
             <button (click)="uploadEmbeddedFile()" class="btn btn-success mb-2">Upload Embedded</button>
 
             <p *ngIf="uploadStatus" class="upload-status text-muted">{{ uploadStatus }}</p>
           </div>
+
+
+          <!-- <h6 class="h4 mb-3 text-success">Upload Charts </h6>
+                    <div class="d-flex flex-column align-items-center">
+            <input type="file" accept=".zip" (change)="onEmbeddedFileSelected($event)"
+              class="form-control mb-3" id="fileInput" />
+            
+            <button (click)="uploadEmbeddedFile()" class="btn btn-success mb-2">Upload Embedded</button>
+
+            <p *ngIf="uploadStatus" class="upload-status text-muted">{{ uploadStatus }}</p>
+          </div> -->
 
 
         </div>

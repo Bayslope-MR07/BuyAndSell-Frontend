@@ -102,8 +102,8 @@
     <!-- ✅ Exclusive Patents Tab -->
      <!-- <button type="button" class="btn btn-outline-success btn-md p-2" >Seller Form</button> -->
     <mat-tab label="Exclusive Patents" >
-      <div class="table-container">
-        <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm">
+      <div class="table-container exclusive-table-container">
+        <table *ngIf="!loader; else loading" class="table table-bordered table-hover shadow-sm table-striped exclusive-table">
           <thead class="table-color">
             <tr>
               <th>Sr. No.</th>
@@ -169,14 +169,14 @@
                   
                 </a>
               </td> -->
-              <!-- <td> -->
-  <!-- <a *ngIf="buyer.analysis_sheet"
+              <!-- <td>
+   <a *ngIf="buyer.analysis_sheet"
      href="javascript:void(0)"
      class="link-success"
      (click)="confirmDownloadAndSendEmail(buyer.analysis_sheet, buyer.id)">
     <i class="fa-solid fa-file-excel"></i>
   </a>
-</td> -->
+</td>  -->
               <td>{{ buyer.acquisition_status }}</td>
               <!-- <td>{{ buyer.buying_options }}</td> -->
 
@@ -207,7 +207,8 @@
                         <ng-template #resubmitTemplate>
                           <div class="alert alert-warning d-flex justify-content-between align-items-center">
                             <p class="mb-0">
-                              You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes.
+You have selected this patent. Please resubmit to make any changes.
+
                             </p>
                             <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>
                           </div>
@@ -382,7 +383,9 @@
                         <ng-template #resubmitTemplate>
                           <div class="alert alert-warning d-flex justify-content-between align-items-center">
                             <p class="mb-0">
-                              You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes.
+                              <!-- You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes. -->
+                               You have selected this patent. Please resubmit to make any changes.
+
                             </p>
                             <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>
                           </div>
@@ -478,7 +481,9 @@
                         <ng-template #resubmitTemplate>
                           <div class="alert alert-warning d-flex justify-content-between align-items-center">
                             <p class="mb-0">
-                              You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes.
+                              <!-- You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes. -->
+                               You have selected this patent. Please resubmit to make any changes.
+
                             </p>
                             <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>
                           </div>

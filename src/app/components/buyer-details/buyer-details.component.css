@@ -221,3 +221,26 @@ body {
     color: #006241;
   }
 }
+
+
+/* Center align table content and fix vertical line alignment */
+.table {
+  width: 100%;
+  border-collapse: collapse !important; /* single neat border line */
+  table-layout: fixed; /* ensures equal spacing */
+}
+
+.table th,
+.table td {
+  text-align: center !important; /* center horizontally */
+  vertical-align: middle !important; /* center vertically */
+  border: 1px solid #000 !important; /* clean black lines */
+  padding: 10px 12px !important; /* equal spacing for both sides */
+}
+
+/* Make first column (th) slightly narrower for balanced look */
+.table th {
+  width: 40%;
+  background-color: #f0f5f9; /* optional: light gray header */
+  font-weight: 600;
+}
