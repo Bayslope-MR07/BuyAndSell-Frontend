@@ -130,14 +130,14 @@
               <tr *ngFor="let buyer of exclusivePaginatedData; let i = index">
               <td>{{ i + 1 }}</td>
               <td>
-                <a [routerLink]="['/buyer-details', buyer.id]" class="link-primary">
+                <a [routerLink]="['/buyer-details', buyer.id]" class="link-primary"style="width: 120px;text-align: center;">
   {{ buyer.portfolio_code }}
 </a>
               </td>
-              <td>{{ buyer.industry }}</td>
+              <td style="width: 120px;">{{ buyer.industry }}</td>
               <!-- <td>{{ buyer.tech_domain }}</td> -->
                <!-- ✅ Tech Domain truncated -->
-      <td style="width: 160px;text-align: center;">
+      <td style="width: 250px;text-align: center;">
         <p >
           {{ buyer.tech_domain }}
           
