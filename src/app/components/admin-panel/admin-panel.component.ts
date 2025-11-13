@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FileUploadService } from '../../services/file-upload.service';
@@ -72,6 +72,8 @@ export class AdminPanelComponent implements OnInit {
   loader2: boolean = false;
   pageSize = 10; // Rows per page
   pageIndex = 0; // Current page index
+  users: any[] = [];
+  filteredUsers: any[] = [];
 
   constructor(
     private http: HttpClient,
@@ -343,7 +345,7 @@ export class AdminPanelComponent implements OnInit {
           this.message = 'Seller data verified successfully!';
           if (this.selectedTabIndex === 2) {
             this.fetchSellerDataUnverified();
-            this.fetchSellerDataVerified(); 
+            this.fetchSellerDataVerified();
           } else if (this.selectedTabIndex === 1) {
             this.fetchSellerDataVerified(); // agar already verified tab me ho
           } else {
@@ -437,5 +439,72 @@ export class AdminPanelComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+  fetchUsers() {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http
+      .get<any[]>(`${this.baseUrl}/admin/users/`, { headers })
+      .subscribe({
+        next: (data) => {
+          this.users = data;
+          this.applyFilters();
+        },
+        error: (err) => {
+          console.error('Error fetching users:', err);
+        },
+      });
+  }
+
+  // applyFilters() {
+  //   this.filteredUsers = this.users.filter((user) => {
+  //     if (this.filter.verified === '') return true;
+  //     return user.is_verified === (this.filter.verified === 'true');
+  //   });
+  // }
+
+  verifyUser(user: any) {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http
+      .patch(`${this.baseUrl}/admin/users/${user.id}/verify/`, {}, { headers })
+      .subscribe({
+        next: () => {
+          user.is_verified = true;
+          this.applyFilters();
+        },
+        error: (err) => {
+          console.error('Error verifying user:', err);
+        },
+      });
+  }
+
+  unverifyUser(user: any) {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http
+      .patch(
+        `${this.baseUrl}/admin/users/${user.id}/unverify/`,
+        {},
+        { headers }
+      )
+      .subscribe({
+        next: () => {
+          user.is_verified = false;
+          this.applyFilters();
+        },
+        error: (err) => {
+          console.error('Error unverifying user:', err);
+        },
+      });
   }
 }

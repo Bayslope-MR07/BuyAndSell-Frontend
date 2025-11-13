@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           user_type: response.user_type,
           has_filled_seller_form: response.has_filled_seller_form ?? false,
           has_filled_buyer_form: response.has_filled_buyer_form ?? false,
-          is_verified: response.is_verified ?? false,
+          // is_verified: response.is_verified ?? false,
         };
 
         this.toastr.success('Login Successful!', 'Success');
@@ -129,15 +129,31 @@ export class LoginComponent implements OnInit {
         console.error('Login Error:', error);
         this.toastr.error('Login failed ❌');
 
-        if (error.error) {
-          for (const key in error.error) {
-            if (error.error.hasOwnProperty(key)) {
-              this.toastr.error(`${key}: ${error.error[key].join(' ')}`);
-            }
-          }
+        if (
+          error.status === 403 &&
+          error.error.error.includes('Not verified')
+        ) {
+          // NDA upload required
+          this.message = 'You are not verified. Please upload signed NDA.';
+          // Redirect or show NDA upload modal/page
+          this.router.navigate(['/nda-upload'], {
+            queryParams: { email: this.formData.email },
+          });
+          return;
         }
 
-        this.message = 'Invalid email or password.';
+        /*
+      // Commented out invalid email/password error handling
+      if (error.error) {
+        for (const key in error.error) {
+          if (error.error.hasOwnProperty(key)) {
+            this.toastr.error(`${key}: ${error.error[key].join(' ')}`);
+          }
+        }
+      }
+
+      this.message = 'Invalid email or password.';
+      */
       },
     });
   }

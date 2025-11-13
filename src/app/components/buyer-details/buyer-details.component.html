@@ -35,7 +35,7 @@
   <i class="fa-solid fa-file-excel"></i> Download Analysis Sheet
 </button>
   <button class="btn btn-success" (click)="downloadAllFiles()">
-  ⬇️ Download All Files (.zip)
+  ⬇️ Download All Charts
 </button>
 
   </div>
@@ -237,10 +237,10 @@
         <th>Market size of products</th>
         <td>{{ patentDetails.market_size }}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th>Any landmark litigation in the space</th>
         <td>{{ patentDetails.current }}</td>
-      </tr>
+      </tr> -->
       
     </tbody>
   </table>
@@ -252,7 +252,7 @@
 
 
 
-<h2 class="section-title">Analysis</h2>
+<h2 class="section-title">Opportunity Details</h2>
 <div *ngIf="patentDetails; else loading" class="table-responsive mt-3">
   <table class="table table-bordered table-striped align-middle">
     <tbody>

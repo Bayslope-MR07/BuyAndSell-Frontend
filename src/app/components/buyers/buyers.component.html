@@ -207,8 +207,13 @@
                         <ng-template #resubmitTemplate>
                           <div class="alert alert-warning d-flex justify-content-between align-items-center">
                             <p class="mb-0">
-You have selected this patent. Please resubmit to make any changes.
-
+ You’ve selected
+                               
+                               <!-- '{{ submissionStatus.get(buyer.id) }}' -->
+                                <strong>
+    '{{ submissionStatus.get(buyer.id) }}'
+  </strong> . Please resubmit to select again.
+       <!-- You’ve selected ‘Pursue’. Please resubmit to select again. -->
                             </p>
                             <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>
                           </div>
@@ -384,7 +389,9 @@ You have selected this patent. Please resubmit to make any changes.
                           <div class="alert alert-warning d-flex justify-content-between align-items-center">
                             <p class="mb-0">
                               <!-- You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes. -->
-                               You have selected this patent. Please resubmit to make any changes.
+                               You have selected this patent.
+                               '{{ submissionStatus.get(buyer.id) }}'
+                               Please resubmit to make any changes.
 
                             </p>
                             <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>
@@ -482,7 +489,10 @@ You have selected this patent. Please resubmit to make any changes.
                           <div class="alert alert-warning d-flex justify-content-between align-items-center">
                             <p class="mb-0">
                               <!-- You have {{ buyer?.user_feedback?.action }} this patent. Kindly resubmit for changes. -->
-                               You have selected this patent. Please resubmit to make any changes.
+                               You’ve selected
+                                <strong>
+    '{{ submissionStatus.get(buyer.id) }}'
+  </strong> . Please resubmit to select again.
 
                             </p>
                             <button type="button" class="btn btn-danger" (click)="enableResubmit(buyer.id)">Resubmit</button>

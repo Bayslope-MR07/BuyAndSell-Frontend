@@ -291,6 +291,49 @@
 
         </div>
       </mat-tab>
+
+            <mat-tab class="lableClass" label="Buyer Activity" style="font-weight: bold;">
+        <!-- <app-buyer-actions></app-buyer-actions> -->
+        <!-- <h2>Admin Panel - User Verification</h2> -->
+         <!-- admin-panel.component.html -->
+
+<h2>Admin Panel - User Verification</h2>
+
+<div>
+  <label>Filter by Verified Status:</label>
+  <select [(ngModel)]="filter.verified" (change)="applyFilters()">
+    <option value="">All</option>
+    <option value="true">Verified</option>
+    <option value="false">Unverified</option>
+  </select>
+</div>
+
+<table class="table table-bordered mt-3">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>User Type</th>
+      <th>Verified</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of filteredUsers">
+      <td>{{ user.email }}</td>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.user_type }}</td>
+      <td>{{ user.is_verified ? 'Yes' : 'No' }}</td>
+      <td>
+        <button *ngIf="!user.is_verified" (click)="verifyUser(user)">Verify</button>
+        <button *ngIf="user.is_verified" (click)="unverifyUser(user)">Unverify</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+      </mat-tab>
     </mat-tab-group>
 
     <!-- Feedback Modal -->

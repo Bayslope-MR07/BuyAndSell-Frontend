@@ -550,11 +550,18 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
       this.exclusivePageSize = event.pageSize;
       this.updateExclusivePaginatedData();
     }
+    // selectedActions = new Map<number, string>();
+    // selectAction(patentId: number, action: string) {
+    //   this.selectedActions.set(patentId, action); // Save the selected action for the specific entry
+    //   // console.log(`Selected action for patent ${patentId}: ${action}`);
+    // }
 
-    selectAction(patentId: number, action: string) {
-      this.selectedActions.set(patentId, action); // Save the selected action for the specific entry
-      // console.log(`Selected action for patent ${patentId}: ${action}`);
+    // selectedActions = new Map<number, string>();
+
+    selectAction(buyerId: number, action: string) {
+      this.selectedActions.set(buyerId, action);
     }
+
     logUrl(url: string) {
       const decoded = decodeURIComponent(url.split('/').pop() || '');
       console.log('📥 Downloading:', decoded);
@@ -591,6 +598,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
             patent &&
             !this.shortlistedPatents.some((p) => p.id === patentId)
           ) {
+            patent.action = action; // ✅ Add this line
             this.shortlistedPatents = [...this.shortlistedPatents, patent];
             console.log(
               '✅ Added to shortlistedPatents:',
@@ -598,8 +606,9 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
             );
           }
         }
-
-        this.submissionStatus.set(patentId, true);
+        this.selectedActions.set(patentId, action);
+        // this.submissionStatus.set(patentId, true);
+        this.submissionStatus.set(patentId, true); // ✅ store action instead of Boolean
       }
     }
 
@@ -658,6 +667,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
 
           // UI state update
           this.submissionStatus.set(patentId, true);
+          // this.submissionStatus.set(patentId, action); // ✅ store action instead of Boolean
         });
     }
 
@@ -736,8 +746,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
         return (
           techDomain.includes(searchValue) ||
           keywords.includes(searchValue) ||
-          portfoliocode.includes(searchValue) 
-
+          portfoliocode.includes(searchValue)
         );
       };
 
@@ -750,7 +759,6 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
       this.exclusivePageIndex = 0;
       this.updateExclusivePaginatedData();
     }
-
 
     clearSearch(): void {
       this.globalSearch = '';
