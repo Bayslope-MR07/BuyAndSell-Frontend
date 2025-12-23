@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FileUploadService {
   // private baseUrl = 'http://127.0.0.1:8000/api/accounts';
-  private baseUrl = 'http://160.153.181.186:8002/api/accounts';
+  private baseUrl = 'api.https://sellbuypatent.com/api/accounts';
   // private baseUrl ='https://buyandsell-backend.onrender.com/api/accounts';
 
   constructor(private http: HttpClient) {}

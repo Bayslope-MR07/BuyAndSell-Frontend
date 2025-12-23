@@ -186,7 +186,7 @@ export class UserSellerDataComponent implements OnInit {
     this.http
       .patch(
         // `http://127.0.0.1:8000/api/accounts/user-seller-data/${this.selectedSeller.id}/`,
-        `http://160.153.181.186:8002/api/accounts/user-seller-data/${this.selectedSeller.id}/`,
+        `api.https://sellbuypatent.com/api/accounts/user-seller-data/${this.selectedSeller.id}/`,
         // `https://buyandsell-backend.onrender.com/api/accounts/user-seller-data/${this.selectedSeller.id}/`,
 
         payload
@@ -212,7 +212,7 @@ export class UserSellerDataComponent implements OnInit {
 
     this.http
       .patch(
-        `http://160.153.181.186:8002/api/accounts/user-seller-data/${seller.id}/`,
+        `api.https://sellbuypatent.com/api/accounts/user-seller-data/${seller.id}/`,
         // `https://buyandsell-backend.onrender.com/api/accounts/user-seller-data/${seller.id}/`,
         payload
       )

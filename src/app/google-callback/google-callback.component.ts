@@ -33,7 +33,7 @@ export class GoogleCallbackComponent implements OnInit {
   exchangeCodeForTokens(code: string): void {
     // const url = 'http://localhost:8000/api/v1/auth/google/';
     // const url = 'https://buyandsell-backend.onrender.com/api/v1/auth/google/';
-    const url = 'http://160.153.181.186:8002/api/v1/auth/google/';
+    const url = 'api.https://sellbuypatent.com/api/v1/auth/google/';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Skip-Auth-Interceptor': 'true'});
 
     this.http.post(url, { code }, { headers })
