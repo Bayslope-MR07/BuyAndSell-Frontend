@@ -88,6 +88,7 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit() {
     this.fetchSellerData();
+    this.fetchUsers();
   }
 
   updatePaginatedData() {
@@ -380,6 +381,10 @@ export class AdminPanelComponent implements OnInit {
   }
 
   applyFilters() {
+    this.filteredUsers = this.users.filter((user) => {
+      if (this.filter.verified === '') return true;
+      return user.is_verified === (this.filter.verified === 'true');
+    });
     this.filteredData = this.sellerData.filter((seller) => {
       const matchesEmail = this.filter.email
         ? seller?.email?.toLowerCase().includes(this.filter.email.toLowerCase())
@@ -459,12 +464,7 @@ export class AdminPanelComponent implements OnInit {
       });
   }
 
-  // applyFilters() {
-  //   this.filteredUsers = this.users.filter((user) => {
-  //     if (this.filter.verified === '') return true;
-  //     return user.is_verified === (this.filter.verified === 'true');
-  //   });
-  // }
+
 
   verifyUser(user: any) {
     const token = localStorage.getItem('access_token');

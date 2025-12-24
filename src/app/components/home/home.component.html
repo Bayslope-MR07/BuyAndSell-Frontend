@@ -8,29 +8,51 @@
   <body>
     <header>
       <div class="navbar fixed-top navbar-expand-lg">
-        <div class="logo">
+        <!-- <div class="logo">
           <img src="Logo.png"  alt="Logo" class="logo-img" />
-        </div>
+        </div> -->
         <nav>
-          <ul>
-            <li><a class="ac" (click)="aboutUs()">About Us</a></li>
-            <li><a (click)="contactUs()">Contact Us</a></li>
+          <!-- <ul> -->
+            <!-- <li><a class="ac" (click)="aboutUs()">About Us</a></li>
+            <li><a (click)="contactUs()">Contact Us</a></li> -->
             <!-- Login Button with Dropdown -->
-            <li class="login-container">
-              <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
+            <!-- <li class="login-container"> -->
+              <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
                 <mat-icon class="login-icon">person</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" class="login-menu bg-dark" xPosition="before">
+              </button> -->
+              <!-- <mat-menu #menu="matMenu" class="login-menu bg-dark" xPosition="before"> -->
                 <!-- <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsAdmin()">Login as Admin</button> -->
-                <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsBuyer()">Login as Buyer</button>
-                <button mat-menu-item class="menu-item user-login text-white" (click)="loginAsSeller()">Login as Seller</button>
+                <!-- <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsBuyer()">Login as Buyer</button> -->
+                <!-- <button mat-menu-item class="menu-item user-login text-white" (click)="loginAsSeller()">Login as Seller</button> -->
 
-              </mat-menu>
-            </li>
-          </ul>
+              <!-- </mat-menu> -->
+            <!-- </li> -->
+          <!-- </ul> -->
         </nav>
       </div>
     </header>
+
+        <section class="join-community" id="join-community">
+      <h2 style="font-weight: 600;">Join our Community</h2>
+      <p style="color: black; font-size: 26px;font-weight: bolder;">
+        "Ready to
+        <button class="btn-buy p-4" (click)="naviagateToBuy()"
+        style="background-color: #2C5F2D; "
+        >Buy</button> or
+        <button
+          class="btn-sell p-4"
+          (click)="naviagateToShell()"
+          style="background-color: #97BC62; "
+        >
+          Sell
+        </button>
+        Patents?"
+      </p>
+      <p class="buttomin-readyto">
+        Create an account today and start connecting with innovators and
+        industry <br />leaders. It's fast, free, and secure.
+      </p>
+    </section>
     <section class="hero" style="padding: 200px;">
       <h1 style="font-size: 36px; font-weight: 700;">
         "Unlock Innovation – Buy and <br />
@@ -41,7 +63,7 @@
         or <br />monetize intellectual property securely and transparently."
       </p>
     </section>
-    <button class="btn-explore">Explore Patents</button>
+    <!-- <button class="btn-explore">Explore Patents</button> -->
     <div class="container">
       <h2 class="section-title" style="font-size: 36px;">How it Works</h2>
       <div class="step-row">
@@ -102,7 +124,19 @@
       </div>
     </div>
 
-    <section class="join-community" id="join-community">
+    <section class="patent-banner">
+      <div class="patent-banner-content">
+        <h2>Want to Sell or Buy Patents?</h2>
+        <p>
+          List your patents, discover high‑value IP, and close deals faster
+          with expert support.
+        </p>
+        <button class="btn-contact-banner" (click)="contactUs()">
+          Contact Us
+        </button>
+      </div>
+    </section>
+    <!-- <section class="join-community" id="join-community">
       <h2 style="font-weight: 600;">Join our Community</h2>
       <p style="color: black; font-size: 26px;font-weight: bolder;">
         "Ready to
@@ -122,7 +156,7 @@
         Create an account today and start connecting with innovators and
         industry <br />leaders. It's fast, free, and secure.
       </p>
-    </section>
+    </section> -->
 
     <div class="container" style="font-weight: 600;">
       <h2 class="section-title">Benefits of Using Our Platform</h2>
@@ -207,7 +241,7 @@
       </div>
     </div>
 
-    <footer>
+        <!-- <footer>
       <div class="footer-content">
         <div class="left-section">
           <p class="copyright">
@@ -243,6 +277,70 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> -->
+
+    <footer class="site-footer">
+  <div class="footer-top">
+    <!-- LEFT -->
+    <div class="footer-left">
+      <div class="brand">
+        <span class="logo"></span>
+        <h3>SellBuyPatent</h3>
+      </div>
+      <p class="tagline">
+        SellBuyPatent is a smart patent marketplace that enables innovators, startups, and enterprises to buy, sell, license, and evaluate patents efficiently using AI-powered insights.
+      </p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="footer-right">
+      <h4 style="font-weight: bolder;">CONTACT US</h4>
+      <p style="font-weight: bolder;">+1 6807704133</p>
+      <!-- <p>infsellbuypatent.com</p> -->
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 SellBuyPatent. All Rights Reserved.
+  </div>
+</footer>
+
+
+    <!-- <footer> -->
+      <!-- <div class="footer-content"> -->
+        <!-- <div class="left-section"> -->
+          
+          <!-- <div class="links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Report Error</a>
+          </div>
+        </div>
+        <div class="social-media">
+          <p>Follow Us:</p>
+          <div class="icons">
+            <div>
+              <a
+                href="https://x.com/Bayslopepatent/status/1423928590073098244"
+                target="_blank"
+                ><i style="color: #006241" class="bi bi-twitter"></i
+              ></a>
+              <a href="https://www.facebook.com/yourusername" target="_blank"
+                ><i style="color: #006241" class="bi bi-facebook"></i
+              ></a>
+              <a href="https://www.instagram.com/bayslope" target="_blank"
+                ><i style="color: #006241" class="bi bi-instagram"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/company/bayslopepatentsolutions"
+                target="_blank"
+                ><i style="color: #006241" class="bi bi-linkedin"></i
+              ></a>
+            </div>
+          </div>
+        </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
+    <!-- </footer> -->
   </body>
 </html>

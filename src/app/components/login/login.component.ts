@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           user_type: response.user_type,
           has_filled_seller_form: response.has_filled_seller_form ?? false,
           has_filled_buyer_form: response.has_filled_buyer_form ?? false,
-          // is_verified: response.is_verified ?? false,
+          is_verified: response.is_verified ?? false,
         };
 
         this.toastr.success('Login Successful!', 'Success');

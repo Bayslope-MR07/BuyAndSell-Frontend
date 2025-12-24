@@ -72,7 +72,7 @@
     </div>
 
     <div class="col-lg-6 col-md-12">
-      <form class="contact-form">
+      <!-- <form class="contact-form">
         <h4 class="text-primary1" style="font-size: 32px; color: #006241;">
           <strong>Get in touch</strong>
         </h4>
@@ -83,22 +83,73 @@
         <input type="tel" id="phone" name="phone" placeholder="Phone Number" />
         <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
         <button type="submit">Submit</button>
-      </form>
+      </form> -->
+    <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
+  <h4 class="text-primary1" style="font-size: 32px; color: #006241;">
+    <strong>Get in touch</strong>
+  </h4>
+  <h6 class="text-primary1" style="color: #1E3932;">You can reach us anytime</h6>
+
+  <input
+    type="text"
+    id="first-name"
+    name="firstName"
+    placeholder="First Name"
+    [(ngModel)]="contact.firstName"
+    required
+  />
+
+  <input
+    type="text"
+    id="last-name"
+    name="lastName"
+    placeholder="Last Name"
+    [(ngModel)]="contact.lastName"
+    required
+  />
+
+  <input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="Your Email"
+    [(ngModel)]="contact.email"
+    required
+  />
+
+  <input
+    type="tel"
+    id="phone"
+    name="phone"
+    placeholder="Phone Number"
+    [(ngModel)]="contact.phone"
+  />
+
+  <textarea
+    id="message"
+    name="message"
+    placeholder="How can we help?"
+    [(ngModel)]="contact.message"
+    required
+  ></textarea>
+
+  <button type="submit">Submit</button>
+</form>
     </div>
   </div>
 </section>
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 <footer>
   <div class="footer-content">
-    <p class="copyright">© 2025 Boyslope Business Solutions Private Limited</p>
-    <div class="links">
+    <p class="copyright">©2025 SellBuyPatent. All Rights Reserved.</p>
+    <!-- <div class="links">
       <a href="#">Terms of Service</a>
       <a href="#">Privacy Policy</a>
       <a href="#">Report Error</a>
-    </div>
+    </div> -->
 
 
-    <div class="social-media">
+    <!-- <div class="social-media">
       <p>Follow Us:</p>
       <div class="icons">
         <a href="https://x.com/Bayslopepatent/status/1423928590073098244" target="_blank"
@@ -114,6 +165,6 @@
           ><i class="bi bi-linkedin"></i
         ></a>
       </div>
-    </div>
+    </div> -->
   </div>
 </footer>

@@ -2,9 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface ContactFormPayload {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  message: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class FileUploadService {
   // private baseUrl = 'http://127.0.0.1:8000/api/accounts';
   private baseUrl = 'https://api.sellbuypatent.com/api/accounts';
@@ -40,5 +50,9 @@ export class FileUploadService {
     });
 
     return this.http.post(`${this.baseUrl}/upload-nda/`, formData, { headers });
+  }
+
+  sendContactForm(payload: ContactFormPayload): Observable<any> {
+    return this.http.post(`${this.baseUrl}/contact/`, payload);
   }
 }
