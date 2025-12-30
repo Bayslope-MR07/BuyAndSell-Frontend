@@ -6,33 +6,9 @@
     <title>BSP - Buy & Sell Patents</title>
   </head>
   <body>
-    <header>
-      <div class="navbar fixed-top navbar-expand-lg">
-        <!-- <div class="logo">
-          <img src="Logo.png"  alt="Logo" class="logo-img" />
-        </div> -->
-        <nav>
-          <!-- <ul> -->
-            <!-- <li><a class="ac" (click)="aboutUs()">About Us</a></li>
-            <li><a (click)="contactUs()">Contact Us</a></li> -->
-            <!-- Login Button with Dropdown -->
-            <!-- <li class="login-container"> -->
-              <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
-                <mat-icon class="login-icon">person</mat-icon>
-              </button> -->
-              <!-- <mat-menu #menu="matMenu" class="login-menu bg-dark" xPosition="before"> -->
-                <!-- <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsAdmin()">Login as Admin</button> -->
-                <!-- <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAsBuyer()">Login as Buyer</button> -->
-                <!-- <button mat-menu-item class="menu-item user-login text-white" (click)="loginAsSeller()">Login as Seller</button> -->
 
-              <!-- </mat-menu> -->
-            <!-- </li> -->
-          <!-- </ul> -->
-        </nav>
-      </div>
-    </header>
 
-        <section class="join-community" id="join-community">
+        <!-- <section class="join-community" id="join-community">
       <h2 style="font-weight: 600;">Join our Community</h2>
       <p style="color: black; font-size: 26px;font-weight: bolder;">
         "Ready to
@@ -62,9 +38,42 @@
         "Access a marketplace of patents across industries. Discover, purchase,
         or <br />monetize intellectual property securely and transparently."
       </p>
-    </section>
+    </section> -->
     <!-- <button class="btn-explore">Explore Patents</button> -->
-    <div class="container">
+    <section class="hero-join-compact">
+  <!-- DIV 1 -->
+  <div class="hero-text">
+    <h1 class="section-title" style="font-size: 36px;">
+      Buy and Sell Patents with Ease.<br />
+      
+    </h1>
+
+    <!-- <p>
+      Access a marketplace of patents across industries. Discover, purchase, or
+      monetize intellectual property securely and transparently.
+    </p> -->
+  </div>
+
+  <!-- DIV 2 -->
+  <div class="join-text">
+    <h2>Join our Community</h2>
+
+    <p class="cta">
+      Ready to
+      <button class="btn-buy" (click)="naviagateToBuy()">Buy</button>
+      or
+      <button class="btn-sell" (click)="naviagateToShell()">Sell</button>
+      Patents?
+    </p>
+
+    <p class="small-text">
+      Create an account today and start connecting with innovators and industry
+      leaders. It's fast, free, and secure.
+    </p>
+  </div>
+</section>
+
+    <!-- <div class="container">
       <h2 class="section-title" style="font-size: 36px;">How it Works</h2>
       <div class="step-row">
         <div class="step-number">
@@ -122,9 +131,58 @@
           />
         </div>
       </div>
+    </div> -->
+
+
+    <div class="container how-it-works-compact">
+  <h2 class="section-title" style="font-size: 36px;">How it Works</h2>
+
+  <div class="how-grid">
+
+    <!-- CARD 1 -->
+    <div class="how-card">
+      <img
+        src="https://img.icons8.com/ios/100/000000/certificate.png"
+        alt="Browse Patent Icon"
+      />
+      <h3>Browse Patents</h3>
+      <p>
+        Explore a diverse selection of patents from various industries,
+        each ready for licensing or purchase.
+      </p>
     </div>
 
-    <section class="patent-banner">
+    <!-- CARD 2 -->
+    <div class="how-card">
+      <img
+        src="https://img.icons8.com/ios/100/000000/security-checked.png"
+        alt="Secure Transactions Icon"
+      />
+      <h3>Secure Transactions</h3>
+      <p>
+        Our platform ensures every transaction is safe and transparent,
+        with secure IP transfers.
+      </p>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="how-card">
+      <img
+        src="https://img.icons8.com/ios/100/000000/handshake.png"
+        alt="Monetize IP Icon"
+      />
+      <h3>Monetize Your IP</h3>
+      <p>
+        List your patent on our marketplace to connect with verified buyers
+        ready to invest.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+    <!-- <section class="patent-banner">
       <div class="patent-banner-content">
         <h2>Want to Sell or Buy Patents?</h2>
         <p>
@@ -135,7 +193,7 @@
           Contact Us
         </button>
       </div>
-    </section>
+    </section> -->
     <!-- <section class="join-community" id="join-community">
       <h2 style="font-weight: 600;">Join our Community</h2>
       <p style="color: black; font-size: 26px;font-weight: bolder;">
@@ -158,7 +216,7 @@
       </p>
     </section> -->
 
-    <div class="container" style="font-weight: 600;">
+    <!-- <div class="container" style="font-weight: 600;">
       <h2 class="section-title">Benefits of Using Our Platform</h2>
       <h3 style="color: #006241; margin: 50px 0px 50px 0px; text-align: left">
         Why choose our platform
@@ -239,7 +297,73 @@
           />
         </div>
       </div>
+    </div> -->
+
+
+    <div class="container benefits-compact">
+  <h2 class="section-title">Benefits of Using Our Platform</h2>
+
+  <!-- <h3 style="color: #006241; margin: 30px 0; text-align: left">
+    Why choose our platform
+  </h3> -->
+
+  <div class="benefits-grid">
+
+    <!-- 1 -->
+    <div class="benefit-card">
+      <img
+        src="https://img.icons8.com/ios/100/000000/certificate.png"
+        alt="Wide Patent Range Icon"
+      />
+      <h4>Wide Patent Range</h4>
+      <p>
+        Browse a large and varied selection of patents across multiple
+        industries.
+      </p>
     </div>
+
+    <!-- 2 -->
+    <div class="benefit-card">
+      <img
+        src="https://img.icons8.com/ios/100/000000/security-checked.png"
+        alt="Secure Transactions Icon"
+      />
+      <h4>Secure Transactions</h4>
+      <p>
+        All transactions are secure, with guidance provided for seamless
+        intellectual property transfers.
+      </p>
+    </div>
+
+    <!-- 3 -->
+    <div class="benefit-card">
+      <img
+        src="https://img.icons8.com/ios/100/000000/customer-support.png"
+        alt="Expert Support Icon"
+      />
+      <h4>Expert Support</h4>
+      <p>
+        Our team offers expert advice and support to guide you through every
+        step.
+      </p>
+    </div>
+
+    <!-- 4 -->
+    <div class="benefit-card">
+      <img
+        src="https://img.icons8.com/ios/100/000000/handshake.png"
+        alt="Direct Buyer Connections Icon"
+      />
+      <h4>Direct Buyer Connections</h4>
+      <p>
+        Connect directly with verified buyers ready to invest in your
+        intellectual property.
+      </p>
+    </div>
+
+  </div>
+</div>
+
 
         <!-- <footer>
       <div class="footer-content">
@@ -293,12 +417,9 @@
     </div>
 
     <!-- RIGHT -->
-    <div class="footer-right">
-      <h4 style="font-weight: bolder;">CONTACT US</h4>
-      <p style="font-weight: bolder;">+1 6807704133</p>
-      <!-- <p>infsellbuypatent.com</p> -->
-    </div>
-  </div>
+<div class="footer-right"> <h4 style="font-weight: bolder;">CONTACT US</h4> <p style="font-weight: bolder;">+1 6807704133</p> <!-- <p>infsellbuypatent.com</p> --> </div> </div>
+
+  <!-- </div> -->
 
   <div class="footer-bottom">
     © 2025 SellBuyPatent. All Rights Reserved.
