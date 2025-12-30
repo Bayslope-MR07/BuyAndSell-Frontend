@@ -4,14 +4,14 @@ body {
 }
 
 .navbar {
-  background-color: #006241;
-  transition: background-color 0.3s ease;
+  /* background-color: #006241; */
+  /* transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(209, 26, 26, 0.1);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background: #006241;
+  align-items: center; */
+  /* padding: 20px; */
+  /* background: #006241; */
 }
 
 .navbar.scrolled {
@@ -104,12 +104,26 @@ body {
 
 .contact-us {
   width: 100%;
-  padding: 80px 20px;
+  padding: 60px 20px;
   background: #f8f8f8;
-  margin: 20px;
+  margin: 20px auto;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+/* ROW CENTER ALIGNMENT */
+.contact-us .row {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+/* LEFT COLUMN thoda narrow (optional) */
+.contact-us .col-lg-6:first-child {
+  /* display: flex; */
+  align-items: center;
+}
+
 
 .contact-us h2 {
   color: #006241;
@@ -179,36 +193,43 @@ body {
 }
 
 .contact-form {
-  border-radius: 30px;
-  border: 2px solid green;
+  max-width: 460px;      /* width control */
+  width: 100%;
+  margin: 0 auto;        /* center horizontally */
+  border-radius: 26px;
+  border: 2px solid #006241;
   text-align: center;
-  padding: 60px;
+  padding: 40px;         /* height kam */
+  background: #ffffff;
 }
 
+
 .contact-form h4 {
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 700;
+  margin-bottom: 6px;
 }
 
 .contact-form h6 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
+  margin-bottom: 20px;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 10px 14px;
+  margin: 8px 0;
   border: 1px solid #ccc;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 400;
+  border-radius: 22px;
+  font-size: 15px;
 }
 
 .contact-form textarea {
-  height: 100px;
+  height: 90px; /* pehle 100 tha */
 }
+
 
 .contact-form button {
   padding: 10px 20px;
@@ -271,4 +292,31 @@ footer {
 .icons i:hover {
   color: #006241;
   font-weight: bolder;
+}
+
+
+
+
+.site-footer {
+  background: #ffffff;
+  padding: 40px 60px 20px;
+  font-family: Arial, sans-serif;
+  border-top: 1px solid #eee;
+}
+
+/* TOP SECTION */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+/* LEFT */
+.footer-left {
+  max-width: 420px;
+   display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* pehle agar center tha to override ho jayega */
+  text-align: left;
 }
