@@ -139,8 +139,11 @@ export class SignupComponent implements OnInit {
     if (form.valid) {
       this.authService.signUp(this.formData).subscribe(
         response => {
-          this.toastr.success('Sign-up successful! Redirecting to login...');
-          this.message = 'Sign-up successful! Redirecting to login...';
+          this.toastr.success(
+            'Your details have been submitted for review. Account access will be granted after verification, and you’ll be notified accordingly.'
+          );
+          this.message =
+            'Your details have been submitted for review. Account access will be granted after verification, and you’ll be notified accordingly.';
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 1500);

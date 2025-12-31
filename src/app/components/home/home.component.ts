@@ -11,7 +11,7 @@ import { MatMenu, MatMenuContent, MatMenuTrigger } from '@angular/material/menu'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, CommonModule,MatIcon,MatMenu,MatMenuTrigger],
+  imports: [FormsModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

@@ -1,150 +1,120 @@
-<div class="navbar fixed-top navbar-expand-lg">
-  <div class="logo" (click)="homePage()">
-    <!-- <img src="Logo.png" alt="Logo" class="logo-img" /> -->
-  </div>
-  <nav>
-    <ul>
-      <!-- <li><a class="ac" (click)="aboutUs()">About Us</a></li> -->
-      <!-- <li><a (click)="contactUs()">Contact Us</a></li> -->
-      <!-- <li class="login-container">
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
-          <mat-icon class="login-icon">person</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" class="login-menu bg-dark">
-          <button mat-menu-item class="menu-item admin-login text-white" (click)="loginAdmin()">
-            Login as Buyer
-          </button>
-          <button mat-menu-item class="menu-item user-login text-white" (click)="loginAdmin()">Login as Seller</button>
-        </mat-menu>
-      </li> -->
-    </ul>
-  </nav>
-</div>
+<header class="site-header">
+  <img
+    src="Logo.png"
+    alt="SellBuyPatent Logo"
+    class="site-logo"
+    (click)="homePage()"
+  />
+</header>
 
+<!-- NAVBAR (empty / future use) -->
+<div class="navbar fixed-top navbar-expand-lg"></div>
+
+<!-- CONTACT SECTION -->
 <section class="contact-us container">
+
+  <!-- BACK ARROW BELOW NAVBAR -->
+  <div class="nav-left" style="margin-top: 90px; margin-bottom: 20px;">
+    <i
+      class="fa fa-arrow-left back-arrow"
+      aria-hidden="true"
+      (click)="homePage()"
+    ></i>
+  </div>
+
+  <!-- CENTER HEADING -->
+  <div class="contact-heading">
+    <h1 class="page-heading" style="margin-top: -61px;">Contact Us</h1>
+  </div>
+
   <div class="row">
+
+    <!-- LEFT COLUMN (optional info later) -->
     <div class="col-lg-6 col-md-12">
-      <h2>
-        <a (click)="homePage()"
-          ><i class="fa fa-arrow-left" aria-hidden="true"></i> Contact Us</a
-        >
-      </h2>
-      <div class="contact-info">
-        <!-- <p class="text-primary1">
-          <i class="fa fa-envelope m-2" aria-hidden="true"></i> Email Us: 
-          <a class="m-lg-5 tx1 text-secondary1" href="mailto:sarita@bayslo.com">sarita&commat;bayslope.com</a>
-        </p> -->
-       
-        <!-- <span class="text-primary1"
-          ><i class="fa-solid fa-house-laptop m-1 my-4"></i> India Office:</span
-        >
-        <span class="text-black m-4">India Office</span>
-        <p class="tx2 text-secondary1" style="margin-left: 27%">
-          Level 10, United Cyber Park, Tower B,<br />Sector-38, Gurgaon-122003, Haryana
-        </p> -->
-      </div>
-      <!-- <div id="map"> -->
-        <!-- <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.1995269225886!2d77.0525490749498!3d28.443401092645203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d185e31fb655d%3A0x46210ab1ece5b96e!2sBayslope!5e0!3m2!1sen!2sin!4v1741279220377!5m2!1sen!2sin"
-          width="600"
-          height="260"
-          style="border: solid green 2px; border-radius: 20px;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe> -->
-        <!-- <a href="https://www.google.com/maps" target="_blank" class="map-link"> -->
-          <!-- <img src="companyLogo.png" alt="Map Link" class="map-image" /> -->
-        <!-- </a> -->
-      <!-- </div> -->
+      <div class="contact-info"></div>
     </div>
 
+    <!-- RIGHT FORM -->
     <div class="col-lg-6 col-md-12">
-      <!-- <form class="contact-form">
-        <h4 class="text-primary1" style="font-size: 32px; color: #006241;">
+      <form
+        class="contact-form"
+        (ngSubmit)="onSubmit()"
+        #contactForm="ngForm"
+      >
+        <h4 class="text-primary1">
           <strong>Get in touch</strong>
         </h4>
-        <h6 class="text-primary1" style="color: #1E3932;">You can reach us anytime</h6>
-        <input type="text" id="first-name" name="first-name" placeholder="First Name" required />
-        <input type="text" id="last-name" name="last-name" placeholder="Last Name" required />
-        <input type="email" id="email" name="email" placeholder="Your Email" required />
-        <input type="tel" id="phone" name="phone" placeholder="Phone Number" />
-        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+
+        <h6 class="text-primary1">
+          You can reach us anytime
+        </h6>
+
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          [(ngModel)]="contact.firstName"
+          required
+        />
+
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          [(ngModel)]="contact.lastName"
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          [(ngModel)]="contact.email"
+          required
+        />
+
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          [(ngModel)]="contact.phone"
+        />
+
+        <textarea
+          name="message"
+          placeholder="How can we help?"
+          [(ngModel)]="contact.message"
+          required
+        ></textarea>
+
         <button type="submit">Submit</button>
-      </form> -->
-    <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
-  <h4 class="text-primary1" style="font-size: 32px; color: #006241;">
-    <strong>Get in touch</strong>
-  </h4>
-  <h6 class="text-primary1" style="color: #1E3932;">You can reach us anytime</h6>
-
-  <input
-    type="text"
-    id="first-name"
-    name="firstName"
-    placeholder="First Name"
-    [(ngModel)]="contact.firstName"
-    required
-  />
-
-  <input
-    type="text"
-    id="last-name"
-    name="lastName"
-    placeholder="Last Name"
-    [(ngModel)]="contact.lastName"
-    required
-  />
-
-  <input
-    type="email"
-    id="email"
-    name="email"
-    placeholder="Your Email"
-    [(ngModel)]="contact.email"
-    required
-  />
-
-  <input
-    type="tel"
-    id="phone"
-    name="phone"
-    placeholder="Phone Number"
-    [(ngModel)]="contact.phone"
-  />
-
-  <textarea
-    id="message"
-    name="message"
-    placeholder="How can we help?"
-    [(ngModel)]="contact.message"
-    required
-  ></textarea>
-
-  <button type="submit">Submit</button>
-</form>
+      </form>
     </div>
+
   </div>
 </section>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-    <footer class="site-footer">
+<!-- FOOTER -->
+<footer class="site-footer">
   <div class="footer-top">
-    <!-- LEFT -->
     <div class="footer-left">
       <div class="brand">
-        <span class="logo"></span>
+        <img src="Logo.png" alt="SellBuyPatent Logo" class="brand-logo" />
         <h3>SellBuyPatent</h3>
       </div>
+
       <p class="tagline">
-        SellBuyPatent is a smart patent marketplace that enables innovators, startups, and enterprises to buy, sell, license, and evaluate patents efficiently using AI-powered insights.
+        SellBuyPatent is a smart patent marketplace that enables innovators,
+        startups, and enterprises to buy, sell, license, and evaluate patents
+        efficiently using AI-powered insights.
       </p>
     </div>
 
-    <!-- RIGHT -->
-<div class="footer-right"> <h4 style="font-weight: bolder;">CONTACT US</h4> <p style="font-weight: bolder;">+1 6807704133</p> <!-- <p>infsellbuypatent.com</p> --> </div> </div>
-
-  <!-- </div> -->
+    <div class="footer-right">
+      <h4>CONTACT US</h4>
+      <p>+1 6807704133</p>
+    </div>
+  </div>
 
   <div class="footer-bottom">
     © 2025 SellBuyPatent. All Rights Reserved.
