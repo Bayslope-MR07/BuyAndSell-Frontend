@@ -1,9 +1,9 @@
 <div class="login-form">
   <h1 class="text-center">Welcome Back</h1>
   <p>Glad to see you again, Login To your account below</p>
-  <button (click)="googleCallback()" id="button-google">
+  <!-- <button (click)="googleCallback()" id="button-google">
     <i class="fab fa-google fa-2x me-3"></i> Continue with Google
-  </button>
+  </button> -->
   <form (ngSubmit)="onSubmit()">
     <label for="email">Email:</label>
     <input type="email" [(ngModel)]="formData.email" name="email" required />
