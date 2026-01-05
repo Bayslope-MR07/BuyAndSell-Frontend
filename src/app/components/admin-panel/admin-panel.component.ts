@@ -103,7 +103,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('/');
   }
 
   homePage() {

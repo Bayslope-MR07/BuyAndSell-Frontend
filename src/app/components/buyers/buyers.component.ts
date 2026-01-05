@@ -137,7 +137,7 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
     dataSource = new MatTableDataSource<any>([]);
 
     logout() {
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('/');
     }
 
     analytics() {

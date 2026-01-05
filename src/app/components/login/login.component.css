@@ -253,3 +253,352 @@
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+
+
+
+
+
+
+
+.site-footer {
+  background: #ffffff;
+  padding: 40px 60px 20px;
+  font-family: Arial, sans-serif;
+  border-top: 1px solid #eee;
+}
+
+/* TOP SECTION */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+/* LEFT */
+.footer-left {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* pehle agar center tha to override ho jayega */
+  text-align: left;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bolder;
+}
+
+.logo {
+  font-size: 22px;
+  color: #4f46e5;
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  /* color: #666; */
+  /* line-height: 1.4; */
+}
+
+/* RIGHT */
+.footer-right {
+  text-align: right;
+}
+
+.footer-right h4 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  /* color: #4f46e5; */
+  letter-spacing: 1px;
+  font-weight: bolder;
+}
+
+.footer-right p {
+  margin: 4px 0;
+  font-size: 15px;
+  /* color: #6b4eff; */
+}
+
+/* BOTTOM */
+.footer-bottom {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bolder;
+  /* color: #777; */
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-right {
+    text-align: left;
+  }
+}
+
+
+.patent-banner {
+  background: linear-gradient(90deg, #2c5f2d, #97bc62);
+  color: #fff;
+  padding: 18px 20px;
+  text-align: center;
+  margin: 40px 0;
+  border-radius: 12px;
+}
+
+.patent-banner-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.patent-banner-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.btn-contact-banner {
+  background-color: #ffffff;
+  color: #2c5f2d;
+  border: none;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-contact-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.footer-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 260px;
+}
+
+.footer-contact-form input,
+.footer-contact-form textarea {
+  padding: 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.footer-contact-form button {
+  padding: 8px;
+  font-size: 14px;
+  background: #006241;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+.hero-join-compact {
+  /* padding: 70px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; */
+
+  /* background-image: url('assets/images/hero-bg.png');  */
+   /* background-image: url('/image.png'); */
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+  padding: 80px 60px;
+}
+
+.hero-text h1 {
+  font-size: 32px;
+}
+
+.hero-text p {
+  font-size: 18px;
+}
+
+.join-text h2 {
+  font-size: 32px;
+    margin-bottom: 10px;
+    color: green;
+    font-weight: bolder;
+}
+
+.small-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+.cta{
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+
+
+
+.how-it-works-compact {
+  padding: 60px 0;
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.how-card img {
+  width: 80px;
+  margin-bottom: 20px;
+}
+
+.how-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.how-card p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .how-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+.benefits-compact {
+  padding: 60px 0;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.benefit-card img {
+  width: 75px;
+  margin-bottom: 18px;
+}
+
+.benefit-card h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.benefit-card p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+.hero-join-compact {
+  padding: 70px 60px;
+  background: linear-gradient(
+    135deg,
+    #f3faf5,
+    #e6f4ea
+  );
+}
+
+
+.site-header {
+  position: fixed;        /* hamesha top par rahe */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  /* background-color: rgb(140, 178, 140); */
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
+  z-index: 1000;
+}
+
+.site-logo {
+  height: 45px;           /* logo size */
+  width: auto;
+  cursor: pointer;
+}
+
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;          /* logo aur text ke beech space */
+}
+
+.brand-logo {
+  height: 40px;      /* logo size */
+  width: auto;
+}
+
+
+
+
+.site-header {
+  position: fixed;        /* hamesha top par rahe */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  /* background-color: rgb(140, 178, 140); */
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
+  z-index: 1000;
+}
+
+.site-logo {
+  height: 45px;           /* logo size */
+  width: auto;
+  cursor: pointer;
+}
+

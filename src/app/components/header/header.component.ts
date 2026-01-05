@@ -17,7 +17,7 @@ export class HeaderComponent {
 
   }
   logout(){
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('/');
   }
   naviagateToBuy(){
     this.router.navigateByUrl('buyer');
