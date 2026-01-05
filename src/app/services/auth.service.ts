@@ -104,7 +104,7 @@ export class AuthService {
     return this.http.post(
       `${this.baseUrl}/forgot-password/`,
       { email },
-      { withCredentials: true }
+      { withCredentials: true, headers: { 'Skip-Auth-Interceptor': 'true' } }
     );
   }
 
