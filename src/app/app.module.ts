@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: 'forgot', component: ForgotPasswordComponent },
   { path: 'otp', component: OtpComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'seller', component: SellerFormComponent, canActivate: [AuthGuard] },
+  { path: 'seller', component: SellerFormComponent },
   { path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard] },
   { path: 'buyer', component: BuyersComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },

@@ -7,6 +7,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuContent, MatMenuTrigger } from '@angular/material/menu';
+import { SellerFormComponent } from '../seller-form/seller-form.component';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/login?user_type=Buyer');
   }
   naviagateToShell() {
-    this.router.navigateByUrl('/login?user_type=Seller');
+    this.router.navigateByUrl('/seller');
   }
   contactUs() {
     this.router.navigateByUrl('contact-us');

@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth.service'; // path adjust karo agar alag ho
 
 @Injectable({
   providedIn: 'root',
@@ -17,22 +17,19 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const token = localStorage.getItem('access_token');
-    if (token && this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated()) {
       return true;
-    } else {
-      this.router.navigate(['/login'], { replaceUrl: true }).then(() => {
-        window.history.replaceState(null, '', '/login');
-        window.onpopstate = () => {
-          window.history.replaceState(null, '', '/login');
-          this.router.navigate(['/login'], { replaceUrl: true });
-        };
-        while (window.history.length > 1) {
-          window.history.back();
-          window.history.forward();
-        }
-      });
-      return false;
     }
+
+    // Optional: clear local storage if koi leftover hai
+    this.authService.clearSession();
+
+    // User ko login pe bhejo, replaceUrl ke saath
+    this.router.navigate(['/'], {
+      replaceUrl: true,
+      queryParams: { returnUrl: state.url }, // agar baad me redirect back karna ho to
+    });
+
+    return false;
   }
 }

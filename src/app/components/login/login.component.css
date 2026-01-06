@@ -602,3 +602,30 @@
   cursor: pointer;
 }
 
+
+
+
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* eye icon ke liye space */
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+.toggle-password-btn:focus {
+  outline: none;
+}

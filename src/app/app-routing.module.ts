@@ -20,7 +20,7 @@ import { NdaUploadComponent } from './nda-upload/nda-upload.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'seller', component: SellerFormComponent, canActivate: [AuthGuard] },
+  { path: 'seller', component: SellerFormComponent },
   { path: 'home', component: HomeComponent },
   { path: 'dope', component: LoginComponent },
   { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard2] },
@@ -32,7 +32,8 @@ const routes: Routes = [
   { path: 'google/callback/', component: GoogleCallbackComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
   { path: 'buyerform', component: BuyerFormComponent },
-  { path: 'nda-upload',component: NdaUploadComponent },
+  { path: 'nda-upload', component: NdaUploadComponent },
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({

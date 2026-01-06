@@ -13,12 +13,24 @@
     <input type="email" [(ngModel)]="formData.email" name="email" required />
 
     <label for="password">Password:</label>
+
+    <div class="password-wrapper">
     <input
-      type="password"
+      [type]="showPassword ? 'text' : 'password'"
       [(ngModel)]="formData.password"
       name="password"
       required
     />
+     <button
+    type="button"
+    class="toggle-password-btn"
+    (click)="togglePassword()"
+    aria-label="Show or hide password"
+  >
+    <i *ngIf="!showPassword" class="fa fa-eye"></i>
+    <i *ngIf="showPassword" class="fa fa-eye-slash"></i>
+  </button>
+</div>
     <span class="mb-3">
       <a class="form-control-sm anchorStyle" style="color: #006241;" (click)="goForgot()">Forgot Password</a>
     </span>

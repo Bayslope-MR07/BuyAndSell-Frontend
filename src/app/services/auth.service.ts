@@ -138,7 +138,7 @@ export class AuthService {
       .pipe(
         finalize(() => {
           this.clearSession();
-          this.router.navigate(['/login'], { replaceUrl: true });
+          this.router.navigate(['/'], { replaceUrl: true });
         })
       );
   }
@@ -177,7 +177,12 @@ export class AuthService {
     return this.http.post(
       `${this.baseUrl}/accounts/seller_form_submission/`,
       data,
-      { headers: this.authHeaders(), withCredentials: true }
+      {
+        withCredentials: true,
+        headers: new HttpHeaders({
+          'Skip-Auth-Interceptor': 'true', // 👈 interceptor ko hint
+        }),
+      }
     );
   }
 

@@ -30,7 +30,7 @@ export class SellerFormComponent {
     country: '',
     email: '',
     phone: '',
-    
+
     city: '',
     postal_code: '',
     current_assignee_status: '', // Yes or No
@@ -149,5 +149,11 @@ export class SellerFormComponent {
           console.log('Request completed');
         },
       });
+  }
+
+  goToSellerLogin() {
+    this.router.navigate(['/login'], {
+      queryParams: { user_type: 'Seller' },
+    });
   }
 }

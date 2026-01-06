@@ -11,19 +11,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [MatMenuModule, MatIconModule, MatButtonModule, CommonModule],
   templateUrl: './profile-header.component.html',
-  styleUrls: ['./profile-header.component.css'] // Corrected from styleUrl to styleUrls
+  styleUrls: ['./profile-header.component.css'], // Corrected from styleUrl to styleUrls
 })
 export class ProfileHeaderComponent implements OnInit {
-  userType: string= '';
-  check1: boolean=false
-  check2: boolean=false
+  userType: string = '';
+  check1: boolean = false;
+  check2: boolean = false;
   constructor(private router: Router, private authService: AuthService) {}
   ngOnInit(): void {
-      let user:any=localStorage.getItem('userData');
-      let info=JSON.parse(user);
-      this.userType=info.user_type;
-      this.check1=this.userType==='Buyer' || this.userType==='Both'
-      this.check2=this.userType==='Seller' || this.userType==='Both'
+    let user: any = localStorage.getItem('userData');
+    let info = JSON.parse(user);
+    this.userType = info.user_type;
+    this.check1 = this.userType === 'Buyer' || this.userType === 'Both';
+    this.check2 = this.userType === 'Seller' || this.userType === 'Both';
   }
   // Check if the current route matches a given path
   isRouteActive(route: string): boolean {
@@ -31,7 +31,17 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigateByUrl('login');
+    this.authService.logout().subscribe({
+      next: () => {
+        // yaha kuch nahi karna, finalize already redirect + clear karega
+      },
+      error: (err) => {
+        console.error('Logout error:', err);
+        // Agar API fail bhi ho jaaye, phir bhi user ko force logout kar sakte ho:
+        this.authService.clearSession();
+        this.router.navigate(['/'], { replaceUrl: true });
+      },
+    });
   }
 
   naviagateToBuy() {
@@ -69,7 +79,7 @@ export class ProfileHeaderComponent implements OnInit {
   buyer() {
     this.router.navigateByUrl('buyer');
   }
-  goForgot(){
+  goForgot() {
     this.router.navigateByUrl('confirm-password');
   }
 }

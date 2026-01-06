@@ -144,7 +144,30 @@
 </div>
 
 
+
 <div class="container  p-2 bg-light rounded shadow" style="margin-top: 5%;">
+
+  <div
+    class="alert alert-info d-flex justify-content-between align-items-center mb-3"
+    style="border-radius: 6px;"
+  >
+    <span>
+      Already filled this seller form and received your login details?<br />
+      Please login as a Seller to view or manage your portfolio.
+    </span>
+
+    <button
+      type="button"
+      class="btn btn-success btn-sm ms-3"
+      (click)="goToSellerLogin()"
+    >
+      Login as Seller
+    </button>
+  </div>
+
+  <div>
+  <h1>Seller Form</h1>
+</div>
   <p class="subtitle text-start mb-4 mt-lg-1">
     Please enter the details below to sell.
   </p>

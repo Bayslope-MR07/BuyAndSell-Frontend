@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   showBuyerPopup: boolean = false;
   showSellerPopup: boolean = false;
 
+  showPassword = false;
+
   formData = {
     email: '',
     password: '',
@@ -60,6 +62,104 @@ export class LoginComponent implements OnInit {
     window.location.href = googleAuthUrl;
   }
 
+  // onSubmit() {
+  //   this.authService.login(this.formData).subscribe({
+  //     next: (response: any) => {
+  //       this.message = 'Login successful!';
+  //       localStorage.setItem('access_token', response.access_token);
+  //       localStorage.setItem('refresh_token', response.refresh_token);
+  //       localStorage.setItem('is_admin', response.is_admin);
+  //       localStorage.setItem('userData', JSON.stringify(response));
+
+  //       this.userData = {
+  //         first_name: response.first_name,
+  //         last_name: response.last_name,
+  //         email: response.email,
+  //         user_type: response.user_type,
+  //         has_filled_seller_form: response.has_filled_seller_form ?? false,
+  //         has_filled_buyer_form: response.has_filled_buyer_form ?? false,
+  //         is_verified: response.is_verified ?? false,
+  //       };
+
+  //       this.toastr.success('Login Successful!', 'Success');
+
+  //       // 👨‍💼 Admin
+  //       if (response.is_admin === true) {
+  //         this.router.navigate(['/admin']);
+  //         return;
+  //       }
+
+  //       const userType = response.user_type;
+
+  //       // 👨‍🏫 Seller or Both
+  //       if (userType === 'Seller' || userType === 'Both') {
+  //         if (this.userData.has_filled_seller_form) {
+  //           this.router.navigate(['/user-seller-data']);
+  //         } else {
+  //           this.router.navigate(['/seller']);
+  //         }
+  //         return;
+  //       }
+
+  //       // 👤 Buyer Login Logic
+  //       if (userType === 'Buyer') {
+  //         // ❌ If not verified, go to NDA upload
+  //         if (!this.userData.is_verified) {
+  //           this.router.navigate(['/buyer']);
+  //           return;
+  //         }
+
+  //         // ✅ Verified Buyer
+  //         if (!this.userData.has_filled_buyer_form) {
+  //           const skipped = localStorage.getItem('buyerFormSkipped');
+  //           if (skipped === 'true') {
+  //             this.router.navigate(['/buyer']);
+  //           } else {
+  //             this.showBuyerPopup = true;
+  //           }
+  //         } else {
+  //           this.router.navigate(['/buyer']);
+  //         }
+
+  //         return;
+  //       }
+
+  //       // Default fallback
+  //       this.router.navigate(['/buyer']);
+  //     },
+  //     error: (error) => {
+  //       console.error('Login Error:', error);
+  //       this.toastr.error('Login failed ❌');
+
+  //       if (
+  //         error.status === 403 &&
+  //         error.error.error.includes('Not verified')
+  //       ) {
+  //         // NDA upload required
+  //         this.message = 'You are not verified. Please upload signed NDA.';
+  //         // Redirect or show NDA upload modal/page
+  //         this.router.navigate(['/nda-upload'], {
+  //           queryParams: { email: this.formData.email },
+  //         });
+  //         return;
+  //       }
+
+  //       /*
+  //     // Commented out invalid email/password error handling
+  //     if (error.error) {
+  //       for (const key in error.error) {
+  //         if (error.error.hasOwnProperty(key)) {
+  //           this.toastr.error(`${key}: ${error.error[key].join(' ')}`);
+  //         }
+  //       }
+  //     }
+
+  //     this.message = 'Invalid email or password.';
+  //     */
+  //     },
+  //   });
+  // }
+
   onSubmit() {
     this.authService.login(this.formData).subscribe({
       next: (response: any) => {
@@ -101,13 +201,11 @@ export class LoginComponent implements OnInit {
 
         // 👤 Buyer Login Logic
         if (userType === 'Buyer') {
-          // ❌ If not verified, go to NDA upload
           if (!this.userData.is_verified) {
             this.router.navigate(['/buyer']);
             return;
           }
 
-          // ✅ Verified Buyer
           if (!this.userData.has_filled_buyer_form) {
             const skipped = localStorage.getItem('buyerFormSkipped');
             if (skipped === 'true') {
@@ -118,7 +216,6 @@ export class LoginComponent implements OnInit {
           } else {
             this.router.navigate(['/buyer']);
           }
-
           return;
         }
 
@@ -127,33 +224,38 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         console.error('Login Error:', error);
-        this.toastr.error('Login failed ❌');
 
+        // 1️⃣ Not-verified (NDA) case as-is
         if (
           error.status === 403 &&
+          error.error &&
+          typeof error.error.error === 'string' &&
           error.error.error.includes('Not verified')
         ) {
-          // NDA upload required
           this.message = 'You are not verified. Please upload signed NDA.';
-          // Redirect or show NDA upload modal/page
+          this.toastr.error(this.message);
+
           this.router.navigate(['/nda-upload'], {
             queryParams: { email: this.formData.email },
           });
           return;
         }
 
-        /*
-      // Commented out invalid email/password error handling
-      if (error.error) {
-        for (const key in error.error) {
-          if (error.error.hasOwnProperty(key)) {
-            this.toastr.error(`${key}: ${error.error[key].join(' ')}`);
-          }
+        // 2️⃣ Wrong credentials (email/password) – usually 400 + non_field_errors
+        if (
+          error.status === 400 &&
+          error.error &&
+          (error.error.non_field_errors || error.error.detail)
+        ) {
+          this.message = 'Your password is wrong. Please check and try again.';
+          // agar tum generic rakhna chaho: 'Email or password is incorrect.'
+          this.toastr.error(this.message);
+          return;
         }
-      }
 
-      this.message = 'Invalid email or password.';
-      */
+        // 3️⃣ Any other error
+        this.message = 'Something went wrong. Please try again later.';
+        this.toastr.error(this.message);
       },
     });
   }
@@ -167,5 +269,8 @@ export class LoginComponent implements OnInit {
     this.showBuyerPopup = false;
     localStorage.setItem('buyerFormSkipped', 'true');
     this.router.navigate(['/buyer']);
+  }
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }
