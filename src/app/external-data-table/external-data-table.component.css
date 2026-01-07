@@ -1,0 +1,139 @@
+/* ========== GLOBAL ========== */
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #eef7f4;
+  margin: 0;
+  color: #2f4f4f;
+}
+
+/* ========== HEADER ========== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #d4e9e2;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.site-logo {
+  height: 45px;
+  cursor: pointer;
+}
+
+/* ========== BACK BUTTON ========== */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 90px 0 15px 20px;
+  font-weight: 600;
+  color: #5b8f86;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.back-button mat-icon {
+  font-size: 20px;
+}
+
+.back-button:hover {
+  color: #2f4f4f;
+  transform: translateX(-3px);
+}
+
+/* ========== MAIN WRAPPER ========== */
+.external-wrapper {
+  padding: 20px;
+}
+
+/* ========== TITLE ========== */
+.external-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2f4f4f;
+}
+
+/* ========== ERROR / INFO ========== */
+.error {
+  padding: 12px;
+  background-color: #ffeaea;
+  color: #a94442;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* ========== TABLE CARD ========== */
+.external-table-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  overflow-x: auto;
+}
+
+/* ========== TABLE ========== */
+.external-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1200px;
+}
+
+.external-table th,
+.external-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e0ece8;
+  font-size: 14px;
+}
+
+.external-table th {
+  background-color: #d4e9e2;
+  color: #2f4f4f;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.external-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.external-table tbody tr:hover {
+  background-color: #f1faf7;
+}
+
+/* Sno column */
+.external-table td:first-child {
+  font-weight: 600;
+  color: #5b8f86;
+}
+
+/* ========== FOOTER ========== */
+.site-footer {
+  margin-top: 40px;
+  padding: 14px 0;
+  background-color: #d4e9e2;
+  color: #2f4f4f;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .external-title {
+    font-size: 22px;
+  }
+
+  .back-button {
+    margin-left: 15px;
+  }
+}

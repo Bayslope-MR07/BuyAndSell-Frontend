@@ -807,5 +807,9 @@ import { TechDomainDialogComponent } from '../../tech-domain-dialog/tech-domain-
           },
         });
     }
+    gotobuyerform1() {
+      console.log('External button clicked');
+      this.router.navigate(['/app-external-data-table']);
+    }
   }
   

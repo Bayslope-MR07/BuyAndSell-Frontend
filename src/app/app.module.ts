@@ -50,6 +50,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { BuyerFormComponent } from './buyer-form/buyer-form.component';
 import { TechDomainDialogComponent } from './tech-domain-dialog/tech-domain-dialog.component';
 import { NdaUploadComponent } from './nda-upload/nda-upload.component';
+import { ExternalDataTableComponent } from './external-data-table/external-data-table.component';
 
 // Define routes
 const routes: Routes = [
@@ -72,7 +73,8 @@ const routes: Routes = [
   { path: 'user-profile-update', component: UserProfileUpdateComponent },
   { path: 'google-callback', component: GoogleCallbackComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
-  {path:'buyerform',component:BuyerFormComponent}
+  { path: 'buyerform', component: BuyerFormComponent },
+  { path: 'app-external-data-table', component: ExternalDataTableComponent },
 ];
 
 library.add(faTwitter, faFacebook, faInstagram, faLinkedin);
@@ -84,6 +86,7 @@ library.add(faTwitter, faFacebook, faInstagram, faLinkedin);
     
     GoogleCallbackComponent,
               NdaUploadComponent,
+              
               // TechDomainDialogComponent,
     
     

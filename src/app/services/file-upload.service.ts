@@ -2,6 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
+
+export interface ExternalDataRow {
+  sno: string | null;
+  applicationNumber: string | null;
+  patentNumber: string | null;
+  applicationType: string | null;
+  PublicationNumber: string | null;
+  PublicationType: string | null;
+  status: string | null;
+  entityStatus: string | null;
+  smallEntityStatus: string | null;
+  filingDate: string | null;
+  applicantName: string | null;
+  inventorBag: string | null;
+}
+
 export interface ContactFormPayload {
   firstName: string;
   lastName: string;
@@ -13,8 +30,6 @@ export interface ContactFormPayload {
 @Injectable({
   providedIn: 'root',
 })
-
-
 export class FileUploadService {
   // private baseUrl = 'http://127.0.0.1:8000/api/accounts';
   private baseUrl = 'https://api.sellbuypatent.com/api/accounts';
@@ -54,5 +69,10 @@ export class FileUploadService {
 
   sendContactForm(payload: ContactFormPayload): Observable<any> {
     return this.http.post(`${this.baseUrl}/contact/`, payload);
+  }
+  getFirst100(): Observable<ExternalDataRow[]> {
+    return this.http.get<ExternalDataRow[]>(
+      `${this.baseUrl}/external-data/`
+    );
   }
 }

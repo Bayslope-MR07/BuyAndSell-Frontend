@@ -16,6 +16,7 @@ import { GoogleCallbackComponent } from './google-callback/google-callback.compo
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 import { BuyerFormComponent } from './buyer-form/buyer-form.component';
 import { NdaUploadComponent } from './nda-upload/nda-upload.component';
+import { ExternalDataTableComponent } from './external-data-table/external-data-table.component';
 // Define your routes
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -34,6 +35,14 @@ const routes: Routes = [
   { path: 'buyerform', component: BuyerFormComponent },
   { path: 'nda-upload', component: NdaUploadComponent },
   { path: '', component: HomeComponent },
+  // { path: 'app-external-data-table', component: ExternalDataTableComponent },
+  {
+    path: 'app-external-data-table',
+    loadComponent: () =>
+      import('./external-data-table/external-data-table.component').then(
+        (m) => m.ExternalDataTableComponent
+      ),
+  },
 ];
 
 @NgModule({
