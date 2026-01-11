@@ -34,7 +34,8 @@
           <th>SmallEntityStatus</th>
           <th>FilingDate</th>
           <th>ApplicantName</th>
-          <th>InventorBag</th>
+          <!-- <th>InventorBag</th> -->
+           <th>Reach Out</th>
         </tr>
       </thead>
       <tbody>
@@ -50,7 +51,16 @@
           <td>{{ row.smallEntityStatus }}</td>
           <td>{{ row.filingDate }}</td>
           <td>{{ row.applicantName }}</td>
-          <td>{{ row.inventorBag }}</td>
+          <!-- <td>{{ row.inventorBag }}</td> -->
+           <td>
+        <button
+          type="button"
+          class="btn btn-sm btn-success"
+          (click)="reachOut(row)"
+        >
+          Reach Out
+        </button>
+      </td>
         </tr>
       </tbody>
     </table>
