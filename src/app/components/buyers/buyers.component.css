@@ -145,9 +145,14 @@ body {
 }
 
 /* Ensure the content takes up the remaining space */
-.content-wrapper {
+/* .content-wrapper {
   flex: 1 0 auto;
+} */
+
+.content-wrapper {
+  margin-top: 110px; /* navbar (64px) + banner (~40px) */
 }
+
 
 /* Footer styling */
 footer,
@@ -570,4 +575,17 @@ select.form-select:focus {
 .exclusive-table tr th:last-child,
 .exclusive-table tr td:last-child {
   border-right: none !important;
+}
+.beta-banner {
+  position: fixed;
+  top: 64px;        /* navbar ke neeche */
+  left: 0;
+  width: 100%;
+  background-color: #fff3cd;
+  color: #664d03;
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 13px;
+
+  z-index: 1001;   /* 🔥 navbar se zyada */
 }
