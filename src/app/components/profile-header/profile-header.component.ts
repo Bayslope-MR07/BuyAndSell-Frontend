@@ -65,7 +65,7 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   homePage() {
-    this.router.navigateByUrl('/');
+    // this.router.navigateByUrl('/');
   }
 
   updateUserProfile() {
