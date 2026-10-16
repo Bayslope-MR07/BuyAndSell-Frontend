@@ -2,9 +2,10 @@ export const environment = {
   production: false,
   // apiUrl: 'http://3.144.99.241/api/accounts', // Django backend API
   // apiUrl: 'http://68.178.163.122:8060/api/accounts', // Local Django backend
-  // apiUrl: 'http://127.0.0.1:8000/api/accounts',
+  apiUrl:
+    'https://bp6fqe0ma0.execute-api.us-east-1.amazonaws.com/buysell/api/accounts',
   // apiUrl: 'http://160.153.181.186:8002/api/accounts',
-  apiUrl: 'https://api.sellbuypatent.com/api/accounts',
+  // apiUrl: 'https://api.sellbuypatent.com/api/accounts',
   // apiUrl: 'https://buyandsell-backend.onrender.com/api/accounts',
 
   GOOGLE_CLIENT_ID:

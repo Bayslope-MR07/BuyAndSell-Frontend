@@ -14,13 +14,15 @@ export class NdaUploadComponent {
   selectedFile: File | null = null;
   uploading = false;
   // private baseUrl = 'http://127.0.0.1:8000/api/accounts';
-  private baseUrl = 'https://api.sellbuypatent.com/api/accounts';
+  private baseUrl =
+    'https://bp6fqe0ma0.execute-api.us-east-1.amazonaws.com/buysell/dev/api/accounts';
+  // private baseUrl = 'https://api.sellbuypatent.com/api/accounts';
   // private baseUrl = 'https://buyandsell-backend.onrender.com/api/accounts';
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
   ) {}
 
   onFileSelected(event: any) {

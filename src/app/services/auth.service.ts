@@ -50,8 +50,8 @@ export class AuthService {
   login(data: any): Observable<any> {
     return this.http
       .post(`${this.baseUrl}/login/`, data, {
-        withCredentials: true,
-        headers: { 'Skip-Auth-Interceptor': 'true' },
+        withCredentials: false,
+        headers: { 'Skip-Auth-Interceptor': 'true','Content-Type': 'application/json' },
       })
       .pipe(
         tap((response: any) => {

@@ -20,7 +20,7 @@ import { FooterComponent } from '../footer/footer.component';
     ProfileHeaderComponent,
     MatProgressSpinnerModule,
     FooterComponent,
-    MatPaginatorModule // Added MatPaginatorModule
+    MatPaginatorModule, // Added MatPaginatorModule
   ],
   templateUrl: './user-seller-data.component.html',
   styleUrls: ['./user-seller-data.component.css'],
@@ -72,7 +72,7 @@ export class UserSellerDataComponent implements OnInit {
     private http: HttpClient,
     private fileUploadService: FileUploadService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -117,7 +117,7 @@ export class UserSellerDataComponent implements OnInit {
       (error) => {
         this.loader = false;
         console.error('Error fetching seller data:', error);
-      }
+      },
     );
   }
 
@@ -189,7 +189,7 @@ export class UserSellerDataComponent implements OnInit {
         `https://api.sellbuypatent.com/api/accounts/user-seller-data/${this.selectedSeller.id}/`,
         // `https://buyandsell-backend.onrender.com/api/accounts/user-seller-data/${this.selectedSeller.id}/`,
 
-        payload
+        payload,
       )
       .subscribe(
         (response) => {
@@ -199,7 +199,7 @@ export class UserSellerDataComponent implements OnInit {
         },
         (error) => {
           console.error('Error verifying seller data:', error);
-        }
+        },
       );
   }
 
@@ -212,10 +212,10 @@ export class UserSellerDataComponent implements OnInit {
 
     this.http
       .patch(
-        // `http://127.0.0.1:8000/api/accounts/user-seller-data/${seller.id}/`,
-        `https://api.sellbuypatent.com/api/accounts/user-seller-data/${seller.id}/`,
+        `https://bp6fqe0ma0.execute-api.us-east-1.amazonaws.com/buysell/api/accounts/user-seller-data/${seller.id}/`,
+        // `https://api.sellbuypatent.com/api/accounts/user-seller-data/${seller.id}/`,
         // `https://buyandsell-backend.onrender.com/api/accounts/user-seller-data/${seller.id}/`,
-        payload
+        payload,
       )
       .subscribe(
         (response) => {
@@ -224,12 +224,12 @@ export class UserSellerDataComponent implements OnInit {
         },
         (error) => {
           console.error('Error unverifying seller data:', error);
-        }
+        },
       );
   }
 
   applyFilters() {
-    console.log(this.filter.email, "sdfg");
+    console.log(this.filter.email, 'sdfg');
     this.filteredData = this.sellerData.filter((seller) => {
       const matchesEmail = this.filter.email.trim()
         ? seller?.email?.toLowerCase().includes(this.filter.email.toLowerCase())

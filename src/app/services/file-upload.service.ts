@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
-
 export interface ExternalDataRow {
   sno: string | null;
   applicationNumber: string | null;
@@ -31,8 +29,9 @@ export interface ContactFormPayload {
   providedIn: 'root',
 })
 export class FileUploadService {
-  // private baseUrl = 'http://127.0.0.1:8000/api/accounts';
-  private baseUrl = 'https://api.sellbuypatent.com/api/accounts';
+  private baseUrl =
+    'https://bp6fqe0ma0.execute-api.us-east-1.amazonaws.com/buysell/dev/api/accounts';
+  // private baseUrl = 'https://api.sellbuypatent.com/api/accounts';
   // private baseUrl ='https://buyandsell-backend.onrender.com/api/accounts';
 
   constructor(private http: HttpClient) {}
@@ -43,7 +42,7 @@ export class FileUploadService {
 
     const headers = new HttpHeaders().set(
       'Authorization',
-      `Bearer ${localStorage.getItem('access_token')}`
+      `Bearer ${localStorage.getItem('access_token')}`,
     );
 
     return this.http.post(`${this.baseUrl}/upload_excel/`, formData, {
@@ -71,8 +70,6 @@ export class FileUploadService {
     return this.http.post(`${this.baseUrl}/contact/`, payload);
   }
   getFirst100(): Observable<ExternalDataRow[]> {
-    return this.http.get<ExternalDataRow[]>(
-      `${this.baseUrl}/external-data/`
-    );
+    return this.http.get<ExternalDataRow[]>(`${this.baseUrl}/external-data/`);
   }
 }
