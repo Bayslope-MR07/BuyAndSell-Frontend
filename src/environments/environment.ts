@@ -1,18 +1,7 @@
 export const environment = {
-  production: false,
-  // apiUrl: 'http://3.144.99.241/api/accounts', // Django backend API
-  // apiUrl: 'http://68.178.163.122:8060/api/accounts', // Local Django backend
-  apiUrl:
-    'https://bp6fqe0ma0.execute-api.us-east-1.amazonaws.com/buysell/api/accounts',
-  // apiUrl: 'http://160.153.181.186:8002/api/accounts',
-  // apiUrl: 'https://api.sellbuypatent.com/api/accounts',
-  // apiUrl: 'https://buyandsell-backend.onrender.com/api/accounts',
-
+  production: true,
+  apiUrl: 'https://buyandsell-backend-74mg.onrender.com/api/accounts',
   GOOGLE_CLIENT_ID:
     '310505524472-gv7473u6ngdsujr15nq5nk1ak78curot.apps.googleusercontent.com',
-  // GOOGLE_CALLBACK_URI: 'https://bas-3nw9.onrender.com/google-callback',
-  // GOOGLE_CALLBACK_URI: 'http://localhost:4200/google-callback',
-  GOOGLE_CALLBACK_URI: 'https://sellbuypatent.com/google-callback',
-
-  // GOOGLE_CALLBACK_URI: "http://ec2-3-144-99-241.us-east-2.compute.amazonaws.com/google-callback"
+  GOOGLE_CALLBACK_URI: 'https://buyandsell-frontend-6uf8.onrender.com/google-callback',
 };

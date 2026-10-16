@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface ExternalDataRow {
   sno: string | null;
@@ -29,8 +30,7 @@ export interface ContactFormPayload {
   providedIn: 'root',
 })
 export class FileUploadService {
-  private baseUrl =
-    'https://bp6fqe0ma0.execute-api.us-east-1.amazonaws.com/buysell/dev/api/accounts';
+  private baseUrl = environment.apiUrl;
   // private baseUrl = 'https://api.sellbuypatent.com/api/accounts';
   // private baseUrl ='https://buyandsell-backend.onrender.com/api/accounts';
 
@@ -73,3 +73,4 @@ export class FileUploadService {
     return this.http.get<ExternalDataRow[]>(`${this.baseUrl}/external-data/`);
   }
 }
+
